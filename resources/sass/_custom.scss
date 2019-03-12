@@ -1,0 +1,57 @@
+//variables
+ @import 'varaibles';
+
+ //bootstrap
+ //@import '~bootstrap/scss/bootstrap';
+
+ //.navbar-laravel {
+ //    background-color: #fff;
+ //    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+ //}
+
+ @import "settings";
+
+ // Include all foundation
+ @import "../../vendor/bower_componenets/foundation/scss/foundation.scss";
+
+ // Or selectively include components
+ // @import
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/accordion",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/alert-boxes",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/block-grid",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/breadcrumbs",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/button-groups",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/buttons",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/clearing",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/dropdown",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/dropdown-buttons",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/flex-video",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/forms",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/grid",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/inline-lists",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/joyride",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/keystrokes",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/labels",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/magellan",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/orbit",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/pagination",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/panels",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/pricing-tables",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/progress-bars",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/reveal",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/side-nav",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/split-buttons",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/sub-nav",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/switches",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/tables",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/tabs",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/thumbs",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/tooltips",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/top-bar",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/type",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/offcanvas",
+ //   "../../vendor/bower_componenets/foundation/scss/foundation/components/visibility";
+
+
+ //include custom sass styles
+ @import "_custom.scss";
