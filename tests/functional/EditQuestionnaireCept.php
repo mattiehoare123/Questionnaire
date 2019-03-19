@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('researcher');
-$I->wantTo('Edit a questionnaire');
+$I->wantTo('Edit A Questionnaire');
 
 //Add a questionnaire to the DB
 $I->haveRecord('users', [
@@ -21,17 +21,19 @@ $I->haveRecord('questionnaire', [
 ]);
 
 //Check The Data is in the DB
+$I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
 $I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100']);
 
 //When
-$I->amOnPage('/questionnaire/dashboard');
+$I->amOnPage('/questionnaire/dashboard/1');
 $I->see('My Questionnaires');
 
 //Then
 $I->seeElement('a', ['title' => 'Food Review']);
+//And
 $I->click('Edit');
 
 //Then
-$I->amOnPage('/questionnaire/100/edit');
+$I->amOnPage('/questionnaire/edit/100');
 //And
 $I->see('Edit - Food Review');

@@ -15,8 +15,12 @@ class CreateQuestionnairesTable extends Migration
     {
         Schema::create('questionnaires', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->integer('users_id')->unsigned()->default(0);
+            //$table->foreign('user_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->string('title');
             $table->string('description');
+            $table->date('date_created');
+            $table->date('last_updated');
             $table->timestamps();
         });
     }

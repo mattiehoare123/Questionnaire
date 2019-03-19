@@ -17,24 +17,44 @@ $I->haveRecord('questionnaire', [
   'id' => '100',
   'user_id' => '1',
   'title' => 'Food Review',
-  'description' => "Thankyou for visting our resturant this is a questionnaire on how was your meal"
 ]);
 
+//Check the user and quetionnaire are in the DB
+$I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
+$I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100']);
+
 //When
-$I->am('/questionnaire/100/create');
-$I->see('Edit');
-$I->see('Food Review');
-//And
-$I->submitForm('.createTitle', [
-  'title' => null;
-]);
+$I->amOnPage('/questionnaire/dashboard/1');
+$I->see('My Questionnaires');
 //Then
+$I->seeElement('a', ['title' => 'Food Review']);
+//And
+$I->click('Edit');
+
+//Then
+$I->seeCurrentUrlEquals('~/questionnaire/edit/100')
+$I->see('Edit - Food Review');
+//Then
+$I->seeElement('a', ['title' => 'Food Review']);
+//And
+$I->click('Edit');
+
+//Then
+$I->seeCurrentUrlEquals('questionnaire/welcome/edit/100');
+//And
+$I->see('Edit Welcome Page');
+//Then
+$I->submitForm('.createWelcomePage', [
+  'title' => null,
+]);
+//And
 $I->expectTo('See the error message with title required');
 $I->see('The Title field is required');
 //Then
-$I->submitForm('.createTitle', [
-  'title' => 'Food Review'
+$I->submitForm('.createWelcomePage', [
+  'title' => 'Food Review On McDonalds',
 ]);
 //Then
-$I->click('Add Title');
-$I->see('Food Review', 'h1');
+$I->seeCurrentUrlEquals('/questionnaire/edit/100');
+$I->seeRecord('questionnaire', ['title' => 'Food Review On McDonalds']);
+$I->see('Edit - Food Review On McDonlads', 'h1');

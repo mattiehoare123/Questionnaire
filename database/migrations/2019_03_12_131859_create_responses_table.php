@@ -14,7 +14,12 @@ class CreateResponsesTable extends Migration
     public function up()
     {
         Schema::create('responses', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->integer('question_id')->unsigned();
+            //$table->foreign('question_id')->references('id')->on('permissions')->onDelete('cascade');
+            $table->integer('choice_id')->unsigned();
+            //$table->foreign('choice_id')->references('id')->on('choices')->onDelete('cascade');
+            $table->string('responses');
             $table->timestamps();
         });
     }

@@ -21,10 +21,11 @@ $I->haveRecord('questionnaire', [
 ]);
 
 //Check The Data is in the DB
+$I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
 $I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100']);
 
 //When
-$I->amOnPage('/questionnaire/dashboard');
+$I->amOnPage('/questionnaire/dashboard/1');
 $I->see('My Questionnaires');
 
 //Then
@@ -32,6 +33,6 @@ $I->seeElement('a', ['title' => 'Food Review']);
 $I->click('Delete');
 
 //Then
-$I->amOnPage('/questionnaire/dashboard');
+$I->amOnPage('/questionnaire/dashboard/1');
 //And
 $I->dontSeeElement('a', ['title' => 'Food Review']);

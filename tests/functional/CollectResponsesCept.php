@@ -51,7 +51,7 @@ $I->seeRecord('question', ['question' => 'What was the best starter', 'id' => '1
 $I->seeRecord('choice', ['choice' => 'Chicken', 'id' => '102', 'question_id' => '111']);
 
 //When
-$I->amOnPage('/questionnaire/dashboard');
+$I->amOnPage('/questionnaire/dashboard/1');
 $I->see('My Questionnaires');
 
 //Then

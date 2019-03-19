@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('researcher');
-$I->wantTo('Create A Questionnaire Description');
+$I->wantTo('Create An Ethical Statement');
 
 //Add A Test User
 $I->haveRecord('users', [
@@ -27,9 +27,7 @@ $I->seeCurrentUrlEquals('~/questionnaire/welcome/create/(\d+)~');
 $I->see('New Questionnaire');
 $I->submitForm('.createWelcomePage', [
   'title' => 'Food Review',
-  'descritpion' => 'Questionnaire About Food',
+  'ethical' => 'test Ethical Statement',
 ]);
 //Then
 $I->seeCurrentUrlEquals('~/questionnaire/create/(\d+)~');
-$I->see('New Questionnaire - Food Review');
-$I->see('Questionnaire About Food');

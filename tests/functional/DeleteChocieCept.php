@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('researcher');
-$I->wantTo('Delete A Choice');
+$I->wantTo('Edit A Choice');
 
 //Add A Test User
 $I->haveRecord('users', [
@@ -24,7 +24,7 @@ $I->haveRecord('questionnaire', [
 $I->haveRecord('question', [
   'id' => '111',
   'questionnaire_id' => '100',
-  'question' => 'What was the best starter',
+  'question' => 'testquestion',
   'required' => 'Yes',
 ]);
 
@@ -32,26 +32,17 @@ $I->haveRecord('question', [
 $I->haveRecord('choice', [
   'id' => '101',
   'question_id' => '111',
-  'choice' => 'Fish',
-]);
-$I->haveRecord('choice', [
-  'id' => '102',
-  'question_id' => '111',
-  'choice' => 'Chicken',
-]);
-$I->haveRecord('choice', [
-  'id' => '103',
-  'question_id' => '111',
-  'choice' => 'Soup',
+  'choice' => 'deleteChoice',
 ]);
 
 //Check The Record
+$I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
 $I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100']);
-$I->seeRecord('question', ['question' => 'What was the best starter', 'id' => '111', 'questionnaire_id' => '100']);
-$I->seeRecord('choice', ['choice' => 'Chicken', 'id' => '102', 'question_id' => '111']);
+$I->seeRecord('question', ['question' => 'testquestion', 'id' => '111', 'questionnaire_id' => '100']);
+$I->seeRecord('choice', ['choice' => 'deleteChoice', 'id' => '102', 'question_id' => '111']);
 
 //When
-$I->amOnPage('/questionnaire/dashboard');
+$I->amOnPage('/questionnaire/dashboard/1');
 $I->see('My Questionnaires');
 
 //Then
@@ -59,25 +50,25 @@ $I->seeElement('a', ['title' => 'Food Review']);
 $I->click('Edit');
 
 //Then
-$I->amOnPage('/questionnaire/100/edit');
+$I->seeCurrentUrlEquals('/questionnaire/edit/100');
 //And
 $I->see('Edit - Food Review');
 
 //Then
-$I->seeElement('a', ['question' => 'What was the best starter']);
+$I->seeElement('a', ['question' => 'testquestion']);
 //And
 $I->click('Edit');
 
 //Then
-$I->amOnPage('/questionnaire/question/111/edit');
+$I->amOnPage('/questionnaire/question/edit/111');
 //And
-$I->see('Edit Question - What was the best starter');
+$I->see('Edit Question - testquestion');
 
 //Then
-$I->seeElement('a', ['choice' => 'Chicken']);
+$I->seeElement('a', ['choice' => 'deleteChoice']);
 //And
-$I->click('delete');
+$I->click('Delete');
 
 //Then
-$I->amOnPage('questionnaire/100/edit');
-$I->dontsee('Chicken');
+$I->seeCurrentUrlEquals('questionnaire/question/edit/111');
+$I->dontSeeElement('a', ['choice' => 'deleteChoice']);

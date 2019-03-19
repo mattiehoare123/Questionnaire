@@ -17,31 +17,41 @@ $I->haveRecord('questionnaire', [
   'id' => '100',
   'user_id' => '1',
   'title' => 'Food Review',
-  'description' => "Thankyou for visting our resturant this is a questionnaire on how was your meal"
+  'description' => 'Questionnaire About Food';
 ]);
 
 //Add A Question
 $I->haveRecord('question', [
   'id' => '111',
   'questionnaire_id' => '100',
-  'question' => 'What was the best starter',
+  'question' => 'testquestion',
   'required' => 'Yes',
 ]);
 
 //Check The Record
+$I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
 $I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100']);
-$I->seeRecord('question', ['question' => 'What was the best starter', 'id' => '111', 'questionnaire_id' => '100']);
+$I->seeRecord('question', ['question' => 'testquestion', 'id' => '111', 'questionnaire_id' => '100']);
 
 //When
-$I->amOnPage('/questionnaire/dashboard');
+$I->amOnPage('/questionnaire/dashboard/1');
 $I->see('My Questionnaires');
 
 //Then
 $I->seeElement('a', ['title' => 'Food Review']);
+$I->click('Edit');
+
+//Then
+$I->seeCurrentUrlEquals('/questionnaire/edit/100');
+//And
+$I->see('Edit - Food Review');
+
+//Then
+$I->seeElement('a', ['question' => 'testquestion']);
+//And
 $I->click('Delete');
 
 //Then
-$I->seeCurrentUrlEquals('/questionnaire/100/edit');
-
+$I->amOnPage('/questionnaire/edit/100');
 //And
-$I->dontsee('What was the best starter');
+$I->dontSeeElement('a', ['question' => 'testquestion']);

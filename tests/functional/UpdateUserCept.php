@@ -53,4 +53,4 @@ $I->click('Update User');
 $I->seeCurrentUrlEquals('admin/users');
 $I->seeRecord('users', ['name' => 'John Black']);
 $I->see('Users', 'h1');
-$I->see('User Update');
+$I->see('User Updated');

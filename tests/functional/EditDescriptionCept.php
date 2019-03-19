@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('researcher');
-$I->wantTo('Create The Questionnaire Description');
+$I->wantTo('Edit The Questionnaire Description');
 
 //Add A Test User
 $I->haveRecord('users', [
@@ -20,29 +20,32 @@ $I->haveRecord('questionnaire', [
   'description' => 'Questionnaire About Food';
 ]);
 
+//Check the user and questionnaire are in the DB
+$I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
 $I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100']);
 
 //When
-$I->amOnPage('/questionnaire/dashboard');
+$I->amOnPage('/questionnaire/dashboard/1');
 $I->see('My Questionnaires');
 
 //Then
+$I->seeCurrentUrlEquals('/questionnaire/edit/100')
+$I->see('Edit - Food Review');
+//Then
 $I->seeElement('a', ['title' => 'Food Review']);
+//And
 $I->click('Edit');
 
-//When
-$I->am('/questionnaire/100/edit');
-$I->see('Edit - Food Review');
-
 //Then
-$I->submitForm('.createTitle_Description', [
-  'title' => 'Food Review',
-  'description' => 'Questionnaire About Food And Drinks'
-]);
+$I->seeCurrentUrlEquals('questionnaire/welcome/edit/100');
 //And
-$I->click('Submit');
+$I->see('Edit Welcome Page');
+//Then
+$I->submitForm('.createWelcomePage', [
+  'description' => 'Food About KFC',
+]);
 
 //Then
-$I->see('Food Review', 'h1');
-$I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100', 'description' => 'Questionnaire About Food And Drinks'])
+$I->seeCurrentUrlEquals('/questionnaire/edit/100')
+$I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100', 'description' => 'Questionnaire About KFC']);
 $I->see('Questionnaire About Food And Drinks');

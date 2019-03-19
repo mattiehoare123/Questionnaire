@@ -46,25 +46,34 @@ $I->haveRecord('choice', [
 ]);
 
 //Check The Record
+$I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
 $I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100']);
 $I->seeRecord('question', ['question' => 'What was the best starter', 'id' => '111', 'questionnaire_id' => '100']);
 $I->seeRecord('choice', ['choice' => 'Chicken', 'id' => '102', 'question_id' => '111']);
 
 //When
-$I->amOnPage('/questionnaire/dashboard');
+$I->amOnPage('/questionnaire/dashboard/1');
 $I->see('My Questionnaires');
 
 //Then
 $I->seeElement('a', ['title' => 'Food Review']);
+//And
 $I->click('Take');
 
 //Then
-$I->amOnPage('/questionnaire/100/show');
+$I->seeCurrentUrlEquals('/questionnaire/show/100s');
 //And
 $I->see('Food Review');
 $I->see('What was the best starter');
 
 //Then
-$I->choose('Chicken');
+$I->click('Submit');
+
+//And
+$I->expectTo('See a error message that a required question has not been answered');
+$I->see('Please answer all questions');
+
+//Then
+$I->choose('Fish');
 //And
 $I->click('Submit');
