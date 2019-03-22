@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('researcher');
-$I->wantTo('Edit The Questionnaire Description');
+$I->wantTo('Create A Question');
 
 //Add A Test User
 $I->haveRecord('users', [
@@ -13,39 +13,39 @@ $I->haveRecord('users', [
 ]);
 
 //Add A Questionnaire
-$I->haveRecord('questionnaire', [
-  'id' => '100',
-  'user_id' => '1',
+$I->haveRecord('questionnaires', [
+  'id' => '1',
   'title' => 'Food Review',
-  'description' => 'Questionnaire About Food';
+  'description' => 'Questionnaire About Food',
 ]);
 
 //Check the user and questionnaire are in the DB
 $I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
-$I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100']);
+$I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1']);
 
 //When
-$I->amOnPage('/questionnaire/dashboard/1');
+$I->amOnPage('/dashboard');
 $I->see('My Questionnaires');
-
-//Then
-$I->seeElement('a', ['title' => 'Food Review']);
 //And
-$I->click('Edit');
+$I->click('Create Questionnaire');
 
 //Then
-$I->seeCurrentUrlEquals('/questionnaire/edit/100');
-$I->see('Edit - Food Review');
-$I->dontSee('testquestion');
+$I->seeCurrentUrlEquals('/questionnaire/create');
 //And
-$I->click('Add Question');
+$I->see('New Questionnaire');
+$I->submitForm('#createTitle', [
+  'title' => 'Food Review',
+]);
 
 //Then
-$I->submitForm('.createQuestion', [
+$I->seeCurrentUrlEquals('/question');
+$I->click('Add New Question');
+
+//Then
+$I->seeCurrentUrlEquals('/questionnaire/question/create');
+$I->submitForm('#createQuestion', [
   'question' => 'testquestion',
-  'required' => '[Yes]', //Dropdown
-
 ]);
 //And
-$I->seeCurrentUrlEquals('/questionnaire/edit/100');
+$I->seeCurrentUrlEquals('/questionnaire/question');
 $I->see('textquestion');

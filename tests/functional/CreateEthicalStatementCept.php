@@ -16,18 +16,19 @@ $I->haveRecord('users', [
 $I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
 
 //When
-$I->amOnPage('/questionnaire/dashboard/1');
+$I->amOnPage('/dashboard');
 $I->see('My Questionnaires');
 //And
 $I->click('Create Questionnaire');
 
 //Then
-$I->seeCurrentUrlEquals('~/questionnaire/welcome/create/(\d+)~');
+$I->seeCurrentUrlEquals('/questionnaire/create');
 //And
 $I->see('New Questionnaire');
-$I->submitForm('.createWelcomePage', [
+$I->submitForm('#createTitle', [
   'title' => 'Food Review',
   'ethical' => 'test Ethical Statement',
 ]);
 //Then
-$I->seeCurrentUrlEquals('~/questionnaire/create/(\d+)~');
+$I->seeCurrentUrlEquals('/question/create');
+$I->see('Food Review');

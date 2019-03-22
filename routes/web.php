@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+/*Route::get('questionnaire/dashboard', function () {
+   return view('questionnaire.dashboard');
+});
+
+*/
+Route::resource('dashboard', 'DashboardController');
+Route::resource('questionnaire', 'QuestionnaireController');
+Route::resource('question', 'QuestionController');
+Route::resource('choice', 'ChoiceController');
