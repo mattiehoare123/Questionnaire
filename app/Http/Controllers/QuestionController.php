@@ -113,5 +113,10 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         //
+        $question = question::find($id);
+
+        $question->delete();
+
+        return redirect('/questionnaire');
     }
 }

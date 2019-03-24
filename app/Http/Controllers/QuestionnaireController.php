@@ -113,5 +113,11 @@ class QuestionnaireController extends Controller
     public function destroy($id)
     {
         //
+        $questionnaires = questionnaires::find($id);
+
+        $questionnaires->delete();
+
+        return redirect('/dashboard');
+
     }
 }

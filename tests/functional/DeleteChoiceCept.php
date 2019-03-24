@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('researcher');
-$I->wantTo('Delete A Question');
+$I->wantTo('Delete A Choice');
 
 //Add A Test User
 $I->haveRecord('users', [
@@ -21,14 +21,20 @@ $I->haveRecord('questionnaires', [
 
 $I->haveRecord('questions', [
   'id' => '111',
-  'questionnaires_id' => '100',
+  'questionnaires_id' => '1',
   'question' => 'testquestion',
+]);
+$I->haveRecord('choices', [
+  'id' => '101',
+  'question_id' => '111',
+  'choice' => 'testchoice',
 ]);
 
 //Check the user and questionnaire are in the DB
 $I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
 $I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1']);
-$I->seeRecord('questions', ['question' => 'testquestion', 'id' => '111', 'questionnaires_id' => '100']);
+$I->seeRecord('questions', ['question' => 'testquestion', 'id' => '111', 'questionnaires_id' => '1']);
+$I->seeRecord('choices', ['choice' => 'testchoice', 'id' => '101', 'question_id' => '111']);
 
 
 //When
@@ -42,13 +48,17 @@ $I->click('Edit');
 $I->seeCurrentUrlEquals('/questionnaire');
 //And
 //$I->see('Edit - Food Review');
+//And
+$I->see('testquestion');
+$I->click('Edit');
 
 //Then
-$I->see('testquestion');
+$I->seeCurrentUrlEquals('/question/111/edit');
 //And
+$I->see('testchoice');
 $I->click('Delete');
 
 //Then
-$I->seeCurrentUrlEquals('/questionnaire');
+$I->seeCurrentUrlEquals('/question/111/edit');
 //And
-$I->dontSee('testquestion');
+$I->dontSee('testchoice');

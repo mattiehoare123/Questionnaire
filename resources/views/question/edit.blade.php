@@ -38,6 +38,9 @@
             @foreach ($choice as $choice)         {{--If the data is being passed over show all the questionnaire titles--}}
               <a href="choice/{{ $choice->choice }}/edit">{{$choice->choice}}</a>
               <a href="choice/{{$choice->id}}/edit">Edit Choice</a>
+              {!! Form::open(['method' => 'DELETE', 'route' => ['choice.destroy', $choice->id]]) !!}
+              {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+              {!! Form::close() !!}
               @endforeach
             </ul>
             @else {{--If no data is being passed over or no questionnaires have been made this show--}}

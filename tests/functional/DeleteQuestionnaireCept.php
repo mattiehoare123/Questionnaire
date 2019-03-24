@@ -2,9 +2,9 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('researcher');
-$I->wantTo('Delete a questionnaire');
+$I->wantTo('Delete A Questionnaire');
 
-//Add a questionnaire to the DB
+//Add A Test User
 $I->haveRecord('users', [
   'id' => '1',
   'name' => 'testuser',
@@ -13,26 +13,24 @@ $I->haveRecord('users', [
 ]);
 
 //Add A Questionnaire
-$I->haveRecord('questionnaire', [
-  'id' => '100',
-  'user_id' => '1',
+$I->haveRecord('questionnaires', [
+  'id' => '1',
   'title' => 'Food Review',
-  'description' => "Thankyou for visting our resturant this is a questionnaire on how was your meal"
+  'description' => 'Questionnaire About Food',
 ]);
 
-//Check The Data is in the DB
+//Check the user and questionnaire are in the DB
 $I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
-$I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100']);
+$I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1']);
 
 //When
-$I->amOnPage('/questionnaire/dashboard/1');
+$I->amOnPage('/dashboard');
 $I->see('My Questionnaires');
-
-//Then
-$I->seeElement('a', ['title' => 'Food Review']);
+$I->see('Food Review');
+//And
 $I->click('Delete');
 
 //Then
-$I->amOnPage('/questionnaire/dashboard/1');
+$I->seeCurrentUrlEquals('/dashboard');
 //And
-$I->dontSeeElement('a', ['title' => 'Food Review']);
+$I->dontSeeElement('Food Review');

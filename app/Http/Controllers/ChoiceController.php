@@ -92,5 +92,10 @@ class ChoiceController extends Controller
     public function destroy($id)
     {
         //
+        $choice = choice::find($id);
+
+        $choice->delete();
+        //This redirects back to the same page where the request was made from 
+        return redirect()->back();
     }
 }

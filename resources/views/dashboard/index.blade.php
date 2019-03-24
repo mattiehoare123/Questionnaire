@@ -15,8 +15,12 @@
         @foreach ($questionnaires as $questionnaires)         {{--If the data is being passed over show all the questionnaire titles--}}
           <a href="questionnaire/{{ $questionnaires->id }}/edit">{{$questionnaires->title}}</a>
           <a href="/questionnaire">Edit</a>
-          @endforeach
+          <!--Cannot anchor the delete button unlike update for security-->
+          {!! Form::open(['method' => 'DELETE', 'route' => ['questionnaire.destroy', $questionnaires->id]]) !!}
+          {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+          {!! Form::close() !!}
         </ul>
+          @endforeach
         @else {{--If no data is being passed over or no questionnaires have been made this show--}}
         <p>No questionnaires made</p>
         @endif
