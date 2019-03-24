@@ -12,9 +12,6 @@
             {!! Form::label('choice', 'Choice:') !!}
             {!! Form::text('choice', null, ['class' => 'large-8 columns']) !!}
         </div>
-        <div class="row large-12 columns">
-            {!! Form::text('choice', null, ['class' => 'large-8 columns']) !!}
-        </div>
         <div class="row large-4 columns">
             {!! Form::submit('Submit', ['class' => 'button']) !!}
         </div>

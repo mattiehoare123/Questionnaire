@@ -92,6 +92,11 @@ class QuestionnaireController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate(
+          $request, [
+          //This states that the title is required and it must be a minumum of 3 characters long
+          'title' => 'required|min:3',
+        ]);
         $questionnaires = questionnaires::findOrFail($id);
         //Call the update method which will store the editied record in the DB row
         $questionnaires->update($request->all());

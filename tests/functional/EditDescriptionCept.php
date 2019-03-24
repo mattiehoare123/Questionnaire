@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('researcher');
-$I->wantTo('Edit The Questionnaire Description');
+$I->wantTo('Edit The Title');
 
 //Add A Test User
 $I->haveRecord('users', [
@@ -13,39 +13,39 @@ $I->haveRecord('users', [
 ]);
 
 //Add A Questionnaire
-$I->haveRecord('questionnaire', [
-  'id' => '100',
-  'user_id' => '1',
+$I->haveRecord('questionnaires', [
+  'id' => '1',
   'title' => 'Food Review',
-  'description' => 'Questionnaire About Food';
+  'description' => 'Questionnaire About Food',
 ]);
 
 //Check the user and questionnaire are in the DB
 $I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
-$I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100']);
+$I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1']);
 
 //When
-$I->amOnPage('/questionnaire/dashboard/1');
+$I->amOnPage('/dashboard');
 $I->see('My Questionnaires');
-
-//Then
-$I->seeCurrentUrlEquals('/questionnaire/edit/100')
-$I->see('Edit - Food Review');
-//Then
-$I->seeElement('a', ['title' => 'Food Review']);
+$I->see('Food Review');
 //And
 $I->click('Edit');
 
 //Then
-$I->seeCurrentUrlEquals('questionnaire/welcome/edit/100');
+$I->seeCurrentUrlEquals('/questionnaire');
 //And
-$I->see('Edit Welcome Page');
-//Then
-$I->submitForm('.createWelcomePage', [
-  'description' => 'Food About KFC',
-]);
+//$I->see('Edit - Food Review');
+//And
+$I->click('Edit Title');
 
 //Then
-$I->seeCurrentUrlEquals('/questionnaire/edit/100')
-$I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100', 'description' => 'Questionnaire About KFC']);
-$I->see('Questionnaire About Food And Drinks');
+$I->seeCurrentUrlEquals('/questionnaire/1/edit');
+//And
+$I->see('Edit - Food Review Welcome Page');
+//Then
+$I->fillField('description', 'editDescription');
+//And
+$I->click('Update');
+
+//Then
+$I->seeCurrentUrlEquals('/questionnaire');
+$I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1', 'description' => 'editDescription']);

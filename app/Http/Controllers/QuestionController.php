@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Questionnaires;
 use App\Question;
+use App\Choice;
 
 
 class QuestionController extends Controller
@@ -18,7 +19,14 @@ class QuestionController extends Controller
     {
         //
         $question = question::all();//Get all the questionnaires
-        return view('question.index')->with('question', $question);
+        $choice = choice::all();
+
+        return view('question.index')->with('question', $question)->with('choice', $choice);
+        /*
+        $question = DB::table('questions')->get();
+
+       return view('question.index', ['question' => $question]);
+       */
     }
 
     /**
@@ -68,6 +76,10 @@ class QuestionController extends Controller
     public function edit($id)
     {
         //
+        $question = question::findOrFail($id);
+        $choice = choice::all();
+
+        return view('question.edit', compact('question'))->with('choice', $choice);
     }
 
     /**
@@ -80,6 +92,16 @@ class QuestionController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate( $request, [
+          //This states that the title is required and it must be a minumum of 3 characters long
+          'question' => 'required|min:5',
+        ]);
+
+        $question = question::findOrFail($id);
+        //Call the update method which will store the editied record in the DB row
+        $question->update($request->all());
+
+        return redirect('questionnaire/');
     }
 
     /**

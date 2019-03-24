@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('researcher');
-$I->wantTo('Edit An Ethical Statement');
+$I->wantTo('Update The Questionnaire Title');
 
 //Add A Test User
 $I->haveRecord('users', [
@@ -13,38 +13,38 @@ $I->haveRecord('users', [
 ]);
 
 //Add A Questionnaire
-$I->haveRecord('questionnaire', [
-  'id' => '100',
-  'user_id' => '1',
+$I->haveRecord('questionnaires', [
+  'id' => '1',
   'title' => 'Food Review',
-  'description' => 'Questionnaire About Food';
+  'description' => 'Questionnaire About Food',
+  'ethical' => 'Ethical Statmenet',
 ]);
 
-//Check the user is in the DB
+//Check the user and questionnaire are in the DB
 $I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
-$I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100']);
+$I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1', 'ethical' => 'Ethical Statmenet']);
 
 //When
-$I->amOnPage('/questionnaire/dashboard/1');
+$I->amOnPage('/dashboard');
 $I->see('My Questionnaires');
-
-//Then
-$I->seeCurrentUrlEquals('/questionnaire/edit/100')
-$I->see('Edit - Food Review');
-//Then
-$I->seeElement('a', ['title' => 'Food Review']);
+$I->see('Food Review');
 //And
 $I->click('Edit');
 
 //Then
-$I->seeCurrentUrlEquals('questionnaire/welcome/edit/100');
+$I->seeCurrentUrlEquals('/questionnaire');
 //And
-$I->see('Edit Welcome Page');
-//Then
-$I->submitForm('.createWelcomePage', [
-  'ethical' => 'Edit ethical statement',
-]);
+//$I->see('Edit - Food Review');
+//And
+$I->click('Edit Title');
 
 //Then
-$I->seeCurrentUrlEquals('/questionnaire/edit/100');
-$I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100', 'ethical' => 'Edit ethical statement']);
+$I->seeCurrentUrlEquals('/questionnaire/1/edit');
+//And
+$I->fillField('ethical', 'Edit ethical statement');
+
+//Then
+$I->click('Update');
+//And
+$I->seeCurrentUrlEquals('/questionnaire');
+$I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1', 'ethical' => 'Edit Ethical Statmenet']);

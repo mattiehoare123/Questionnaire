@@ -12,7 +12,7 @@
       <ul>
         @foreach ($questionnaires as $questionnaires)         {{--If the data is being passed over show all the questionnaire titles--}}
           <a href="questionnaire/{{ $questionnaires->id }}/edit">{{$questionnaires->title}}</a>
-          <a href="/questionnaire/show">Edit</a>
+          <a href="questionnaire/{{ $questionnaires->id }}/edit">Edit Title</a>
           @endforeach
         </ul>
         @else {{--If no data is being passed over or no questionnaires have been made this show--}}
@@ -25,8 +25,8 @@
 
         <ul>
           @foreach ($question as $question)         {{--If the data is being passed over show all the questionnaire titles--}}
-            <a href="questionnaire/{{ $question->id }}/edit">{{$question->question}}</a>
-            <a href="/questionnaire/show">Edit</a>
+            <a href="question/{{ $question->id }}/edit">{{$question->question}}</a>
+            <a href="question/{{ $question->id }}/edit">Edit</a>
             @endforeach
           </ul>
           @else {{--If no data is being passed over or no questionnaires have been made this show--}}
@@ -35,7 +35,7 @@
         </section>
         <section>
 
-          @if (isset($chocie))     {{--Check that all the data is being passed over--}}
+          @if (isset($choice))     {{--Check that all the data is being passed over--}}
 
           <ul>
             @foreach ($choice as $choice)         {{--If the data is being passed over show all the questionnaire titles--}}
@@ -44,7 +44,7 @@
               @endforeach
             </ul>
             @else {{--If no data is being passed over or no questionnaires have been made this show--}}
-            <p>No choicea yet</p>
+            <p>No choices yet</p>
             @endif
           </section>
 </html>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Questionnaires;
+use App\Question;
 use App\Choice;
 
 class ChoiceController extends Controller
@@ -64,6 +66,9 @@ class ChoiceController extends Controller
     public function edit($id)
     {
         //
+        $choice = choice::findOrFail($id);
+
+        return view('choice.edit', compact('choice'));
     }
 
     /**

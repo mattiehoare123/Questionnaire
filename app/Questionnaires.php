@@ -12,6 +12,7 @@ class Questionnaires extends Model
       'user_id',
       'title',
       'description',
+      'ethical',
       'date_created',
       'last_updated'
   ];

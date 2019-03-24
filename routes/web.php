@@ -21,6 +21,12 @@ Route::get('/', function () {
 
 */
 Route::resource('dashboard', 'DashboardController');
-Route::resource('questionnaire', 'QuestionnaireController');
-Route::resource('question', 'QuestionController');
 Route::resource('choice', 'ChoiceController');
+
+
+//A group created to then run the validation middleware
+Route::group(['middle' => ['web']], function() {
+  Route::resource('questionnaire', 'QuestionnaireController');
+  Route::resource('question', 'QuestionController');
+
+});

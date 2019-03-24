@@ -19,9 +19,16 @@
             {!! Form::text('description', null, ['class' => 'large-8 columns']) !!}
         </div>
 
+        <div class="row large-12 columns">
+            {!! Form::label('ethical', 'Ethical Statement:') !!}
+            {!! Form::text('ethical', null, ['class' => 'large-8 columns']) !!}
+        </div>
+
+
         <div class="row large-4 columns">
             {!! Form::submit('Submit', ['class' => 'button']) !!}
         </div>
+
     {!! Form::close() !!}
 
   </body>

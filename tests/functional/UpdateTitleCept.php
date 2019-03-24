@@ -13,48 +13,46 @@ $I->haveRecord('users', [
 ]);
 
 //Add A Questionnaire
-$I->haveRecord('questionnaire', [
-  'id' => '100',
-  'user_id' => '1',
+$I->haveRecord('questionnaires', [
+  'id' => '1',
   'title' => 'Food Review',
+  'description' => 'Questionnaire About Food',
 ]);
 
-//Check the user and quetionnaire are in the DB
+//Check the user and questionnaire are in the DB
 $I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
-$I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100']);
+$I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1']);
 
 //When
-$I->amOnPage('/questionnaire/dashboard/1');
+$I->amOnPage('/dashboard');
 $I->see('My Questionnaires');
-//Then
-$I->seeElement('a', ['title' => 'Food Review']);
+$I->see('Food Review');
 //And
 $I->click('Edit');
 
 //Then
-$I->seeCurrentUrlEquals('~/questionnaire/edit/100')
-$I->see('Edit - Food Review');
-//Then
-$I->seeElement('a', ['title' => 'Food Review']);
+$I->seeCurrentUrlEquals('/questionnaire');
 //And
-$I->click('Edit');
+//$I->see('Edit - Food Review');
+//And
+$I->click('Edit Title');
 
 //Then
-$I->seeCurrentUrlEquals('questionnaire/welcome/edit/100');
-//And
-$I->see('Edit Welcome Page');
+$I->seeCurrentUrlEquals('/questionnaire/1/edit');
 //Then
-$I->submitForm('.createWelcomePage', [
-  'title' => null,
-]);
+$I->fillField('title', null);
 //And
+$I->click('Update');
+
+//Then
 $I->expectTo('See the error message with title required');
 $I->see('The Title field is required');
 //Then
-$I->submitForm('.createWelcomePage', [
-  'title' => 'Food Review On McDonalds',
-]);
+$I->fillField('title', 'testTitle');
+//And
+$I->click('Update');
+
 //Then
-$I->seeCurrentUrlEquals('/questionnaire/edit/100');
-$I->seeRecord('questionnaire', ['title' => 'Food Review On McDonalds']);
-$I->see('Edit - Food Review On McDonlads', 'h1');
+$I->seeCurrentUrlEquals('/questionnaire');
+$I->seeRecord('questionnaires', ['title' => 'testTitle']);
+$I->see('testTitle');

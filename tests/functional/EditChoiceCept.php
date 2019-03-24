@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('researcher');
-$I->wantTo('Update The Questionnaire Title');
+$I->wantTo('Edit A Choice');
 
 //Add A Test User
 $I->haveRecord('users', [
@@ -24,11 +24,18 @@ $I->haveRecord('questions', [
   'questionnaires_id' => '1',
   'question' => 'testquestion',
 ]);
+$I->haveRecord('choices', [
+  'id' => '101',
+  'question_id' => '111',
+  'choice' => 'testchoice',
+]);
 
 //Check the user and questionnaire are in the DB
 $I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
 $I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1']);
 $I->seeRecord('questions', ['question' => 'testquestion', 'id' => '111', 'questionnaires_id' => '1']);
+$I->seeRecord('choices', ['choice' => 'testchoice', 'id' => '101', 'question_id' => '111']);
+
 
 //When
 $I->amOnPage('/dashboard');
@@ -49,22 +56,30 @@ $I->seeCurrentUrlEquals('/question/111/edit');
 //And
 $I->see('Edit Question - testquestion');
 
+//Then
+$I->see('testchoice');
+//And
+$I->click('Edit Choice');
 
 //Then
-$I->fillField('question', null);
+$I->seeCurrentUrlEquals('/question/111/choice/101/edit');
+//And
+$I->see('Edit Choice - testchoice');
+//Then
+$I->fillField('choice', null);
 //And
 $I->click('Update');
 
 //Then
-$I->expectTo('See the error message question is required');
-$I->see('The question field is required');
+$I->expectTo('See the error message choice is required');
+$I->see('The choice field is required');
+
 //Then
-//Then
-$I->fillField('question', 'editquestion');
+$I->fillField('choice', 'editChoice');
 //And
 $I->click('Update');
 
 //Then
-$I->seeCurrentUrlEquals('/questionnaire');
-$I->seeRecord('questions', ['question' => 'editquestion']);
-$I->see('editquestion');
+$I->seeCurrentUrlEquals('/question/111/edit');
+$I->seeRecord('choices', ['chocie' => 'editChoice']);
+$I->see('editChoice');
