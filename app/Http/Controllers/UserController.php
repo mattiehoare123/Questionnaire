@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Questionnaires;
-use App\Question;
-use App\Choice;
+use App\User;
 
-class QuestionnaireController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,16 +15,9 @@ class QuestionnaireController extends Controller
     public function index()
     {
         //
-        $questionnaires = questionnaires::all();//Get all the questionnaires
-        $question = question::all();
-        $choice = choice::all();
-        return view('questionnaire.index')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice);
+        $user = user::all();
+        return view('admin/users/index')->with('user', $user);
     }
-
-  /*  Route::get('/questionnaire/dashboard'), function () {
-        return view('questionnare.dashboard');
-    });
-*/
 
     /**
      * Show the form for creating a new resource.
@@ -36,7 +27,7 @@ class QuestionnaireController extends Controller
     public function create()
     {
         //
-        return view('questionnaire.create');
+        return view('admin/users/create');
     }
 
     /**
@@ -48,12 +39,18 @@ class QuestionnaireController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+          //This states that the title is required and it must be a minumum of 3 characters long
+          'name' => 'required',
+          'email' => 'required|unique:users',
+          'password' => 'required'
+        ]);
+        //Get all fields from the form and put it into the $input variale using the $POST request
         $input = $request->all();
-
-        Questionnaires::create($input);
-
-        return redirect('/question/create');;
-
+        //Call the user model to create a user using the $input array
+        user::create($input);
+        //Redirect to this route using the $GET request which will be the admin/users/index
+        return redirect('admin/users')->with('added', 'New user added');
     }
 
     /**
@@ -77,9 +74,9 @@ class QuestionnaireController extends Controller
     {
         //Runs the find or fail if the $id is correct it will open with the edit view
         //passing along the $id variale with the compact function
-        $questionnaires = questionnaires::findOrFail($id);
+        $user = user::findOrFail($id);
 
-        return view('questionnaire.edit', compact('questionnaires'));
+        return view('admin/users/edit', compact('user'));
     }
 
     /**
@@ -93,14 +90,16 @@ class QuestionnaireController extends Controller
     {
         //
         $this->validate($request, [
-          //This states that the title is required and it must be a minumum of 3 characters long
-          'title' => 'required|min:3',
+          'name' => 'required',
+          'email' => 'required',
+          'password' => 'required'
         ]);
-        $questionnaires = questionnaires::findOrFail($id);
-        //Call the update method which will store the editied record in the DB row
-        $questionnaires->update($request->all());
 
-        return redirect('questionnaire/');
+        $user = User::findOrFail($id);
+        //Call the update method which will store the editied record in the DB row
+        $user->update($request->all());
+        //If this action has been successully it will redirect with this flash message to the users index view
+        return redirect('admin/users')->with('updated', 'User Updated');
     }
 
     /**
@@ -111,12 +110,11 @@ class QuestionnaireController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $questionnaires = questionnaires::find($id);
+      //Take the provided $id and find it in within the DB
+      $user = user::find($id);
+      //Once it is avaiable delete it and then redirect back to the admin users index
+      $user->delete();
 
-        $questionnaires->delete();
-
-        return redirect('/dashboard');
-
+      return redirect('/admin/users');
     }
 }

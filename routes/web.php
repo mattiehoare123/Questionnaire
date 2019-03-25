@@ -28,5 +28,5 @@ Route::resource('choice', 'ChoiceController');
 Route::group(['middle' => ['web']], function() {
   Route::resource('questionnaire', 'QuestionnaireController');
   Route::resource('question', 'QuestionController');
-
+  Route::resource('admin/users', 'UserController');
 });

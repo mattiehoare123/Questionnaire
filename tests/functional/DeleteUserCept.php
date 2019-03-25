@@ -4,11 +4,11 @@ $I = new FunctionalTester($scenario);
 $I->am('admin');
 $I->wantTo('Delete A User');
 
-//Enter A User In DB And Then Delete 
+//Enter A User In DB And Then Delete
 $I->haveRecord('users', [
   'id' => '1',
   'name' => 'John Brown',
-  'email' => 'johnb@example.com'
+  'email' => 'johnb@example.com',
   'password' => '12345',
 ]);
 
@@ -20,14 +20,14 @@ $I->amOnPage('/admin/users');
 
 //Then
 $I->see('John Brown');
-$I->seeElement('John Brown', 'a.item');
+$I->seeLink('John Brown', 'users/1/edit');
 
 //Then
-$I->click('testuser delete');
+$I->click('Delete');
 
 //Then
-$I->seeCurrentUrlEquals('admin/users');
+$I->seeCurrentUrlEquals('/admin/users');
 
 //Check That The User Has Been Deleted
 $I->dontSee('John Brown');
-$I->dontSeeElement('John Brown', 'a.item');
+$I->dontSeeLink('John Brown', 'users/1/edit');

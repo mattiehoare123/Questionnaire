@@ -8,7 +8,7 @@ $I->wantTo('Update A User');
 $I->haveRecord('users', [
   'id' => '1',
   'name' => 'John Brown',
-  'email' => 'johnb@example.com'
+  'email' => 'johnb@example.com',
   'password' => '12345',
 ]);
 
@@ -17,10 +17,11 @@ $I->seeRecord('users', ['name' => 'John Brown', 'id' => '1']);
 
 //When
 $I->amOnPage('/admin/users');
+$I->see('John Brown');
 
-$I->seeElement('a', ['name' => 'John Brown']);
+$I->seeLink('John Brown', 'users/1/edit');
 //And
-$I->click('a', ['name' => 'John Brown']);
+$I->click('Edit');
 
 //Then
 $I->amOnPage('/admin/users/1/edit');
@@ -36,21 +37,24 @@ $I->fillfield('email', null);
 $I->fillfield('password', null);
 
 //And
-$I-click('Update User');
+$I->click('Update');
 
 //Then
-$I->expectedTo('See the form but with required fields need filling');
-$I->seeCurrentUrlEquals('admin/users/1/edit');
-$I->see('The Name, Email & Password fields are required');
+$I->expectTo('See the form but with required fields need filling');
+$I->seeCurrentUrlEquals('/admin/users/1/edit');
+$I->see('The Name field is required');
+$I->see('The email field is required');
+$I->see('The password field is required');
+
 //Then
 $I->fillfield('name', 'John Black');
 $I->fillfield('email', 'johnnyb@example.com');
 $I->fillfield('password', '678910');
 //And
-$I->click('Update User');
+$I->click('Update');
 
 //Then
-$I->seeCurrentUrlEquals('admin/users');
+$I->seeCurrentUrlEquals('/admin/users');
 $I->seeRecord('users', ['name' => 'John Black']);
 $I->see('Users', 'h1');
 $I->see('User Updated');
