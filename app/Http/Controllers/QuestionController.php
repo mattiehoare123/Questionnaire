@@ -49,6 +49,12 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate( $request, [
+          //This states that the title is required and it must be a minumum of 5 characters long
+          'question' => 'required|min:5',
+          'required' => 'required',
+        ]);
+
         $input = $request->all();
 
         Question::create($input);
@@ -95,6 +101,7 @@ class QuestionController extends Controller
         $this->validate( $request, [
           //This states that the title is required and it must be a minumum of 3 characters long
           'question' => 'required|min:5',
+          'required' => 'required',
         ]);
 
         $question = question::findOrFail($id);

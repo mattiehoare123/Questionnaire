@@ -25,6 +25,12 @@
                 {!! Form::label('question', 'Question:') !!}
                 {!! Form::text('question', null, ['class' => 'large-8 columns']) !!}
             </div>
+            <div class="row large-12 columns">
+              {!! Form::label('required', 'Required:') !!}
+              <!--If the yes button is checked it will send the value true into the DB for the required question-->
+              {!! Form::radio('required', true) !!}True
+              {!! Form::radio('required', false) !!}False
+            </div>
             <div class="row large-4 columns">
                 {!! Form::submit('Update', ['class' => 'button']) !!}
             </div>

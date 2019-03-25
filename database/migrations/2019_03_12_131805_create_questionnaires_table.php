@@ -20,8 +20,6 @@ class CreateQuestionnairesTable extends Migration
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('ethical')->nullable();
-            $table->date('date_created')->nullable();
-            $table->date('last_updated')->nullable();
             $table->timestamps();
         });
     }

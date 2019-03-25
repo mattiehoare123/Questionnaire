@@ -14,6 +14,8 @@
       <ul>
         @foreach ($questionnaires as $questionnaires)         {{--If the data is being passed over show all the questionnaire titles--}}
           <a href="questionnaire/{{ $questionnaires->id }}/edit">{{$questionnaires->title}}</a>
+          <p>Created At: {{$questionnaires->created_at}}</p>
+          <p>Last Updated At: {{$questionnaires->updated_at}}</p>
           <a href="/questionnaire">Edit</a>
           <!--Cannot anchor the delete button unlike update for security-->
           {!! Form::open(['method' => 'DELETE', 'route' => ['questionnaire.destroy', $questionnaires->id]]) !!}
