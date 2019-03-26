@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Questionnaires;
 use App\Question;
 use App\Choice;
+use App\Response;
 
-class QuestionnaireController extends Controller
+class ResponseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +18,8 @@ class QuestionnaireController extends Controller
     public function index()
     {
         //
-        $questionnaires = questionnaires::all();//Get all the questionnaires
-        $question = question::all();
-        $choice = choice::all();
-        return view('questionnaire.index')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -30,7 +28,6 @@ class QuestionnaireController extends Controller
     public function create()
     {
         //
-        return view('questionnaire.create');
     }
 
     /**
@@ -44,10 +41,9 @@ class QuestionnaireController extends Controller
         //
         $input = $request->all();
 
-        Questionnaires::create($input);
+        Response::create($input);
 
-        return redirect('/question/create');;
-
+        return redirect('admin/articles');
     }
 
     /**
@@ -58,11 +54,14 @@ class QuestionnaireController extends Controller
      */
     public function show($id)
     {
+        //
         $questionnaires = questionnaires::all();//Get all the questionnaires
         $question = question::all();
         $choice = choice::all();
-        return view('questionnaire.show')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice);
-      }
+        $response = response::all();
+        return view('responses.show')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice)->with('response', $response);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -71,11 +70,7 @@ class QuestionnaireController extends Controller
      */
     public function edit($id)
     {
-        //Runs the find or fail if the $id is correct it will open with the edit view
-        //passing along the $id variale with the compact function
-        $questionnaires = questionnaires::findOrFail($id);
-
-        return view('questionnaire.edit', compact('questionnaires'));
+        //
     }
 
     /**
@@ -88,15 +83,6 @@ class QuestionnaireController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request, [
-          //This states that the title is required and it must be a minumum of 3 characters long
-          'title' => 'required|min:3',
-        ]);
-        $questionnaires = questionnaires::findOrFail($id);
-        //Call the update method which will store the editied record in the DB row
-        $questionnaires->update($request->all());
-
-        return redirect('questionnaire/');
     }
 
     /**
@@ -108,11 +94,5 @@ class QuestionnaireController extends Controller
     public function destroy($id)
     {
         //
-        $questionnaires = questionnaires::find($id);
-
-        $questionnaires->delete();
-
-        return redirect('/dashboard');
-
     }
 }

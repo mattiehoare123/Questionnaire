@@ -15,13 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Route::get('questionnaire/dashboard', function () {
-   return view('questionnaire.dashboard');
-});
-
-*/
 Route::resource('dashboard', 'DashboardController');
 Route::resource('choice', 'ChoiceController');
+Route::resource('responses', 'ResponseController');
 
 
 //A group created to then run the validation middleware

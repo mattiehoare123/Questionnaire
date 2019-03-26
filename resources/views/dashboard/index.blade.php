@@ -16,11 +16,13 @@
           <a href="questionnaire/{{ $questionnaires->id }}/edit">{{$questionnaires->title}}</a>
           <p>Created At: {{$questionnaires->created_at}}</p>
           <p>Last Updated At: {{$questionnaires->updated_at}}</p>
+          <a href="/responses/show">Responses</a>
           <a href="/questionnaire">Edit</a>
           <!--Cannot anchor the delete button unlike update for security-->
           {!! Form::open(['method' => 'DELETE', 'route' => ['questionnaire.destroy', $questionnaires->id]]) !!}
           {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
           {!! Form::close() !!}
+          <a href="questionnaire/show">Take</a>
         </ul>
           @endforeach
         @else {{--If no data is being passed over or no questionnaires have been made this show--}}

@@ -2,7 +2,7 @@
 $I = new FunctionalTester($scenario);
 
 $I->am('researcher');
-$I->wantTo('Check Questionnaire Responses');
+$I->wantTo('Submit A Questionnaire');
 
 //Add A Test User
 $I->haveRecord('users', [
@@ -13,59 +13,46 @@ $I->haveRecord('users', [
 ]);
 
 //Add A Questionnaire
-$I->haveRecord('questionnaire', [
-  'id' => '100',
-  'user_id' => '1',
+$I->haveRecord('questionnaires', [
+  'id' => '1',
   'title' => 'Food Review',
-  'description' => "Thankyou for visting our resturant this is a questionnaire on how was your meal"
+  'description' => 'Questionnaire About Food',
 ]);
 
-//Add A Question
-$I->haveRecord('question', [
+$I->haveRecord('questions', [
   'id' => '111',
-  'questionnaire_id' => '100',
-  'question' => 'What was the best starter',
-  'required' => 'Yes',
+  'questionnaires_id' => '1',
+  'question' => 'testquestion',
 ]);
-
-//Add Choices To The Question
-$I->haveRecord('choice', [
+$I->haveRecord('choices', [
   'id' => '101',
   'question_id' => '111',
-  'choice' => 'Fish',
+  'choice' => 'testchoice',
 ]);
-$I->haveRecord('choice', [
-  'id' => '102',
-  'question_id' => '111',
-  'choice' => 'Chicken',
+$I->haveRecord('responses', [
+  'id' => '100',
+  'question_id' => '1',
+  'choice_id' => '101',
+  'responses' => 'testchoice'
 ]);
-$I->haveRecord('choice', [
-  'id' => '103',
-  'question_id' => '111',
-  'choice' => 'Soup',
-]);
-
-//Check The Record
+//Check the user and questionnaire are in the DB
 $I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
-$I->seeRecord('questionnaire', ['title' => 'Food Review', 'id' => '100']);
-$I->seeRecord('question', ['question' => 'What was the best starter', 'id' => '111', 'questionnaire_id' => '100']);
-$I->seeRecord('choice', ['choice' => 'Chicken', 'id' => '102', 'question_id' => '111']);
+$I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1']);
+$I->seeRecord('questions', ['question' => 'testquestion', 'id' => '111', 'questionnaires_id' => '1']);
+$I->seeRecord('choices', ['choice' => 'testchoice', 'id' => '101', 'question_id' => '111']);
+$I->seeRecord('responses', ['responses' => 'testchoice', 'id' => '100', 'choice_id' => '101', 'question_id' => '1']);
+
 
 //When
-$I->amOnPage('/questionnaire/dashboard/1');
+$I->amOnPage('/dashboard');
 $I->see('My Questionnaires');
+$I->see('Food Review');
+//And
+$I->click('Responses');
 
 //Then
-$I->seeElement('a', ['title' => 'Food Review']);
-$I->click('Results');
-
-//Then
-$I->amOnPage('/questionnaire/responses/show/');
+$I->amOnPage('/responses/show');
 //And
 $I->see('Food Review');
-$I->see('What was the best starter');
-
-//Then
-$I->checkOption('Chicken');
-//And
-$I->click('Submit');
+$I->see('testquestion');
+$I->see('testchoice');

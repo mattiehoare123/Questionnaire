@@ -13,7 +13,5 @@ class Questionnaires extends Model
       'title',
       'description',
       'ethical',
-      'date_created',
-      'last_updated'
   ];
 }
