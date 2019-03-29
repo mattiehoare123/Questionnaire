@@ -2,9 +2,20 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+
+     <!-- Set the viewport width to device width for mobile -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title></title>
+     <!-- Included CSS Files, use foundation.css if you do not want minified code -->
+     <link rel="stylesheet" href="css/foundation.min.css">
+     <link rel="stylesheet" href="css/foundation.css">
+     <link rel="stylesheet" href="css/app.css">
+     <!-- Custom Modernizr for Foundation -->
   </head>
   <body>
+
+    @include('includes.header')
+
     <h1>My Questionnaires</h1>
     <a href="/questionnaire/create">Create Questionnaire</a>
     <section>
@@ -28,5 +39,16 @@
         <p>No questionnaires made</p>
         @endif
       </section>
+
+      @include('includes.footer')
+
+
+<!-- Latest version of jQuery -->
+<script src="js/vendor/jquery.js"></script>
+<!-- Included JS Files (Minified) -->
+<script src="js/vendor/foundation.min.js"></script>
+<!-- Initialize JS Plugins -->
+<script src="js/app.js"></script>
+
   </body>
 </html>

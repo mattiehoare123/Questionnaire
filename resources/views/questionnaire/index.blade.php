@@ -17,7 +17,7 @@
         </ul>
         @endforeach
         @else {{--If no data is being passed over or no questionnaires have been made this show--}}
-        <p>No questionnaires made</p>
+        <p>T</p>
         @endif
       </section>
       <section>
