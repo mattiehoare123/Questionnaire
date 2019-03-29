@@ -35,17 +35,16 @@ $I->seeCurrentUrlEquals('/questionnaire/create');
 $I->see('New Questionnaire');
 $I->submitForm('#createTitle', [
   'title' => 'Food Review',
+  'required' =>  true
 ]);
 
 //Then
-$I->seeCurrentUrlEquals('/question');
-$I->click('Add New Question');
+$I->seeCurrentUrlEquals('/question/create');
+$I->see('Add New Question');
 
 //Then
-$I->seeCurrentUrlEquals('/questionnaire/question/create');
 $I->submitForm('#createQuestion', [
   'question' => 'testquestion',
 ]);
 //And
-$I->seeCurrentUrlEquals('/questionnaire/question');
-$I->see('textquestion');
+$I->seeCurrentUrlEquals('/choice/create');

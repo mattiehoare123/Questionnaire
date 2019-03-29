@@ -28,8 +28,8 @@
             <div class="row large-12 columns">
               {!! Form::label('required', 'Required:') !!}
               <!--If the yes button is checked it will send the value true into the DB for the required question-->
-              {!! Form::radio('required', true) !!}True
-              {!! Form::radio('required', false) !!}False
+              {!! Form::radio('required', true) !!}Yes
+              {!! Form::radio('required', false) !!}No
             </div>
             <div class="row large-4 columns">
                 {!! Form::submit('Update', ['class' => 'button']) !!}
@@ -42,8 +42,8 @@
 
           <ul>
             @foreach ($choice as $choice)         {{--If the data is being passed over show all the questionnaire titles--}}
-              <a href="choice/{{ $choice->choice }}/edit">{{$choice->choice}}</a>
-              <a href="choice/{{$choice->id}}/edit">Edit Choice</a>
+              <p>{{$choice->choice}}</a>
+              <a href="choice/{{$choice->id}}/edit">Edit Choice</p>
               {!! Form::open(['method' => 'DELETE', 'route' => ['choice.destroy', $choice->id]]) !!}
               {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
               {!! Form::close() !!}

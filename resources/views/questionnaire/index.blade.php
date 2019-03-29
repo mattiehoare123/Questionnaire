@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    
+
     <title></title>
   </head>
   <body>
@@ -12,7 +12,7 @@
 
       <ul>
         @foreach ($questionnaires as $questionnaires)         {{--If the data is being passed over show all the questionnaire titles--}}
-          <a href="questionnaire/{{ $questionnaires->id }}/edit">{{$questionnaires->title}}</a>
+          <p>{{$questionnaires->title}}</p>
           <a href="questionnaire/{{ $questionnaires->id }}/edit">Edit Title</a>
         </ul>
         @endforeach
@@ -26,7 +26,7 @@
 
         <ul>
           @foreach ($question as $question)         {{--If the data is being passed over show all the questionnaire titles--}}
-            <a href="question/{{ $question->id }}/edit">{{$question->question}}</a>
+            <p>{{$question->question}}</p>
             <a href="question/{{ $question->id }}/edit">Edit</a>
             {!! Form::open(['method' => 'DELETE', 'route' => ['question.destroy', $question->id]]) !!}
             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
@@ -34,7 +34,7 @@
             @endforeach
           </ul>
           @else {{--If no data is being passed over or no questionnaires have been made this show--}}
-          <p>No questionnaires made</p>
+          <p>You Have Not Created Any Questions Yet</p>
           @endif
         </section>
         <section>
@@ -43,12 +43,11 @@
 
           <ul>
             @foreach ($choice as $choice)         {{--If the data is being passed over show all the questionnaire titles--}}
-              <a href="questionnaire/{{ $question->id }}/edit">{{$choice->choice}}</a>
-              <a href="/questionnaire/show">Edit</a>
+              <p>{{$choice->choice}}</p>
               @endforeach
             </ul>
             @else {{--If no data is being passed over or no questionnaires have been made this show--}}
-            <p>No choices yet</p>
+            <p>You Have Not Added No Chocies To The Question Yet</p>
             @endif
           </section>
 </html>

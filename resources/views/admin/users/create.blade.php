@@ -14,7 +14,7 @@
     @endif
 
     {!! Form::open(array('action' => 'UserController@store', 'id' => 'createUser')) !!}
-            {{ csrf_token() }}
+    @csrf
         <div class="row large-12 columns">
             {!! Form::label('name', 'Name:') !!}
             {!! Form::text('name', null, ['class' => 'large-8 columns']) !!}

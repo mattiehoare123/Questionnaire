@@ -12,8 +12,8 @@
 
       <ul>
         @foreach ($question as $question)         {{--If the data is being passed over show all the questionnaire titles--}}
-          <a href="questionnaire/{{ $question->id }}/edit">{{$question->question}}</a>
-          <a href="/questionnaire/show">Edit</a>
+          <a>{{$question->question}}</a>
+          <a href="/question/{{$question->id}}/edit">Edit</a>
           @endforeach
         </ul>
         @else {{--If no data is being passed over or no questionnaires have been made this show--}}

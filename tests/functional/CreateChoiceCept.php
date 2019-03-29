@@ -39,12 +39,11 @@ $I->submitForm('#createTitle', [
 //Then
 $I->seeCurrentUrlEquals('/question/create');
 
-/*Then
+
 $I->seeCurrentUrlEquals('/questionnaire/question/create');
 $I->submitForm('#createQuestion', [
   'question' => 'testquestion',
 ]);
-*/
 //And
 $I->amOnPage('/choice/create');
 //Then

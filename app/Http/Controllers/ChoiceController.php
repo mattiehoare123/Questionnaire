@@ -43,7 +43,7 @@ class ChoiceController extends Controller
 
           Choice::create($input);
 
-          return redirect('question/');
+          return redirect('/questionnaire');
     }
 
     /**
@@ -95,7 +95,7 @@ class ChoiceController extends Controller
         $choice = choice::find($id);
 
         $choice->delete();
-        //This redirects back to the same page where the request was made from 
+        //This redirects back to the same page where the request was made from
         return redirect()->back();
     }
 }

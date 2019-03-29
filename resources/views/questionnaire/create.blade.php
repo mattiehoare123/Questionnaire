@@ -8,7 +8,7 @@
   <body>
     <h1>New Questionnaire</h1>
     {!! Form::open(array('action' => 'QuestionnaireController@store', 'id' => 'createTitle')) !!}
-            {{ csrf_token() }}
+    @csrf
         <div class="row large-12 columns">
             {!! Form::label('title', 'Title:') !!}
             {!! Form::text('title', null, ['class' => 'large-8 columns']) !!}

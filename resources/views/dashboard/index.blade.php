@@ -8,7 +8,6 @@
     <h1>My Questionnaires</h1>
     <a href="/questionnaire/create">Create Questionnaire</a>
     <section>
-    <h1>My Questionnaires</h1>
       @if (isset($questionnaires))     {{--Check that all the data is being passed over--}}
 
       <ul>

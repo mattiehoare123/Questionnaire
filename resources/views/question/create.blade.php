@@ -14,8 +14,9 @@
             </ul>
         </div>
     @endif
+    <h1>Add New Question</h1>
     {!! Form::open(array('action' => 'QuestionController@store', 'id' => 'createQuestion')) !!}
-            {{ csrf_token() }}
+    @csrf
         <div class="row large-12 columns">
             {!! Form::label('question', 'Question:') !!}
             {!! Form::text('question', null, ['class' => 'large-8 columns']) !!}
@@ -23,8 +24,8 @@
         <div class="row large-12 columns">
           {!! Form::label('required', 'Required:') !!}
           <!--If the yes button is checked it will send the value true into the DB for the required question-->
-          {!! Form::radio('required', true) !!}True
-          {!! Form::radio('required', false) !!}False
+          {!! Form::radio('required', true) !!}Yes
+          {!! Form::radio('required', false) !!}No
         </div>
         <div class="row large-4 columns">
             {!! Form::submit('Submit', ['class' => 'button']) !!}
