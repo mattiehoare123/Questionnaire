@@ -4,8 +4,7 @@ $I = new FunctionalTester($scenario);
 $I->am('admin');
 $I->wantTo('create a new user');
 
-
-Auth::loginUsingId(2);
+Auth::loginUsingId(1);
 
 //When
 $I->amOnPage('/admin/users');

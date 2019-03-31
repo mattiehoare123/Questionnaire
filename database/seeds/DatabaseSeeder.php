@@ -3,8 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
-use App\Category;
-use App\Article;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,22 +21,20 @@ class DatabaseSeeder extends Seeder
          */
 
         //disable foreign key check for this connection before running seeders
-        /*DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Model::unguard();
 
-        Category::truncate();
         User::truncate();
-        Article::truncate();
 
         Model::reguard();
         //re-enable foreign key check for this connection
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');*/
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
 
         /*
          * Run seed files so known data is created first
          */
-        $this->call(UserTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
 
         /*
          * run factories
