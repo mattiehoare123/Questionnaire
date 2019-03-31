@@ -15,3 +15,7 @@ modules:
         dsn: 'mysql:host=localhost;dbname=questionnaire'
         user: 'root'
         password: 'password'
+        dump: tests/_data/dumpseeded.sql
+        populate: true
+        cleanup: false
+        reconnect: true

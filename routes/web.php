@@ -18,11 +18,15 @@ Route::get('/', function () {
 Route::resource('dashboard', 'DashboardController');
 Route::resource('choice', 'ChoiceController');
 Route::resource('responses', 'ResponseController');
+Route::resource('questionnaire', 'QuestionnaireController');
+Route::resource('question', 'QuestionController');
 
 
 //A group created to then run the validation middleware
 Route::group(['middle' => ['web']], function() {
-  Route::resource('questionnaire', 'QuestionnaireController');
-  Route::resource('question', 'QuestionController');
+  Auth::routes();
+  Route::get('/home', 'HomeController@index')->name('home');
   Route::resource('admin/users', 'UserController');
+
+
 });

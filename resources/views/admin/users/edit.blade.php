@@ -32,6 +32,13 @@
             {!! Form::label('password', 'Password:') !!}
             {!! Form::text('password', null, ['class' => 'large-8 columns']) !!}
         </div>
+        <div>
+          {!! Form::label('roles', 'Roles:') !!}
+          @foreach($roles as $role)
+              {{ Form::label($role->name) }}
+              {{ Form::checkbox('role[]', $role->id, $user->roles->contains($role->id), ['id' => $role->id]) }}
+          @endforeach
+      </div>
         <div class="row large-4 columns">
             {!! Form::submit('Update', ['class' => 'button']) !!}
         </div>

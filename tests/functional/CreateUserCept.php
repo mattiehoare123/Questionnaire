@@ -4,10 +4,12 @@ $I = new FunctionalTester($scenario);
 $I->am('admin');
 $I->wantTo('create a new user');
 
+
+Auth::loginUsingId(2);
+
 //When
 $I->amOnPage('/admin/users');
 $I->see('Users', 'h1');
-$I->dontsee('Matthew Hoare');
 //And
 $I->click('Add User');
 

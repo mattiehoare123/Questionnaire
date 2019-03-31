@@ -15,6 +15,6 @@ class QuestionnaireTableSeeder extends Seeder
         DB::table('questionnaires')->insert([
           ['id' => '100', 'user_id' => '1', 'title' => 'Food Review', 'description' => 'Questionnaire About Food'],
 
-
+        ]);
     }
 }

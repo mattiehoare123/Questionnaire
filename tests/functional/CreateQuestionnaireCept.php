@@ -4,6 +4,7 @@ $I = new FunctionalTester($scenario);
 $I->am('researcher');
 $I->wantTo('Create A Questionnaire');
 
+
 //Add User into DB (Not sure if this is needed)
 $I->haveRecord('users', [
   'id' => '1',
@@ -14,6 +15,8 @@ $I->haveRecord('users', [
 
 //Check user is in DB
 $I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
+
+Auth::loginUsingId(1);
 
 //When
 $I->amOnPage('/dashboard');

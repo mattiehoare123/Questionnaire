@@ -16,7 +16,7 @@ class CreatePermissionsTable extends Migration
         Schema::create('permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();//Means that cannot have two names the same within the table
-            $table->string('label');
+            $table->string('label')->nullable();
             $table->timestamps();
         });
     }

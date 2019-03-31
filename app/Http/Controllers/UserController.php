@@ -1,22 +1,36 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Gate;
 use Illuminate\Http\Request;
 use App\User;
+use App\Role;
 
 class UserController extends Controller
 {
+  /*Secure the users pages to the admin*/
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
+
     public function index()
     {
         //
-        $user = user::all();
-        return view('admin/users/index')->with('user', $user);
+        if (Gate::allows('see_all_users')){
+
+            $user = User::all();
+
+            return view('admin/users/index', ['user' => $user]);
+        }
+        return view('/home');
     }
 
     /**
@@ -74,10 +88,19 @@ class UserController extends Controller
     {
         //Runs the find or fail if the $id is correct it will open with the edit view
         //passing along the $id variale with the compact function
-        $user = user::findOrFail($id);
+        // get the user
+            $user = User::where('id',$id)->first();
+            $roles = Role::all();
 
-        return view('admin/users/edit', compact('user'));
-    }
+            // if user does not exist return to list
+            if(!$user)
+            {
+                return redirect('/admin/users');
+                // you could add on here the flash messaging of article does not exist.
+            }
+            return view('admin/users/edit')->with('user', $user)->with('roles', $roles);
+        }
+
 
     /**
      * Update the specified resource in storage.
@@ -96,8 +119,10 @@ class UserController extends Controller
         ]);
 
         $user = User::findOrFail($id);
-        //Call the update method which will store the editied record in the DB row
-        $user->update($request->all());
+        $roles = $request->get('role');
+
+        $user->roles()->sync($roles);
+
         //If this action has been successully it will redirect with this flash message to the users index view
         return redirect('admin/users')->with('updated', 'User Updated');
     }

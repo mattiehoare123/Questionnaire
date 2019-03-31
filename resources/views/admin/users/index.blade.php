@@ -29,6 +29,9 @@
         @foreach ($user as $user)         {{--If the data is being passed over show all the questionnaire titles--}}
           <a href="users/{{$user->id}}/edit">{{$user->name}}</a>
           <a href="users/{{$user->id}}/edit">Edit</a>
+          @foreach($user->roles as $role)
+              <li>{{ $role->label }}</li>
+          @endforeach
           {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id]]) !!}
           {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
           {!! Form::close() !!}
