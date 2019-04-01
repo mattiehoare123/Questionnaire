@@ -27,7 +27,7 @@
           <p>Created At: {{$questionnaires->created_at}}</p>
           <p>Last Updated At: {{$questionnaires->updated_at}}</p>
           <a href="/responses/show">Responses</a>
-          <a href="/questionnaire">Edit</a>
+          <a href="/questionnaire/{{$questionnaires->id}}">Edit</a>
           <!--Cannot anchor the delete button unlike update for security-->
           {!! Form::open(['method' => 'DELETE', 'route' => ['questionnaire.destroy', $questionnaires->id]]) !!}
           {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Questionnaires;
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class DashboardController extends Controller
 {
@@ -17,11 +19,13 @@ class DashboardController extends Controller
      {
          $this->middleware('auth');
      }
-     
+
     public function index()
     {
-        //
-        $questionnaires = questionnaires::all();//Get all the questionnaires
+        //The vairable questionnaires equals the DB and searches for the table questionnaires and if the users
+        //id equals the auth::user id which is currently logged in then display there questionnaires
+        $questionnaires = DB::table('questionnaires')->where('user_id', Auth::user()->id)->get();
+        //Load the view with the variable questionnaires which will display them using a foreach loop
         return view('dashboard.index')->with('questionnaires', $questionnaires);
     }
 

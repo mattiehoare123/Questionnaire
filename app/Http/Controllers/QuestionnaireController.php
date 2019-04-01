@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Questionnaires;
 use App\Question;
 use App\Choice;
+use App\User;
 
 class QuestionnaireController extends Controller
 {
@@ -19,7 +20,7 @@ class QuestionnaireController extends Controller
      {
          $this->middleware('auth');
      }
-     
+
     public function index()
     {
         //

@@ -14,4 +14,9 @@ class Questionnaires extends Model
       'description',
       'ethical',
   ];
+
+  public function user()
+  {
+    return $this->belongsTo('App\User');
+  }
 }
