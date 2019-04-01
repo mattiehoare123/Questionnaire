@@ -5,6 +5,9 @@
     <title></title>
   </head>
   <body>
+
+    @include('admin/includes.adminnav')
+
     <h1>Users</h1>
     <a href="users/create">Add User</a>
 
@@ -22,7 +25,6 @@
       @endif
 
     <section>
-
       @if (isset($user))     {{--Check that all the data is being passed over--}}
 
       <ul>

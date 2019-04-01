@@ -5,6 +5,9 @@
     <title></title>
   </head>
   <body>
+
+    @include('admin/includes.adminnav')
+
     <h1>Add User</h1>
 
     @if ($errors->any())

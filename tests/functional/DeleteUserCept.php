@@ -4,23 +4,25 @@ $I = new FunctionalTester($scenario);
 $I->am('admin');
 $I->wantTo('Delete A User');
 
+Auth::loginUsingId(1);
+
 //Enter A User In DB And Then Delete
 $I->haveRecord('users', [
-  'id' => '1',
+  'id' => '999',
   'name' => 'John Brown',
   'email' => 'johnb@example.com',
   'password' => '12345',
 ]);
 
 //Check That The User In DB
-$I->seeRecord('users', ['name' => 'John Brown', 'id' => '1']);
+$I->seeRecord('users', ['name' => 'John Brown', 'id' => '999']);
 
 //When
 $I->amOnPage('/admin/users');
 
 //Then
 $I->see('John Brown');
-$I->seeLink('John Brown', 'users/1/edit');
+$I->seeLink('John Brown', 'users/999/edit');
 
 //Then
 $I->click('Delete');

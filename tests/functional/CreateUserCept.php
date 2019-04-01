@@ -8,6 +8,8 @@ Auth::loginUsingId(1);
 
 //When
 $I->amOnPage('/admin/users');
+$I->see('Quick Question');
+$I->see('Admin');
 $I->see('Users', 'h1');
 //And
 $I->click('Add User');

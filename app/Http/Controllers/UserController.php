@@ -30,7 +30,7 @@ class UserController extends Controller
 
             return view('admin/users/index', ['user' => $user]);
         }
-        return view('/home');
+        return view('/dashboard');
     }
 
     /**
@@ -89,17 +89,17 @@ class UserController extends Controller
         //Runs the find or fail if the $id is correct it will open with the edit view
         //passing along the $id variale with the compact function
         // get the user
-            $user = User::where('id',$id)->first();
-            $roles = Role::all();
+        $user = User::where('id',$id)->first();
+        $roles = Role::all();
 
-            // if user does not exist return to list
-            if(!$user)
-            {
-                return redirect('/admin/users');
-                // you could add on here the flash messaging of article does not exist.
-            }
-            return view('admin/users/edit')->with('user', $user)->with('roles', $roles);
+        // if user does not exist return to list
+        if(!$user)
+        {
+            return redirect('/admin/users');
+            // you could add on here the flash messaging of article does not exist.
         }
+        return view('admin/users/edit')->with('user', $user)->with('roles', $roles);
+    }
 
 
     /**
@@ -119,6 +119,8 @@ class UserController extends Controller
         ]);
 
         $user = User::findOrFail($id);
+        $user->update($request->all());
+
         $roles = $request->get('role');
 
         $user->roles()->sync($roles);
@@ -140,6 +142,6 @@ class UserController extends Controller
       //Once it is avaiable delete it and then redirect back to the admin users index
       $user->delete();
 
-      return redirect('/admin/users');
+      return redirect('admin/users');
     }
 }
