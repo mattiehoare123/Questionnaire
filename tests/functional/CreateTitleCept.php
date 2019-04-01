@@ -4,16 +4,18 @@ $I = new FunctionalTester($scenario);
 $I->am('researcher');
 $I->wantTo('Create A Questionnaire Title');
 
+Auth::loginUsingId(2);
+
 //Add User into DB (Not sure if this is needed)
 $I->haveRecord('users', [
-  'id' => '1',
+  'id' => '999',
   'name' => 'testuser',
   'email' => 'test1@user.com',
   'password' => 'password',
 ]);
 
 //Check user is in DB
-$I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
+$I->seeRecord('users', ['name' => 'testuser', 'id' => '999']);
 
 //When
 $I->amOnPage('/dashboard');

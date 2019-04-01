@@ -19,7 +19,7 @@ class CreateQuestionsTable extends Migration
             //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('number')->nullable();
             $table->longText('question');
-            $table->boolean('required');
+            $table->boolean('required')->default(false);
             $table->timestamps();
         });
     }

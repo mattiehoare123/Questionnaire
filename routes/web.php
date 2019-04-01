@@ -15,18 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('dashboard', 'DashboardController');
-Route::resource('choice', 'ChoiceController');
-Route::resource('responses', 'ResponseController');
-Route::resource('questionnaire', 'QuestionnaireController');
-Route::resource('question', 'QuestionController');
-
 
 //A group created to then run the validation middleware
 Route::group(['middle' => ['web']], function() {
   Auth::routes();
   Route::get('/home', 'HomeController@index')->name('home');
+  Route::resource('dashboard', 'DashboardController');
+  Route::resource('questionnaire', 'QuestionnaireController');
+  Route::resource('question', 'QuestionController');
+  Route::resource('choice', 'ChoiceController');
+  Route::resource('responses', 'ResponseController');
   Route::resource('admin/users', 'UserController');
-
-
 });

@@ -15,6 +15,11 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
+
     public function index()
     {
         //
@@ -108,7 +113,7 @@ class QuestionController extends Controller
         //Call the update method which will store the editied record in the DB row
         $question->update($request->all());
 
-        return redirect('questionnaire/');
+        return redirect('/questionnaire');
     }
 
     /**

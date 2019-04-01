@@ -4,16 +4,18 @@ $I = new FunctionalTester($scenario);
 $I->am('researcher');
 $I->wantTo('Create An Ethical Statement');
 
+Auth::loginUsingId(2);
+
 //Add A Test User
 $I->haveRecord('users', [
-  'id' => '1',
+  'id' => '999',
   'name' => 'testuser',
   'email' => 'test1@user.com',
   'password' => 'password',
 ]);
 
 //Check the user is in the DB
-$I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
+$I->seeRecord('users', ['name' => 'testuser', 'id' => '999']);
 
 //When
 $I->amOnPage('/dashboard');
