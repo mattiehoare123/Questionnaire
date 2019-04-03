@@ -5,18 +5,12 @@
     <title></title>
   </head>
   <body>
-    <section>
-      @if (isset($questionnaires))     {{--Check that all the data is being passed over--}}
+    <!doctype html>
+    <html lang="en">
+    <head>
 
-      <ul>
-        @foreach ($questionnaires as $questionnaires)         {{--If the data is being passed over show all the questionnaire titles--}}
-          <h1>{{$questionnaires->title}}</h1>
-        </ul>
-        @endforeach
-        @else {{--If no data is being passed over or no questionnaires have been made this show--}}
-        <p>No questionnaires made</p>
-        @endif
-      </section>
+    <h1>{{ $questionnaires->title }}</h1>
+
       <section>
 
         @if (isset($question))     {{--Check that all the data is being passed over--}}

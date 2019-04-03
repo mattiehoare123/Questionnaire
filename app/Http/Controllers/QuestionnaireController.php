@@ -25,7 +25,6 @@ class QuestionnaireController extends Controller
     {
         //
         $questionnaires = questionnaires::all();//Get all the questionnaires
-        $question = question::all();
         $choice = choice::all();
         return view('questionnaire.index')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice);
     }
@@ -37,7 +36,9 @@ class QuestionnaireController extends Controller
     public function create()
     {
         //
-        return view('questionnaire.create');
+        $questionnaires = Questionnaires::pluck('id');//Get all the questionnaires
+
+        return view('questionnaire.create', compact('questionnaires'));
     }
 
     /**
@@ -48,13 +49,10 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $input = $request->all();
 
-        Questionnaires::create($input);
-
-        return redirect('/question/create');;
-
+      $questionnaires = Questionnaires::create($request->all());
+      $questionnaires->question()->attach($request->input('questionnaires'));
+      return redirect('question/create');
     }
 
     /**
@@ -65,10 +63,13 @@ class QuestionnaireController extends Controller
      */
     public function show($id)
     {
-        $questionnaires = questionnaires::all();//Get all the questionnaires
+              // get the article
+        $questionnaires = Questionnaires::where('id',$id)->first();
+
+        // if article does not exist return to list
         $question = question::all();
         $choice = choice::all();
-        return view('questionnaire.show')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice);
+        return view('questionnaire.show')->withQuestionnaires($questionnaires)->with('question', $question)->with('choice', $choice);
       }
     /**
      * Show the form for editing the specified resource.

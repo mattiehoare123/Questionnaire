@@ -59,9 +59,4 @@ class User extends Authenticatable
           Role::whereName($role)->firstOrFail()
       );
     }
-
-    public function questionnaires()
-    {
-      return $this->hasMany('App\Questionnaires');
-    }
 }

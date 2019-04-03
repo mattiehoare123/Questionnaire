@@ -22,16 +22,11 @@ class QuestionController extends Controller
 
     public function index()
     {
-        //
+        $questionnaires = questionnaire::all();//Get all the questionnaires
         $question = question::all();//Get all the questionnaires
         $choice = choice::all();
 
-        return view('question.index')->with('question', $question)->with('choice', $choice);
-        /*
-        $question = DB::table('questions')->get();
-
-       return view('question.index', ['question' => $question]);
-       */
+        return view('question.index')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice);
     }
 
     /**
@@ -41,8 +36,11 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
-        return view('question.create');
+
+      $questionnaires = Questionnaires::pluck('id');//Get all the questionnaires
+
+      return view('question.create', compact('questionnaires'));
+
     }
 
     /**
@@ -53,16 +51,15 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $this->validate( $request, [
           //This states that the title is required and it must be a minumum of 5 characters long
           'question' => 'required|min:5',
           'required' => 'required',
         ]);
 
-        $input = $request->all();
 
-        Question::create($input);
+        $questionnaires = Question::create($request->all());
+        $questionnaires->questions()->attach($request->input('questionnaires'));
 
         return redirect('/choice/create');
     }
@@ -86,7 +83,6 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
         $question = question::findOrFail($id);
         $choice = choice::all();
 
@@ -102,7 +98,6 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         $this->validate( $request, [
           //This states that the title is required and it must be a minumum of 3 characters long
           'question' => 'required|min:5',
@@ -124,7 +119,6 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
         $question = question::find($id);
 
         $question->delete();

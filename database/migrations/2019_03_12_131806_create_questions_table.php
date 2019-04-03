@@ -12,11 +12,12 @@ class CreateQuestionsTable extends Migration
      * @return void
      */
     public function up()
+
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('questionnaires_id')->unsigned()->default(0);
-            //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('questionnaires_id')->unsigned();
+            $table->foreign('questionnaires_id')->references('id')->on('questionnaires')->onDelete('cascade');
             $table->integer('number')->nullable();
             $table->longText('question');
             $table->boolean('required')->default(false);

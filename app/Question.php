@@ -9,9 +9,14 @@ class Question extends Model
     //
     protected $fillable = [
       'id',
-      'questionnaire_id',
+      'questionnaires_id',
       'number',
       'question',
       'required'
     ];
+
+    public function questionnaires()
+    {
+      return $this->belongsToMany('App\Questionnaires');
+    }
 }

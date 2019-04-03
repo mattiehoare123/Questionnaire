@@ -15,8 +15,8 @@ class Questionnaires extends Model
       'ethical',
   ];
 
-  public function user()
+  public function question()
   {
-    return $this->belongsTo('App\User');
+    return $this->belongsToMany('App\Question');
   }
 }

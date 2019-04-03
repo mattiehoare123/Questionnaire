@@ -32,7 +32,8 @@
           {!! Form::open(['method' => 'DELETE', 'route' => ['questionnaire.destroy', $questionnaires->id]]) !!}
           {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
           {!! Form::close() !!}
-          <a href="questionnaire/show">Take</a>
+
+          <a href="questionnaire/{{$questionnaires->id}}" name="{{$questionnaires->title}}">Take</a>
         </ul>
           @endforeach
         @else {{--If no data is being passed over or no questionnaires have been made this show--}}

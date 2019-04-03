@@ -11,6 +11,6 @@ class Role extends Model
   }
 
   public function givePermissionTo(Permission $permission) {
-    return $this->permissions()->sync($permission);
+    return $this->permission()->sync($permission);
   }
 }
