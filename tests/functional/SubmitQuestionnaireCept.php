@@ -6,21 +6,18 @@ $I->wantTo('Submit A Questionnaire');
 
 Auth::loginUsingId(2);
 
-//Add A Test User
-$I->haveRecord('users', [
-  'id' => '999',
-  'name' => 'testuser',
-  'email' => 'test1@user.com',
-  'password' => 'password',
-]);
-
-//Add A Questionnaire
 $I->haveRecord('questionnaires', [
   'id' => '1',
+  'user_id' => '2',
   'title' => 'Food Review',
   'description' => 'Questionnaire About Food',
 ]);
-
+$I->haveRecord('questionnaires', [
+  'id' => '100',
+  'user_id' => '3',
+  'title' => 'test2',
+  'description' => 'Questionnaire About Food',
+]);
 $I->haveRecord('questions', [
   'id' => '111',
   'questionnaires_id' => '1',
@@ -42,8 +39,8 @@ $I->haveRecord('choices', [
   'choice' => 'testchoice3',
 ]);
 //Check the user and questionnaire are in the DB
-$I->seeRecord('users', ['name' => 'testuser', 'id' => '999']);
 $I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1']);
+$I->seeRecord('questionnaires', ['title' => 'test2', 'id' => '100']);
 $I->seeRecord('questions', ['question' => 'testquestion', 'id' => '111', 'questionnaires_id' => '1']);
 $I->seeRecord('choices', ['choice' => 'testchoice', 'id' => '101', 'question_id' => '111']);
 $I->seeRecord('choices', ['choice' => 'testchoice2', 'id' => '102', 'question_id' => '111']);
