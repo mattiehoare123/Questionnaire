@@ -14,6 +14,7 @@
         @foreach ($question as $question)         {{--If the data is being passed over show all the questionnaire titles--}}
           <a>{{$question->question}}</a>
           <a href="/question/{{$question->id}}/edit">Edit</a>
+          <a href='{{$question->id}}/create'>Add question</a>
           @endforeach
         </ul>
         @else {{--If no data is being passed over or no questionnaires have been made this show--}}

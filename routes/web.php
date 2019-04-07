@@ -15,8 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
 //A group created to then run the validation middleware
 Route::group(['middle' => ['web']], function() {
   Auth::routes();

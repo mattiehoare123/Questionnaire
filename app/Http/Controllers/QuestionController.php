@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Questionnaires;
+use Illuminate\Support\Facades\DB;
+use Auth;
 use App\Question;
 use App\Choice;
 
@@ -22,7 +24,7 @@ class QuestionController extends Controller
 
     public function index()
     {
-        $questionnaires = questionnaire::all();//Get all the questionnaires
+        $questionnaires = questionnaires::all();//Get all the questionnaires
         $question = question::all();//Get all the questionnaires
         $choice = choice::all();
 
@@ -36,9 +38,9 @@ class QuestionController extends Controller
      */
     public function create()
     {
-
-      $questionnaires = Questionnaires::pluck('id');//Get all the questionnaires
-
+      //Get all the questionnaire's titles that belong to the user id that is currently logged in and display them to the view
+      $questionnaires = DB::table('questionnaires')->where('user_id', Auth::user()->id)->pluck('title', 'id');
+      //$questionnaires = Questionnaires::pluck('id');//Get all the questionnaires id
       return view('question.create', compact('questionnaires'));
 
     }
@@ -57,9 +59,8 @@ class QuestionController extends Controller
           'required' => 'required',
         ]);
 
-
-        $questionnaires = Question::create($request->all());
-        $questionnaires->questions()->attach($request->input('questionnaires'));
+        $input = $request->all();
+        Question::create($input);
 
         return redirect('/choice/create');
     }

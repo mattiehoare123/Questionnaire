@@ -6,25 +6,6 @@ $I->wantTo('Create A Question');
 
 Auth::loginUsingId(2);
 
-//Add A Test User
-$I->haveRecord('users', [
-  'id' => '999',
-  'name' => 'testuser',
-  'email' => 'test1@user.com',
-  'password' => 'password',
-]);
-
-//Add A Questionnaire
-$I->haveRecord('questionnaires', [
-  'id' => '1',
-  'title' => 'Food Review',
-  'description' => 'Questionnaire About Food',
-]);
-
-//Check the user and questionnaire are in the DB
-$I->seeRecord('users', ['name' => 'testuser', 'id' => '999']);
-$I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1']);
-
 //When
 $I->amOnPage('/dashboard');
 $I->see('My Questionnaires');
@@ -37,7 +18,6 @@ $I->seeCurrentUrlEquals('/questionnaire/create');
 $I->see('New Questionnaire');
 $I->submitForm('#createTitle', [
   'title' => 'Food Review',
-  'required' =>  false
 ]);
 
 //Then
@@ -47,6 +27,9 @@ $I->see('Add New Question');
 //Then
 $I->submitForm('#createQuestion', [
   'question' => 'testquestion',
+  'required' =>  true,
+  'questionnaires_id' => '2'
 ]);
+
 //And
 $I->seeCurrentUrlEquals('/choice/create');

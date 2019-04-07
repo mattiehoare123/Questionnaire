@@ -17,6 +17,6 @@ class Questionnaires extends Model
 
   public function question()
   {
-    return $this->belongsToMany('App\Question');
+    return $this->hasMany('App\Question');
   }
 }
