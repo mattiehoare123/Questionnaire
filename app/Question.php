@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     //
+
     protected $fillable = [
       'id',
       'questionnaires_id',
@@ -17,6 +18,11 @@ class Question extends Model
 
     public function questionnaires()
     {
-      return $this->belongsTo('App\Questionnaires', 'questionnaires_id');
+      return $this->belongsTo('App\Questionnaires');
+    }
+
+    public function choice()
+    {
+      return $this->hasMany('App\Choice');
     }
 }

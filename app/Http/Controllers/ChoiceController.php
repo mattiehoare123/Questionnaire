@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Questionnaires;
+use Illuminate\Support\Facades\DB;
+use Auth;
 use App\Question;
 use App\Choice;
 
@@ -30,10 +32,13 @@ class ChoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
-        return view('choice.create');
+        //This finds the id in the url that has been passed and then it will load with the view
+        //so i can then store the hidden id of question_id
+        $question = Question::find($id);
+        //$questionnaires = Questionnaires::pluck('id');//Get all the questionnaires id
+        return view('choice.create')->with('question', $question);
     }
 
     /**

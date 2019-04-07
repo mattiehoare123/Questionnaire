@@ -24,6 +24,7 @@ class QuestionnaireController extends Controller
     public function index()
     {
         $questionnaires = questionnaires::all();//Get all the questionnaires
+        $question = question::all();
         $choice = choice::all();
         return view('questionnaire.index')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice);
     }
@@ -51,7 +52,7 @@ class QuestionnaireController extends Controller
 
       $input = $request->all();
       $questionnaires =  Questionnaires::create($input);
-      return redirect('question/create');
+      return redirect('question/' . $questionnaires->id . '/create');
     }
 
     /**

@@ -23,7 +23,6 @@
     <!-- Laravel did not support PATCH when placed above so therefore used a method called form spoof which hids the method to spoof the HTTP which worked below-->
             @method('PATCH')
             @csrf
-            {{ csrf_token() }}
         <div class="row large-12 columns">
             {!! Form::label('title', 'Title:') !!}
             {!! Form::text('title', null, ['class' => 'large-8 columns']) !!}

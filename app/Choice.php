@@ -12,4 +12,9 @@ class Choice extends Model
       'question_id',
       'choice',
     ];
+
+    public function questionnaires()
+    {
+      return $this->belongsTo('App\Questionnaires', 'questionnaires_id');
+    }
 }

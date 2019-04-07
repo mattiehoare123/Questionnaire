@@ -36,12 +36,13 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
       //Get all the questionnaire's titles that belong to the user id that is currently logged in and display them to the view
-      $questionnaires = DB::table('questionnaires')->where('user_id', Auth::user()->id)->pluck('title', 'id');
+      //$questionnaires = DB::table('questionnaires')->where('user_id', Auth::user()->id)->pluck('title', 'id');
+      $questionnaires = Questionnaires::find($id);
       //$questionnaires = Questionnaires::pluck('id');//Get all the questionnaires id
-      return view('question.create', compact('questionnaires'));
+      return view('question.create')->with('questionnaires', $questionnaires);
 
     }
 
@@ -60,9 +61,9 @@ class QuestionController extends Controller
         ]);
 
         $input = $request->all();
-        Question::create($input);
+        $question = Question::create($input);
 
-        return redirect('/choice/create');
+        return redirect('choice/' . $question->id . '/create');
     }
 
     /**

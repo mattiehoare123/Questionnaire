@@ -17,7 +17,7 @@
     <h1>Add New Question</h1>
     {!! Form::open(array('action' => 'QuestionController@store', 'id' => 'createQuestion')) !!}
     @csrf
-    {!! Form::label('questionnaires_id', $questionnaires) !!}
+    {!! Form::hidden('questionnaires_id', $questionnaires->id) !!}
 
         <div class="row large-12 columns">
             {!! Form::label('question', 'Question:') !!}
@@ -29,6 +29,7 @@
           {!! Form::radio('required', true) !!}Yes
           {!! Form::radio('required', false) !!}No
         </div>
+
         <div class="row large-4 columns">
             {!! Form::submit('Submit', ['class' => 'button']) !!}
         </div>

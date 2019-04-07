@@ -15,7 +15,7 @@ class Questionnaires extends Model
       'ethical',
   ];
 
-  public function question()
+  public function questions()
   {
     return $this->hasMany('App\Question');
   }

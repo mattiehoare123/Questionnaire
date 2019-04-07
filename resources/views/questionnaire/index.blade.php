@@ -22,8 +22,6 @@
       </section>
       <section>
 
-        <p>{{$questionnaires->$question->id}}</p>
-
         @if (isset($question))     {{--Check that all the data is being passed over--}}
 
         <ul>

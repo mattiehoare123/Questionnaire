@@ -21,15 +21,14 @@ $I->submitForm('#createTitle', [
 ]);
 
 //Then
-$I->seeCurrentUrlEquals('/question/create');
+$I->seeCurrentUrlEquals('/question/9/create');
 $I->see('Add New Question');
 
 //Then
 $I->submitForm('#createQuestion', [
   'question' => 'testquestion',
-  'required' =>  true,
-  'questionnaires_id' => '2'
+  'required' =>  true
 ]);
 
 //And
-$I->seeCurrentUrlEquals('/choice/create');
+$I->seeCurrentUrlEquals('/choice/3/create');

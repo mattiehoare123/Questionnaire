@@ -18,6 +18,7 @@
 
     <!--Edit Form-->
     {!! Form::model($question, ['url' => 'question/'. $question->id]) !!}
+    @csrf
     <!-- Laravel did not support PATCH when placed above so therefore used a method called form spoof which hids the method to spoof the HTTP which worked below-->
             @method('PATCH')
             @csrf
