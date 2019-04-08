@@ -6,31 +6,24 @@ $I->wantTo('Update The Questionnaire Title');
 
 Auth::loginUsingId(2);
 
-//Add A Test User
-$I->haveRecord('users', [
-  'id' => '999',
-  'name' => 'testuser',
-  'email' => 'test1@user.com',
-  'password' => 'password',
-]);
-
 //Add A Questionnaire
 $I->haveRecord('questionnaires', [
-  'id' => '1',
+  'id' => '999',
+  'user_id' => '2',
   'title' => 'Food Review',
+  'ethical' => 'Ethical Statmenet',
   'description' => 'Questionnaire About Food',
 ]);
 
 $I->haveRecord('questions', [
   'id' => '111',
-  'questionnaires_id' => '1',
+  'questionnaires_id' => '999',
   'question' => 'testquestion',
 ]);
 
 //Check the user and questionnaire are in the DB
-$I->seeRecord('users', ['name' => 'testuser', 'id' => '999']);
-$I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1']);
-$I->seeRecord('questions', ['question' => 'testquestion', 'id' => '111', 'questionnaires_id' => '1']);
+$I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '999']);
+$I->seeRecord('questions', ['question' => 'testquestion', 'id' => '111', 'questionnaires_id' => '999']);
 
 //When
 $I->amOnPage('/dashboard');
@@ -40,9 +33,9 @@ $I->see('Food Review');
 $I->click('Edit');
 
 //Then
-$I->seeCurrentUrlEquals('/questionnaire');
+$I->seeCurrentUrlEquals('/questionnaire/999/index');
 //And
-//$I->see('Edit - Food Review');
+$I->see('Edit - Food Review');
 //And
 $I->click('Edit');
 
@@ -63,10 +56,11 @@ $I->see('The question field is required');
 //Then
 //Then
 $I->fillField('question', 'editquestion');
+$I->selectOption('input[name=required]', 1);
 //And
 $I->click('Update');
 
 //Then
-$I->seeCurrentUrlEquals('/questionnaire');
+$I->seeCurrentUrlEquals('/questionnaire/999/index');
 $I->seeRecord('questions', ['question' => 'editquestion']);
 $I->see('editquestion');

@@ -8,29 +8,22 @@
   <body>
     <section>
 
-      @if (isset($questionnaires))     {{--Check that all the data is being passed over--}}
+          <p>Edit - {{$questionnaires->title}}</p>
+          <a href="{{ url('questionnaire/'.$questionnaires->id.'/edit')}}">Edit Title</a>
 
-      <ul>
-        @foreach ($questionnaires as $questionnaires)         {{--If the data is being passed over show all the questionnaire titles--}}
-          <p>{{$questionnaires->title}}</p>
-          <a href="questionnaire/{{ $questionnaires->id }}/edit">Edit Title</a>
-        </ul>
-        @endforeach
-        @else {{--If no data is being passed over or no questionnaires have been made this show--}}
-        <p>T</p>
-        @endif
       </section>
       <section>
-
+        <a href="/question">Edit Questions</a>
         @if (isset($question))     {{--Check that all the data is being passed over--}}
 
         <ul>
           @foreach ($question as $question)         {{--If the data is being passed over show all the questionnaire titles--}}
             <p>{{$question->question}}</p>
-            <a href="question/{{ $question->id }}/edit">Edit</a>
-            {!! Form::open(['method' => 'DELETE', 'route' => ['question.destroy', $question->id]]) !!}
-            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-            {!! Form::close() !!}
+            <!--When using question/{{$question->id}}/edit it produced a url which was questionnaire/5/question/1/edit which is incorrect
+            and it did not route to the edit page so within laravel it has a helper called url which generates the path given which got rid of
+            the questionnaire/5 at the beginning of the url so therefore this now routes to the correct file-->
+            <a href="{{ url('question/'.$question->id.'/edit')}}">Edit</a>
+
             @endforeach
           </ul>
           @else {{--If no data is being passed over or no questionnaires have been made this show--}}

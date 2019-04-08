@@ -30,6 +30,7 @@ $I->submitForm('#createQuestion', [
 $I->amOnPage('/choice/3/create');
 //Then
 $I->see('Add Choices');
+
 $I->submitForm('#createChoice', [
   'choice' => 'choice1',
   'choice' => 'choice2',

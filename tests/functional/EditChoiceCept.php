@@ -4,26 +4,23 @@ $I = new FunctionalTester($scenario);
 $I->am('researcher');
 $I->wantTo('Edit A Choice');
 
-//Add A Test User
-$I->haveRecord('users', [
-  'id' => '1',
-  'name' => 'testuser',
-  'email' => 'test1@user.com',
-  'password' => 'password',
-]);
+Auth::loginUsingId(2);
 
 //Add A Questionnaire
 $I->haveRecord('questionnaires', [
-  'id' => '1',
+  'id' => '999',
+  'user_id' => '2',
   'title' => 'Food Review',
+  'ethical' => 'Ethical Statmenet',
   'description' => 'Questionnaire About Food',
 ]);
 
 $I->haveRecord('questions', [
   'id' => '111',
-  'questionnaires_id' => '1',
+  'questionnaires_id' => '999',
   'question' => 'testquestion',
 ]);
+
 $I->haveRecord('choices', [
   'id' => '101',
   'question_id' => '111',
@@ -31,9 +28,8 @@ $I->haveRecord('choices', [
 ]);
 
 //Check the user and questionnaire are in the DB
-$I->seeRecord('users', ['name' => 'testuser', 'id' => '1']);
-$I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1']);
-$I->seeRecord('questions', ['question' => 'testquestion', 'id' => '111', 'questionnaires_id' => '1']);
+$I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '999']);
+$I->seeRecord('questions', ['question' => 'testquestion', 'id' => '111', 'questionnaires_id' => '999']);
 $I->seeRecord('choices', ['choice' => 'testchoice', 'id' => '101', 'question_id' => '111']);
 
 
@@ -45,9 +41,9 @@ $I->see('Food Review');
 $I->click('Edit');
 
 //Then
-$I->seeCurrentUrlEquals('/questionnaire');
+$I->seeCurrentUrlEquals('/questionnaire/999/index');
 //And
-//$I->see('Edit - Food Review');
+$I->see('Edit - Food Review');
 //And
 $I->click('Edit');
 
@@ -62,7 +58,7 @@ $I->see('testchoice');
 $I->click('Edit Choice');
 
 //Then
-$I->seeCurrentUrlEquals('/question/111/choice/101/edit');
+$I->seeCurrentUrlEquals('/choice/101/edit');
 //And
 $I->see('Edit Choice - testchoice');
 //Then
@@ -81,5 +77,5 @@ $I->click('Update');
 
 //Then
 $I->seeCurrentUrlEquals('/question/111/edit');
-$I->seeRecord('choices', ['chocie' => 'editChoice']);
+$I->seeRecord('choices', ['choice' => 'editChoice']);
 $I->see('editChoice');

@@ -10,6 +10,10 @@
     <head>
 
     <h1>{{ $questionnaires->title }}</h1>
+    <a href="{{ $questionnaires->id }}/edit">Edit Title</a>
+    <a href="question/create">Add New Question</a>
+
+
 
       <section>
 
@@ -18,6 +22,8 @@
         <ul>
           @foreach ($question as $question)         {{--If the data is being passed over show all the questionnaire titles--}}
             <p>{{$question->question}}</p>
+            <a href="/question/{{ $question->id }}/edit">Edit</a>
+            
             @endforeach
           </ul>
           @else {{--If no data is being passed over or no questionnaires have been made this show--}}

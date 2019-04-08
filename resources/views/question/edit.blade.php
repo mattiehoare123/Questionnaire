@@ -44,7 +44,7 @@
           <ul>
             @foreach ($choice as $choice)         {{--If the data is being passed over show all the questionnaire titles--}}
               <p>{{$choice->choice}}</a>
-              <a href="choice/{{$choice->id}}/edit">Edit Choice</p>
+              <a href="{{ url('choice/'.$choice->id.'/edit')}}">Edit Choice</a>
               {!! Form::open(['method' => 'DELETE', 'route' => ['choice.destroy', $choice->id]]) !!}
               {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
               {!! Form::close() !!}

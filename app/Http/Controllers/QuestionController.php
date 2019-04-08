@@ -110,7 +110,7 @@ class QuestionController extends Controller
         //Call the update method which will store the editied record in the DB row
         $question->update($request->all());
 
-        return redirect('/questionnaire');
+        return redirect('questionnaire/' . $question->questionnaires_id . '/index');
     }
 
     /**

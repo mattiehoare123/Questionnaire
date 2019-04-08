@@ -49,12 +49,16 @@ class ChoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          $this->validate( $request, [
+            //This states that the title is required and it must be a minumum of 3 characters long
+            'choice' => 'required',
+          ]);
+
           $input = $request->all();
 
-          Choice::create($input);
+          $questionnaires = Choice::create($input);
 
-          return redirect('/questionnaire');
+          return redirect('questionnaire/' . $questionnaires->id . '/index');
     }
 
     /**
@@ -91,9 +95,18 @@ class ChoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        //This states that the title is required and it must be a minumum of 3 characters long
+        $this->validate( $request, [
+          'choice' => 'required',
+        ]);
 
+      $choice = choice::findOrFail($id);
+      //Call the update method which will store the editied record in the DB row
+      $choice->update($request->all());
+      /*Redirect back to the question edit page by using the choice question_id to get the
+      question id to therefore go back to the correct edit page*/
+      return redirect('question/' . $choice->question_id . '/edit');
+}
     /**
      * Remove the specified resource from storage.
      *

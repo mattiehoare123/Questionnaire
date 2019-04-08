@@ -28,6 +28,7 @@ Route::group(['middle' => ['web']], function() {
   */
   Route::get('question/{id}/create', 'QuestionController@create');
   Route::get('choice/{id}/create', 'ChoiceController@create');
+  Route::get('questionnaire/{id}/index', 'QuestionnaireController@index');
   Route::resource('dashboard', 'DashboardController');
   Route::resource('questionnaire', 'QuestionnaireController');
   Route::resource('question', 'QuestionController');
