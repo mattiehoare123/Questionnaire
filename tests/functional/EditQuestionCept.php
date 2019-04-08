@@ -21,9 +21,17 @@ $I->haveRecord('questions', [
   'question' => 'testquestion',
 ]);
 
+$I->haveRecord('questions', [
+  'id' => '115',
+  'questionnaires_id' => '1000',
+  'question' => 'dummy',
+]);
+
 //Check the user and questionnaire are in the DB
 $I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '999']);
 $I->seeRecord('questions', ['question' => 'testquestion', 'id' => '111', 'questionnaires_id' => '999']);
+$I->seeRecord('questions', ['question' => 'dummy', 'id' => '115', 'questionnaires_id' => '1000']);
+
 
 //When
 $I->amOnPage('/dashboard');
@@ -36,6 +44,8 @@ $I->click('Edit');
 $I->seeCurrentUrlEquals('/questionnaire/999/index');
 //And
 $I->see('Edit - Food Review');
+$I->see('testquestion');
+$I->dontSee('dummy');
 //And
 $I->click('Edit');
 
@@ -43,7 +53,6 @@ $I->click('Edit');
 $I->seeCurrentUrlEquals('/question/111/edit');
 //And
 $I->see('Edit Question - testquestion');
-
 
 //Then
 $I->fillField('question', null);

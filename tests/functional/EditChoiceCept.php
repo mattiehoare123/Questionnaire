@@ -14,15 +14,23 @@ $I->haveRecord('questionnaires', [
   'ethical' => 'Ethical Statmenet',
   'description' => 'Questionnaire About Food',
 ]);
-
+$I->haveRecord('questions', [
+  'id' => '301',
+  'questionnaires_id' => '999',
+  'question' => 'testquestion',
+]);
 $I->haveRecord('questions', [
   'id' => '111',
   'questionnaires_id' => '999',
   'question' => 'testquestion',
 ]);
-
 $I->haveRecord('choices', [
-  'id' => '101',
+  'id' => '450',
+  'question_id' => '301',
+  'choice' => 'dummy',
+]);
+$I->haveRecord('choices', [
+  'id' => '400',
   'question_id' => '111',
   'choice' => 'testchoice',
 ]);
@@ -30,8 +38,8 @@ $I->haveRecord('choices', [
 //Check the user and questionnaire are in the DB
 $I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '999']);
 $I->seeRecord('questions', ['question' => 'testquestion', 'id' => '111', 'questionnaires_id' => '999']);
-$I->seeRecord('choices', ['choice' => 'testchoice', 'id' => '101', 'question_id' => '111']);
-
+$I->seeRecord('choices', ['choice' => 'dummy', 'id' => '450', 'question_id' => '301']);
+$I->seeRecord('choices', ['choice' => 'testchoice', 'id' => '400', 'question_id' => '111']);
 
 //When
 $I->amOnPage('/dashboard');
@@ -51,14 +59,13 @@ $I->click('Edit');
 $I->seeCurrentUrlEquals('/question/111/edit');
 //And
 $I->see('Edit Question - testquestion');
-
-//Then
 $I->see('testchoice');
+$I->dontSee('dummy');
 //And
 $I->click('Edit Choice');
 
 //Then
-$I->seeCurrentUrlEquals('/choice/101/edit');
+$I->seeCurrentUrlEquals('/choice/400/edit');
 //And
 $I->see('Edit Choice - testchoice');
 //Then

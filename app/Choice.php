@@ -13,8 +13,8 @@ class Choice extends Model
       'choice',
     ];
 
-    public function questionnaires()
+    public function question()
     {
-      return $this->belongsTo('App\Questionnaires', 'questionnaires_id');
+      return $this->belongsTo('App\Question');
     }
 }

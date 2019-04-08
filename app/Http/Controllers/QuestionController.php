@@ -24,11 +24,7 @@ class QuestionController extends Controller
 
     public function index()
     {
-        $questionnaires = questionnaires::all();//Get all the questionnaires
-        $question = question::all();//Get all the questionnaires
-        $choice = choice::all();
 
-        return view('question.index')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice);
     }
 
     /**
@@ -86,7 +82,7 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = question::findOrFail($id);
-        $choice = choice::all();
+        $choice = Choice::where('question_id',$id)->get();
 
         return view('question.edit', compact('question'))->with('choice', $choice);
     }

@@ -25,9 +25,8 @@ class QuestionnaireController extends Controller
     {
         $questionnaires = Questionnaires::where('id',$id)->first();
         //First returns an collection where get returns the element itself
-        $question = Question::where('questionnaires_id',$id)->get();
-        $choice = choice::all();
-        return view('questionnaire.index')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice);
+        $question = Question::where('questionnaires_id', $id)->with('choice')->get(); //gets the question where the survey id matches the surveys id
+        return view('questionnaire.index')->with('questionnaires', $questionnaires)->with('question', $question);
     }
     /**
      * Show the form for creating a new resource.

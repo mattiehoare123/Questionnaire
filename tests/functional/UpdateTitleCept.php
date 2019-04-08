@@ -15,11 +15,18 @@ $I->haveRecord('questionnaires', [
   'description' => 'Questionnaire About Food',
 ]);
 
-//Check the user and questionnaire are in the DB
-$I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '999']);
+//Add A Questionnaire
+$I->haveRecord('questionnaires', [
+  'id' => '3000',
+  'user_id' => '2',
+  'title' => 'Bad Review',
+  'ethical' => 'Ethical Statmenet',
+  'description' => 'Questionnaire About Food',
+]);
 
 //Check the user and questionnaire are in the DB
 $I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '999']);
+$I->seeRecord('questionnaires', ['title' => 'Bad Review', 'id' => '3000']);
 
 //When
 $I->amOnPage('/dashboard');
@@ -32,6 +39,7 @@ $I->click('Edit');
 $I->seeCurrentUrlEquals('/questionnaire/999/index');
 //And
 $I->see('Edit - Food Review');
+$I->dontSee('Bad Review');
 //And
 $I->click('Edit Title');
 
