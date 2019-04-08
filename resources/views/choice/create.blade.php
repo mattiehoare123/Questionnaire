@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+@extends('layouts.master')
+
+@section('title', 'Create Choice')
+
+@section('content')
     <h1>Add Choices</h1>
     {!! Form::open(array('action' => 'ChoiceController@store', 'id' => 'createChoice')) !!}
     @csrf
@@ -22,5 +20,4 @@
             {!! Form::submit('Submit', ['class' => 'button']) !!}
         </div>
     {!! Form::close() !!}
-  </body>
-</html>
+@endsection

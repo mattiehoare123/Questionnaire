@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
+@extends('layouts.master')
 
-    <title></title>
-  </head>
-  <body>
+@section('title', 'Create Questionnaire')
+
+@section('content')
+    <section>
     <h1>New Questionnaire</h1>
     {!! Form::open(array('action' => 'QuestionnaireController@store', 'id' => 'createTitle')) !!}
     @csrf
@@ -14,25 +12,23 @@
     {!! Form::hidden('user_id', Auth::user()->id ) !!}
 
 
-        <div class="row large-12 columns">
+        <div>
             {!! Form::label('title', 'Title:') !!}
-            {!! Form::text('title', null, ['class' => 'large-8 columns']) !!}
+            {!! Form::text('title', null) !!}
         </div>
 
-        <div class="row large-12 columns">
+        <div>
             {!! Form::label('description', 'Description:') !!}
-            {!! Form::text('description', null, ['class' => 'large-8 columns']) !!}
+            {!! Form::text('description', null) !!}
         </div>
 
-        <div class="row large-12 columns">
+        <div>
             {!! Form::label('ethical', 'Ethical Statement:') !!}
-            {!! Form::text('ethical', null, ['class' => 'large-8 columns']) !!}
+            {!! Form::text('ethical', null) !!}
         </div>
-        <div class="row large-4 columns">
-            {!! Form::submit('Submit', ['class' => 'button']) !!}
+        <div>
+            {!! Form::submit('Submit', ['class' => 'hollow alert button']) !!}
         </div>
-
     {!! Form::close() !!}
-
-  </body>
-</html>
+  </section>
+@endsection

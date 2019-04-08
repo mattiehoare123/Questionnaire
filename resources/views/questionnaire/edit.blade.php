@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
+@extends('layouts.master')
 
-    <title></title>
-  </head>
-  <body>
+@section('title', 'Edit Questionnaire Title)
+
+@section('content')
+  <section>
     <h1>Edit - {{$questionnaires->title}} Welcome Page</h1>
     <!--If there are any errors loop through the errors and display them to the user-->
     @if ($errors->any())
@@ -42,6 +40,5 @@
             {!! Form::submit('Update', ['class' => 'button']) !!}
         </div>
     {!! Form::close() !!}
-
-  </body>
-</html>
+  </section>
+  @endsection

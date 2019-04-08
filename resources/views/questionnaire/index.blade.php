@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
+@extends('layouts.master')
 
-    <title></title>
-  </head>
-  <body>
+@section('title', 'Edit Questionnaire')
+
+@section('content')
     <section>
 
           <p>Edit - {{$questionnaires->title}}</p>
@@ -43,4 +40,4 @@
             <p>You Have Not Added No Chocies To The Question Yet</p>
             @endif
           </section>
-</html>
+@endsection

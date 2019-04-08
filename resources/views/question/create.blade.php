@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+@extends('layouts.master')
+
+@section('title', 'Create Question')
+
+@section('content')
+
     @if ($errors->any())
         <div>
             <ul class="alert alert-danger">
@@ -34,5 +33,4 @@
             {!! Form::submit('Submit', ['class' => 'button']) !!}
         </div>
     {!! Form::close() !!}
-  </body>
-</html>
+@endsection
