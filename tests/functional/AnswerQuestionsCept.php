@@ -61,8 +61,9 @@ $I->click('Take');
 $I->amOnPage('/questionnaire/1');
 //And
 $I->see('Food Review');
-$I->see('testchoice');
-$I->dontsee('test2');
+$I->see('testquestion');
+$I->click('Answer');
+$I->seeCurrentUrlEquals('/question/111');
 
-//Then
-$I->click('radio[for="testchoice"]');
+$I->see('testchoice');
+$I->selectOption('input[name=responses]', 'testchoice');

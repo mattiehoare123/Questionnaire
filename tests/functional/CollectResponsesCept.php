@@ -12,6 +12,7 @@ $I->haveRecord('questionnaires', [
   'user_id' => '2',
   'title' => 'Food Review',
   'description' => 'Questionnaire About Food',
+  'ethical' => 'test ethical'
 ]);
 $I->haveRecord('questionnaires', [
   'id' => '100',
@@ -23,6 +24,11 @@ $I->haveRecord('questions', [
   'id' => '111',
   'questionnaires_id' => '1',
   'question' => 'testquestion',
+]);
+$I->haveRecord('questions', [
+  'id' => '1001',
+  'questionnaires_id' => '100',
+  'question' => 'dummy question',
 ]);
 $I->haveRecord('choices', [
   'id' => '101',
@@ -38,6 +44,11 @@ $I->haveRecord('choices', [
   'id' => '103',
   'question_id' => '111',
   'choice' => 'testchoice3',
+]);
+$I->haveRecord('choices', [
+  'id' => '110',
+  'question_id' => '1001',
+  'choice' => 'dummy choice',
 ]);
 //Check the user and questionnaire are in the DB
 $I->seeRecord('questionnaires', ['title' => 'Food Review', 'id' => '1']);
@@ -59,4 +70,7 @@ $I->seeCurrentUrlEquals('/questionnaire/1');
 //And
 $I->dontsee('test2');
 $I->see('Food Review');
-$I->see('testchoice');
+$I->see('Questionnaire About Food');
+$I->see('test ethical');
+$I->see('testquestion');
+$I->dontSee('dummy question');

@@ -25,7 +25,7 @@ class QuestionnaireController extends Controller
     {
         $questionnaires = Questionnaires::where('id',$id)->first();
         //First returns an collection where get returns the element itself
-        $question = Question::where('questionnaires_id',$id)->with('choice')->get();
+        $question = Question::where('questionnaires_id',$id)->get();
         $choice = Choice::where('question_id', $id)->get();
         return view('questionnaire.index')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice);
     }
@@ -64,11 +64,9 @@ class QuestionnaireController extends Controller
     {
               // get the article
         $questionnaires = Questionnaires::where('id',$id)->first();
-
         // if article does not exist return to list
-        $question = question::all();
-        $choice = choice::all();
-        return view('questionnaire.show')->withQuestionnaires($questionnaires)->with('question', $question)->with('choice', $choice);
+        $question = Question::where('questionnaires_id',$id)->get();
+        return view('questionnaire.show')->withQuestionnaires($questionnaires)->with('question', $question);
       }
     /**
      * Show the form for editing the specified resource.

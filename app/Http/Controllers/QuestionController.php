@@ -70,7 +70,11 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+      $question = Question::find($id);
+      $choice = Choice::where('question_id',$id)->get();
+
+      return view('question.show')->with('question', $question)->with('choice', $choice);
+
     }
 
     /**
