@@ -18,10 +18,11 @@ $I->seeCurrentUrlEquals('/questionnaire/create');
 $I->see('New Questionnaire');
 $I->submitForm('#createTitle', [
   'title' => 'Food Review',
+  'id' => '1'
 ]);
 
 //Then
-$I->seeCurrentUrlEquals('/question/9/create');
+$I->seeCurrentUrlEquals('/question/1/create');
 $I->see('Add New Question');
 
 //Then
@@ -29,6 +30,5 @@ $I->submitForm('#createQuestion', [
   'question' => 'testquestion',
   'required' =>  true
 ]);
-
 //And
-$I->seeCurrentUrlEquals('/choice/3/create');
+$I->seeCurrentUrlEquals('/choice/303/create');

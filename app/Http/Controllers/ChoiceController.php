@@ -58,7 +58,7 @@ class ChoiceController extends Controller
 
           $questionnaires = Choice::create($input);
 
-          return redirect('/dashboard');
+          return redirect()->back();;
     }
 
     /**

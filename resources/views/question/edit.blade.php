@@ -36,6 +36,7 @@
         </div>
       {!! Form::close() !!}
 
+      <a href="{{ url('choice/'.$question->id.'/create')}}" class="hollow button success">Add Choice</a>
 
       <section>
 

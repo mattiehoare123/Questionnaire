@@ -7,6 +7,7 @@
 
       <h1>Edit - {{$questionnaires->title}}</h1>
       <a id="title" href="{{ url('questionnaire/'.$questionnaires->id.'/edit')}}" class="hollow button warning">Edit Title</a>
+      <a href="/question/{{$questionnaires->id}}/create" class="hollow button success">Create Quesion</a>
 
       @if (isset($question))     {{--Check that all the data is being passed over--}}
 
@@ -14,6 +15,7 @@
         <thead>
           <tr>
             <td>Question</td>
+            <td>Choices</td>
             <td>Edit</td>
             <td>Delete</td>
           </tr>
