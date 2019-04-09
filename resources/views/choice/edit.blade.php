@@ -17,14 +17,14 @@
     <!-- Laravel did not support PATCH when placed above so therefore used a method called form spoof which hids the method to spoof the HTTP which worked below-->
           @method('PATCH')
           @csrf
-          <div class="row large-12 columns">
+          <div class="columns large-12">
               {!! Form::label('choice', 'Choice:') !!}
-              {!! Form::text('choice', null, ['class' => 'large-8 columns']) !!}
+              {!! Form::text('choice', null) !!}
           </div>
-          <div class="row large-12 columns">
-              {!! Form::text('choice', null, ['class' => 'large-8 columns']) !!}
+          <div class="columns large-12">
+              {!! Form::text('choice', null) !!}
           </div>
-          <div class="row large-4 columns">
+          <div class="columns large-12">
               {!! Form::submit('Update', ['class' => 'button']) !!}
           </div>
       {!! Form::close() !!}

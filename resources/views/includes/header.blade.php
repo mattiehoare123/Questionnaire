@@ -8,7 +8,7 @@
   <div class="top-bar-left">
     <ul class="dropdown menu" data-dropdown-menu>
       <li class="menu-text">Quick Question</li>
-      <li><a href="#0">My Questionnaires</a></li>
+      <li><a href="{{ url('dashboard')}}">My Questionnaires</a></li>
     </ul>
   </div>
   <div class="top-bar-right">

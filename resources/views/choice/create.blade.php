@@ -8,15 +8,15 @@
     @csrf
     {!! Form::hidden('question_id', $question->id) !!}
 
-        <div class="row large-12 columns">
+    <div class="columns large-12">
             {!! Form::label('choice', 'Choice:') !!}
-            {!! Form::text('choice', null, ['class' => 'large-8 columns']) !!}
+            {!! Form::text('choice', null) !!}
         </div>
-        <div class="row large-12 columns">
+        <div class="columns large-12">
             {!! Form::label('choice', 'Choice:') !!}
-            {!! Form::text('choice', null, ['class' => 'large-8 columns']) !!}
+            {!! Form::text('choice', null) !!}
         </div>
-        <div class="row large-4 columns">
+        <div class="columns large-12">
             {!! Form::submit('Submit', ['class' => 'button']) !!}
         </div>
     {!! Form::close() !!}

@@ -27,8 +27,8 @@
             <td>{{$questionnaires->title}}</td>
             <td>{{$questionnaires->created_at}}</td>
             <td>{{$questionnaires->updated_at}}</td>
-            <td><a href="questionnaire/{{$questionnaires->id}}" name="{{$questionnaires->title}}">Take</a></td>
-            <td><a href="/responses/show">Responses</a></td>
+            <td><a href="questionnaire/{{$questionnaires->id}}" name="{{$questionnaires->title}}" class="hollow button success">Take</a></td>
+            <td><a href="/responses/show" class="hollow button">Responses</a></td>
             <!--Show all questionnaire and questions that belong to that id and show all choices that belong to the question-->
             <td><a href="/questionnaire/{{$questionnaires->id}}/index" class="hollow button warning">Edit</a></td>
             <!--Cannot anchor the delete button unlike update for security-->

@@ -13,24 +13,25 @@
             </ul>
         </div>
     @endif
+
+    <section>
     <h1>Add New Question</h1>
     {!! Form::open(array('action' => 'QuestionController@store', 'id' => 'createQuestion')) !!}
     @csrf
     {!! Form::hidden('questionnaires_id', $questionnaires->id) !!}
-
-        <div class="row large-12 columns">
-            {!! Form::label('question', 'Question:') !!}
-            {!! Form::text('question', null, ['class' => 'large-8 columns']) !!}
+    <div class="columns large-12">
+        {!! Form::label('question', 'Question:') !!}
+        {!! Form::text('question', null) !!}
         </div>
-        <div class="row large-12 columns">
+        <div class="columns large-12">
           {!! Form::label('required', 'Required:') !!}
           <!--If the yes button is checked it will send the value true into the DB for the required question-->
           {!! Form::radio('required', true) !!}Yes
           {!! Form::radio('required', false) !!}No
         </div>
-
-        <div class="row large-4 columns">
+        <div class="columns large-12">
             {!! Form::submit('Submit', ['class' => 'button']) !!}
         </div>
     {!! Form::close() !!}
+  </section>
 @endsection

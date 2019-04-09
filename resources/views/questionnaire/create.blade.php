@@ -10,8 +10,6 @@
     <!--This is a hidden field which is required in the questionnaire table which is a foregin key of user_id so therefore
     to pass to the user id i have used Auth::user()->id which gets the current users id logged in and passes it to the controller store method then model--->
     {!! Form::hidden('user_id', Auth::user()->id ) !!}
-
-
         <div>
             {!! Form::label('title', 'Title:') !!}
             {!! Form::text('title', null) !!}
@@ -27,7 +25,7 @@
             {!! Form::text('ethical', null) !!}
         </div>
         <div>
-            {!! Form::submit('Submit', ['class' => 'hollow alert button']) !!}
+            {!! Form::submit('Submit', ['class' => 'button']) !!}
         </div>
     {!! Form::close() !!}
   </section>
