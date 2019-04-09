@@ -23,6 +23,7 @@
         @foreach ($question as $question)         {{--If the data is being passed over show all the questionnaire titles--}}
         <tr>
             <td>{{$question->question}}</td>
+            <td>{{$question->choice}}</td>
             <!--When using question/{{$question->id}}/edit it produced a url which was questionnaire/5/question/1/edit which is incorrect
             and it did not route to the edit page so within laravel it has a helper called url which generates the path given which got rid of
             the questionnaire/5 at the beginning of the url so therefore this now routes to the correct file-->
