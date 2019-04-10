@@ -34,7 +34,8 @@ class ChoiceController extends Controller
      */
     public function create($id)
     {
-        /**This finds the id in the url that has been passed and then it will load with the view
+        /**
+        *This finds the id in the url that has been passed and then it will load with the view
         *so i can then store the hidden id of question_id
         */
         $question = Question::find($id);
