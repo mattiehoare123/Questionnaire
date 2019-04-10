@@ -64,7 +64,7 @@ class UserController extends Controller
         //Call the user model to create a user using the $input array
         user::create($input);
         //Redirect to this route using the $GET request which will be the admin/users/index
-        return redirect('admin/users')->with('added', 'New user added');
+        return redirect('admin/users')->with('added', 'New User Added');
     }
 
     /**
@@ -126,7 +126,7 @@ class UserController extends Controller
         $user->roles()->sync($roles);
 
         //If this action has been successully it will redirect with this flash message to the users index view
-        return redirect('admin/users')->with('updated', 'User Updated');
+        return redirect('admin/users')->with('edit', 'User Successfully Edited');;
     }
 
     /**
@@ -142,6 +142,6 @@ class UserController extends Controller
       //Once it is avaiable delete it and then redirect back to the admin users index
       $user->delete();
 
-      return redirect('admin/users');
+      return redirect('admin/users')->with('delete', 'User Deleted');
     }
 }

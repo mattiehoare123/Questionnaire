@@ -7,18 +7,32 @@
     <h1>Users</h1>
     <a href="users/create" class="hollow button button success">Add User</a>
 
-    <!--If the controller has reirected with a flash message then this will display if the session names match-->
     @if (session('added'))
-      <div class="alert alert-success">
-        {{session('added')}}
-      </div>
-      @endif
+    <div class="callout success" data-closable="slide-out-right">
+      {{session('added')}}
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    @endif
 
-    @if (session('updated'))
-      <div class="alert alert-success">
-        {{session('updated')}}
-      </div>
-      @endif
+    @if (session('edit'))
+    <div class="callout success" data-closable="slide-out-right">
+      {{session('edit')}}
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    @endif
+
+    @if (session('delete'))
+    <div class="callout alert" data-closable>
+      {{session('delete')}}
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    @endif
 
       @if (isset($user))     {{--Check that all the data is being passed over--}}
 
@@ -48,8 +62,8 @@
                 {!! Form::submit('Delete', ['class' => 'hollow alert button']) !!}
                 {!! Form::close() !!}
               </td>
-              @endforeach
             </tr>
+            @endforeach
           </tbody>
         </table>
         @else {{--If no data is being passed over or no questionnaires have been made this show--}}
