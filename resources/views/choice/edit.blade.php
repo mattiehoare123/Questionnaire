@@ -22,9 +22,6 @@
               {!! Form::text('choice', null) !!}
           </div>
           <div class="columns large-12">
-              {!! Form::text('choice', null) !!}
-          </div>
-          <div class="columns large-12">
               {!! Form::submit('Update', ['class' => 'button']) !!}
           </div>
       {!! Form::close() !!}

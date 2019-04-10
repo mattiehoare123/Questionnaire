@@ -27,7 +27,7 @@ class QuestionnaireController extends Controller
         //First returns an collection where get returns the element itself
         $question = Question::where('questionnaires_id',$id)->get();
 
-        return view('questionnaire.index')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice);
+        return view('questionnaire.index')->with('questionnaires', $questionnaires)->with('question', $question);
     }
     /**
      * Show the form for creating a new resource.
@@ -62,7 +62,7 @@ class QuestionnaireController extends Controller
      */
     public function show($id)
     {
-              // get the article
+        // get the article
         $questionnaires = Questionnaires::where('id',$id)->first();
         // if article does not exist return to list
         $question = Question::where('questionnaires_id',$id)->get();

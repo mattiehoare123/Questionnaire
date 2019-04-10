@@ -24,14 +24,14 @@ class UserController extends Controller
     public function index()
     {
         //
-        if (Gate::allows('see_all_users')){
+        //if (Gate::allows('see_all_users')){
 
             $user = User::all();
 
             return view('admin/users/index', ['user' => $user]);
         }
-        return view('/dashboard');
-    }
+        //return view('/dashboard');
+
 
     /**
      * Show the form for creating a new resource.

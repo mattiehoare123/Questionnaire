@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
+@extends('layouts.master')
 
-    @include('admin/includes.adminnav')
+@section('title', 'Dashboard')
 
+@section('content')
     <h1>Edit User - {{$user->name}}</h1>
 
     @if ($errors->any())
@@ -23,28 +18,27 @@
     {!! Form::model($user, ['url' => 'admin/users/'. $user->id]) !!}
     @method('PATCH')
     @csrf
-        <div class="row large-12 columns">
+    <div class="columns large-12">
             {!! Form::label('name', 'Name:') !!}
-            {!! Form::text('name', null, ['class' => 'large-8 columns']) !!}
+            {!! Form::text('name', null) !!}
         </div>
-        <div class="row large-12 columns">
+        <div class="columns large-12">
             {!! Form::label('email', 'Email:') !!}
-            {!! Form::text('email', null, ['class' => 'large-8 columns']) !!}
+            {!! Form::text('email', null) !!}
         </div>
-        <div class="row large-12 columns">
+        <div class="columns large-12">
             {!! Form::label('password', 'Password:') !!}
-            {!! Form::text('password', null, ['class' => 'large-8 columns']) !!}
+            {!! Form::text('password', null) !!}
         </div>
-        <div>
+        <div class="columns large-12">
           {!! Form::label('roles', 'Roles:') !!}
           @foreach($roles as $role)
               {{ Form::label($role->name) }}
               {{ Form::checkbox('role[]', $role->id, $user->roles->contains($role->id), ['id' => $role->id]) }}
           @endforeach
       </div>
-        <div class="row large-4 columns">
+      <div class="columns large-12">
             {!! Form::submit('Update', ['class' => 'button']) !!}
         </div>
     {!! Form::close() !!}
-  </body>
-</html>
+@endsection

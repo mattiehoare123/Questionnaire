@@ -19,8 +19,11 @@
             @foreach ($question as $question)         {{--If the data is being passed over show all the questionnaire titles--}}
             <td>{{$question->question}}</td>
             @foreach($question->response as $responses)
+            <td>
             <ul>
-              <li>{{$responses->responses}}</td>
+              <li>{{$responses->responses}}</li>
+            </ul>
+          </td>
             @endforeach
           </tr>
           @endforeach
