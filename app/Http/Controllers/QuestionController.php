@@ -112,7 +112,7 @@ class QuestionController extends Controller
         //Call the update method which will store the editied record in the DB row
         $question->update($request->all());
 
-        return redirect('questionnaire/' . $question->questionnaires_id . '/index');
+        return redirect('questionnaire/' . $question->questionnaires_id . '/index')->with('Edit_Question', 'Question Successfully Updated');
     }
 
     /**
@@ -127,6 +127,6 @@ class QuestionController extends Controller
 
         $question->delete();
 
-        return redirect('/questionnaire');
+        return redirect('questionnaire/' . $question->questionnaires_id . '/index')->with('Question_Delete', 'Question Deleted');
     }
 }

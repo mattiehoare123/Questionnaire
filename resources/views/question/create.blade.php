@@ -3,19 +3,20 @@
 @section('title', 'Create Question')
 
 @section('content')
-
-    @if ($errors->any())
-        <div>
-            <ul class="alert alert-danger">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <section>
+  <section>
     <h1>Add New Question</h1>
+    @if ($errors->any())
+    <div class="callout alert" data-closable>
+      @foreach ($errors->all() as $error)
+        <ul>
+          <li>{{ $error }}</li>
+        </ul>
+      @endforeach
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    @endif
     {!! Form::open(array('action' => 'QuestionController@store', 'id' => 'createQuestion')) !!}
     @csrf
     {!! Form::hidden('questionnaires_id', $questionnaires->id) !!}

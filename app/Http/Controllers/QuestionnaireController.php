@@ -49,6 +49,10 @@ class QuestionnaireController extends Controller
      */
     public function store(Request $request)
     {
+      $this->validate($request, [
+        //This states that the title is required and it must be a minumum of 3 characters long
+        'title' => 'required|min:3',
+      ]);
       $input = $request->all();
       $questionnaires =  Questionnaires::create($input);
       return redirect('question/' . $questionnaires->id . '/create');
@@ -100,7 +104,7 @@ class QuestionnaireController extends Controller
         //Call the update method which will store the editied record in the DB row
         $questionnaires->update($request->all());
 
-        return redirect('questionnaire/' . $questionnaires->id . '/index');
+        return redirect('questionnaire/' . $questionnaires->id . '/index')->with('Edit_Title', 'Title Successfully Updated');
     }
 
     /**
@@ -115,7 +119,7 @@ class QuestionnaireController extends Controller
 
         $questionnaires->delete();
 
-        return redirect('/dashboard');
+        return redirect('/dashboard')->with('Questionnaire_Delete', 'Questionnaire Deleted');;;
 
     }
 }

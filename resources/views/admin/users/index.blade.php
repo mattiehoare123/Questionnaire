@@ -8,7 +8,7 @@
     <a href="users/create" class="hollow button button success">Add User</a>
 
     @if (session('added'))
-    <div class="callout success" data-closable="slide-out-right">
+    <div class="callout success" data-closable>
       {{session('added')}}
       <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
         <span aria-hidden="true">&times;</span>
@@ -17,7 +17,7 @@
     @endif
 
     @if (session('edit'))
-    <div class="callout success" data-closable="slide-out-right">
+    <div class="callout success" data-closable>
       {{session('edit')}}
       <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
         <span aria-hidden="true">&times;</span>

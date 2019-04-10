@@ -5,6 +5,16 @@
 @section('content')
     <section>
     <h1>New Questionnaire</h1>
+    @if ($errors->any())
+    <div class="callout alert" data-closable>
+      @foreach ($errors->all() as $error)
+        {{ $error }}
+      @endforeach
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    @endif
     {!! Form::open(array('action' => 'QuestionnaireController@store', 'id' => 'createTitle')) !!}
     @csrf
     <!--This is a hidden field which is required in the questionnaire table which is a foregin key of user_id so therefore

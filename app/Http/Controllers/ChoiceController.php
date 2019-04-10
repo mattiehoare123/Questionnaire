@@ -58,7 +58,7 @@ class ChoiceController extends Controller
 
           $questionnaires = Choice::create($input);
 
-          return redirect()->back();;
+          return redirect()->back();
     }
 
     /**
@@ -105,7 +105,7 @@ class ChoiceController extends Controller
       $choice->update($request->all());
       /*Redirect back to the question edit page by using the choice question_id to get the
       question id to therefore go back to the correct edit page*/
-      return redirect('question/' . $choice->question_id . '/edit');
+      return redirect('question/' . $choice->question_id . '/edit')->with('Edit_Choice', 'Choice Successfully Updated');
 }
     /**
      * Remove the specified resource from storage.
@@ -120,6 +120,6 @@ class ChoiceController extends Controller
 
         $choice->delete();
         //This redirects back to the same page where the request was made from
-        return redirect()->back();
+        return redirect()->back()->with('Delete_Choice', 'Choice Deleted');
     }
 }

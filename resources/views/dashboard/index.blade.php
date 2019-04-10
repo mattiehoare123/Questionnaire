@@ -4,6 +4,15 @@
 
 @section('content')
   <section>
+    @if (session('Questionnaire_Delete'))
+    <div class="callout alert" data-closable>
+      {{session('Questionnaire_Delete')}}
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    @endif
+    
     <h1>My Questionnaires</h1>
     <a id="create" href="/questionnaire/create" class="hollow button success">Create Questionnaire</a>
 

@@ -3,8 +3,34 @@
 @section('title', 'Edit Questionnaire')
 
 @section('content')
-    <section>
+    @if (session('Question_Delete'))
+    <div class="callout alert" data-closable>
+      {{session('Question_Delete')}}
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    @endif
 
+    @if (session('Edit_Title'))
+    <div class="callout success" data-closable>
+      {{session('Edit_Title')}}
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    @endif
+
+    @if (session('Edit_Question'))
+    <div class="callout success" data-closable>
+      {{session('Edit_Question')}}
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    @endif
+
+    <section>
       <h1>Edit - {{$questionnaires->title}}</h1>
       <a id="title" href="{{ url('questionnaire/'.$questionnaires->id.'/edit')}}" class="hollow button warning">Edit Title</a>
       <a href="/question/{{$questionnaires->id}}/create" class="hollow button success">Create Quesion</a>
@@ -47,19 +73,5 @@
     @else {{--If no data is being passed over or no questionnaires have been made this show--}}
     <p>You Have Not Created Any Questions Yet</p>
     @endif
-
   </section>
-  <section>
-
-    @if (isset($choice))     {{--Check that all the data is being passed over--}}
-    <ul>
-      @foreach ($choice as $choice)         {{--If the data is being passed over show all the questionnaire titles--}}
-        <p>{{$choice->choice}}</p>
-        @endforeach
-      </ul>
-      @else {{--If no data is being passed over or no questionnaires have been made this show--}}
-      <p>You Have Not Added No Chocies To The Question Yet</p>
-      @endif
-
-    </section>
 @endsection

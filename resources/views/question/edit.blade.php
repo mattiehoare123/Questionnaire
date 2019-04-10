@@ -6,13 +6,34 @@
 
     <h1>Edit Question - {{$question->question}}</h1>
     @if ($errors->any())
-        <div>
-            <ul class="alert alert-danger">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+    <div class="callout alert" data-closable>
+      @foreach ($errors->all() as $error)
+        <ul>
+          <li>{{ $error }}</li>
+        </ul>
+      @endforeach
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    @endif
+
+    @if (session('Edit_Choice'))
+    <div class="callout success" data-closable>
+      {{session('Edit_Choice')}}
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    @endif
+
+    @if (session('Delete_Choice'))
+    <div class="callout alert" data-closable>
+      {{session('Delete_Choice')}}
+      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
     @endif
 
     <!--Edit Form-->
