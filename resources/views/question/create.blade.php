@@ -5,18 +5,7 @@
 @section('content')
   <section>
     <h1>Add New Question</h1>
-    @if ($errors->any())
-    <div class="callout alert" data-closable>
-      @foreach ($errors->all() as $error)
-        <ul>
-          <li>{{ $error }}</li>
-        </ul>
-      @endforeach
-      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    @endif
+    @include ('errors/errorlist')
     {!! Form::open(array('action' => 'QuestionController@store', 'id' => 'createQuestion')) !!}
     @csrf
     {!! Form::hidden('questionnaires_id', $questionnaires->id) !!}

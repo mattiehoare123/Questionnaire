@@ -5,15 +5,7 @@
 @section('content')
     <h1>Edit User - {{$user->name}}</h1>
 
-    @if ($errors->any())
-        <div>
-            <ul class="alert alert-danger">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @include ('errors/errorlist')
 
     {!! Form::model($user, ['url' => 'admin/users/'. $user->id]) !!}
     @method('PATCH')

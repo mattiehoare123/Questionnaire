@@ -5,18 +5,7 @@
 @section('content')
   <div class="columns large-12">
     <h1>Add Choices</h1>
-    @if ($errors->any())
-    <div class="callout alert" data-closable>
-      @foreach ($errors->all() as $error)
-        <ul>
-          <li>{{ $error }}</li>
-        </ul>
-      @endforeach
-      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    @endif
+    @include ('errors/errorlist')
     {!! Form::open(array('action' => 'ChoiceController@store', 'id' => 'createChoice')) !!}
     @csrf
     {!! Form::hidden('question_id', $question->id) !!}

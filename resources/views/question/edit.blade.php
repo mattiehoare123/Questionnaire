@@ -5,18 +5,7 @@
 @section('content')
 
     <h1>Edit Question - {{$question->question}}</h1>
-    @if ($errors->any())
-    <div class="callout alert" data-closable>
-      @foreach ($errors->all() as $error)
-        <ul>
-          <li>{{ $error }}</li>
-        </ul>
-      @endforeach
-      <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    @endif
+    @include ('errors/errorlist')
 
     @if (session('Edit_Choice'))
     <div class="callout success" data-closable>
@@ -39,7 +28,7 @@
     <!--Edit Form-->
     {!! Form::model($question, ['url' => 'question/'. $question->id]) !!}
     @csrf
-    <!-- Laravel did not support PATCH when placed above so therefore used a method called form spoof which hids the method to spoof the HTTP which worked below-->
+    <!-- Laravel did not support PATCH when placed above so therefore used a method called form spoof which hides the method to spoof the HTTP which worked below-->
         @method('PATCH')
         @csrf
         <div class="columns large-12">
