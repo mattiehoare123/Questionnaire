@@ -23,10 +23,11 @@ class QuestionnaireController extends Controller
 
     public function index($id)
     {
-        $questionnaires = Questionnaires::where('id',$id)->first();
-        //First returns an collection where get returns the element itself
+        //Find the questionnaire id that matches the $id
+        $questionnaires = questionnaires::findOrFail($id);
+        //->first() returns an collection where ->get() returns the element itself
         $question = Question::where('questionnaires_id',$id)->get();
-
+        //Return the view with the two variables
         return view('questionnaire.index')->with('questionnaires', $questionnaires)->with('question', $question);
     }
     /**
@@ -36,9 +37,8 @@ class QuestionnaireController extends Controller
      */
     public function create()
     {
-        $questionnaires = Questionnaires::pluck('id');//Get all the questionnaires
-
-        return view('questionnaire.create', compact('questionnaires'));
+        //Return the create a questionnaire view
+        return view('questionnaire.create');
     }
 
     /**
@@ -53,8 +53,14 @@ class QuestionnaireController extends Controller
         //This states that the title is required and it must be a minumum of 3 characters long
         'title' => 'required|min:3',
       ]);
+      //Get all fields from the form and put it into the $input variale using the $POST request
       $input = $request->all();
-      $questionnaires =  Questionnaires::create($input);
+      //Call the user model to create a user using the $input array
+      $questionnaires = Questionnaires::create($input);
+      /**
+      *Redirect to this route using the $GET request which will be the question and it passing
+      *the question->id which is needed in as a hidden field in that form
+      */
       return redirect('question/' . $questionnaires->id . '/create');
     }
 
@@ -66,10 +72,11 @@ class QuestionnaireController extends Controller
      */
     public function show($id)
     {
-        // get the article
+        //Where the in Questionnaires table the id matches the $id get the first matcb
         $questionnaires = Questionnaires::where('id',$id)->first();
-        // if article does not exist return to list
-        $question = Question::where('questionnaires_id',$id)->get();
+        //Where the in Question table the questionnaire_id matches the $id get all records so therefore ->get() is used instead of ->first()
+        $question = Question::where('questionna.ires_id',$id)->get();
+        //Return the show view and instead of ->with('questionnaires', $questionnaires) i have used ->withQuestionnaires('$questionnaires') which are the same
         return view('questionnaire.show')->withQuestionnaires($questionnaires)->with('question', $question);
       }
     /**
@@ -80,10 +87,12 @@ class QuestionnaireController extends Controller
      */
     public function edit($id)
     {
-        //Runs the find or fail if the $id is correct it will open with the edit view
-        //passing along the $id variale with the compact function
+        /**
+        *Runs the find or fail and if the $id is correct it will open with the edit view
+        *passing along the $id variale with the compact function
+        */
         $questionnaires = questionnaires::findOrFail($id);
-
+        //Compact creates an array containing vairables and there values
         return view('questionnaire.edit', compact('questionnaires'));
     }
 
@@ -103,7 +112,7 @@ class QuestionnaireController extends Controller
         $questionnaires = questionnaires::findOrFail($id);
         //Call the update method which will store the editied record in the DB row
         $questionnaires->update($request->all());
-
+        //Return back to the correct questionnaire index page by adding $questionnares->id in the url
         return redirect('questionnaire/' . $questionnaires->id . '/index')->with('Edit_Title', 'Title Successfully Updated');
     }
 
@@ -115,11 +124,12 @@ class QuestionnaireController extends Controller
      */
     public function destroy($id)
     {
+        //Find the questionnaire id in the table that matches $id
         $questionnaires = questionnaires::find($id);
-
+        //Delete this questionnaire from the table
         $questionnaires->delete();
-
-        return redirect('/dashboard')->with('Questionnaire_Delete', 'Questionnaire Deleted');;;
+        //Return back to the page where the action was executed with this message
+        return redirect()->back()->with('Questionnaire_Delete', 'Questionnaire Deleted');;;
 
     }
 }

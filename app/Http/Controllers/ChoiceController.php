@@ -34,10 +34,10 @@ class ChoiceController extends Controller
      */
     public function create($id)
     {
-        //This finds the id in the url that has been passed and then it will load with the view
-        //so i can then store the hidden id of question_id
+        /**This finds the id in the url that has been passed and then it will load with the view
+        *so i can then store the hidden id of question_id
+        */
         $question = Question::find($id);
-        //$questionnaires = Questionnaires::pluck('id');//Get all the questionnaires id
         return view('choice.create')->with('question', $question);
     }
 
@@ -50,14 +50,14 @@ class ChoiceController extends Controller
     public function store(Request $request)
     {
           $this->validate( $request, [
-            //This states that the title is required and it must be a minumum of 3 characters long
+            //This states that the choice is required as a question needs a choice
             'choice' => 'required',
           ]);
-
+          //Get all fields from the form and put it into the $input variale using the $POST request
           $input = $request->all();
-
+          //Call the user model to create a user using the $input array, adding the $question variable so i can get the id and pass it on
           $questionnaires = Choice::create($input);
-
+          //Redirect to choice create view passing the question->id as this is required as a hidden field in this view
           return redirect()->back();
     }
 
@@ -103,8 +103,10 @@ class ChoiceController extends Controller
       $choice = choice::findOrFail($id);
       //Call the update method which will store the editied record in the DB row
       $choice->update($request->all());
-      /*Redirect back to the question edit page by using the choice question_id to get the
-      question id to therefore go back to the correct edit page*/
+      /**
+      *Redirect back to the question edit page by using the choice question_id to get the
+      *question id to therefore go back to the correct edit page
+      */
       return redirect('question/' . $choice->question_id . '/edit')->with('Edit_Choice', 'Choice Successfully Updated');
 }
     /**
@@ -115,11 +117,11 @@ class ChoiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Find the choices id that matches $id
         $choice = choice::find($id);
-
+        //Delete this row from the DB
         $choice->delete();
-        //This redirects back to the same page where the request was made from
+        //This redirects back to the same page where the request was made from with the message
         return redirect()->back()->with('Delete_Choice', 'Choice Deleted');
     }
 }

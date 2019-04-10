@@ -22,8 +22,10 @@ class DashboardController extends Controller
 
     public function index()
     {
-        //The vairable questionnaires equals the DB and searches for the table questionnaires and if the users
-        //id equals the auth::user id which is currently logged in then display there questionnaires
+        /**
+        *The vairable questionnaires equals the DB and searches for the table questionnaires and if the users
+        *id equals the auth::user id which is currently logged in then display there questionnaires
+        */
         $questionnaires = DB::table('questionnaires')->where('user_id', Auth::user()->id)->get();
         //Load the view with the variable questionnaires which will display them using a foreach loop
         return view('dashboard.index')->with('questionnaires', $questionnaires);

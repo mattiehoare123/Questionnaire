@@ -15,7 +15,7 @@ class ResponseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+     //This secures the response page
      public function __construct()
      {
          $this->middleware('auth');
@@ -44,11 +44,10 @@ class ResponseController extends Controller
      */
     public function store(Request $request)
     {
-
+        //Get all the input from the view and eqaul it to $input
         $input = $request->all();
-
-        $response = Response::create($input);
-
+        //Store the $input data into the Respone table
+        Response::create($input);
         return redirect('/dashboard');
     }
 
@@ -60,10 +59,11 @@ class ResponseController extends Controller
      */
     public function show($id)
     {
+      //Find the questionnaire data that matches the $id being passed through
       $questionnaires = questionnaires::findOrFail($id);
+      //Retrieve the questions where the questionnaire_id in the question table matches the $id
       $question = question::where('questionnaires_id', $id)->get();
-      //$choice = Choice::where('question_id',$id)->get();
-      return view('responses.show')->with('questionnaires', $questionnaires)->with('question', $question);
+      return view('responses.show')->with('questionnaires', $questionnaires)->with('question', $question);//If both variables find the correct data then load with the view
     }
 
     /**

@@ -22,11 +22,9 @@ class QuestionController extends Controller
          $this->middleware('auth');
      }
 
-    public function index($id)
+    public function index()
     {
-      $question = Question::find($id);
 
-      return view('question.show')->with('question', $question);
     }
 
     /**
@@ -36,10 +34,9 @@ class QuestionController extends Controller
      */
     public function create($id)
     {
-      //Get all the questionnaire's titles that belong to the user id that is currently logged in and display them to the view
-      //$questionnaires = DB::table('questionnaires')->where('user_id', Auth::user()->id)->pluck('title', 'id');
+      //Find that $id that has been passed in the Questionnaires table
       $questionnaires = Questionnaires::find($id);
-      //$questionnaires = Questionnaires::pluck('id');//Get all the questionnaires id
+      //Return the view with the variable to use it as hidden field
       return view('question.create')->with('questionnaires', $questionnaires);
 
     }
@@ -53,14 +50,16 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         $this->validate( $request, [
-          //This states that the title is required and it must be a minumum of 5 characters long
+          //This states that the question is required and it must be a minumum of 5 characters long
           'question' => 'required|min:5',
+          //If the question is required to submit the questionnaire
           'required' => 'required',
         ]);
-
+        //Get all fields from the form and put it into the $input variale using the $POST request
         $input = $request->all();
+        //Call the user model to create a user using the $input array, adding the $question variable so i can get the id and pass it on
         $question = Question::create($input);
-
+        //Redirect to choice create view passing the question->id as this is required as a hidden field in this view
         return redirect('choice/' . $question->id . '/create');
     }
 
@@ -72,9 +71,11 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-      $question = Question::find($id);
+      //Get the question data that matches the $id to display the title
+      $question = Question::findorFail($id);
+      //Gets all the choices that have the question_id same the $id passed for the user to answer
       $choice = Choice::where('question_id',$id)->get();
-
+      //Return the view with the question title and choices
       return view('question.show')->with('question', $question)->with('choice', $choice);
 
     }
@@ -87,6 +88,10 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
+      /**
+       * Because i'm displaying the choices on the question edit view and i need to get
+       * the choices where the question_id in the table matches the $id passed
+       */
         $question = question::findOrFail($id);
         $choice = Choice::where('question_id',$id)->get();
 
@@ -111,7 +116,7 @@ class QuestionController extends Controller
         $question = question::findOrFail($id);
         //Call the update method which will store the editied record in the DB row
         $question->update($request->all());
-
+        //Return back to the correct questionnaire index page by adding $questionnares->id in the url with the message
         return redirect('questionnaire/' . $question->questionnaires_id . '/index')->with('Edit_Question', 'Question Successfully Updated');
     }
 
@@ -123,10 +128,11 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        $question = question::find($id);
-
-        $question->delete();
-
-        return redirect('questionnaire/' . $question->questionnaires_id . '/index')->with('Question_Delete', 'Question Deleted');
+    //Find the questionnaire id in the table that matches $id
+    $question = question::find($id);
+    //Delete this questionnaire from the table
+    $question->delete();
+    //Return back to the page where the action was executed with this message
+    return redirect('questionnaire/' . $question->questionnaires_id . '/index')->with('Question_Delete', 'Question Deleted');
     }
 }
