@@ -13,4 +13,14 @@ class Response extends Model
       'choice_id',
       'responses'
     ];
+
+    public function question()
+    {
+      return $this->belongsTo('App\Question');
+    }
+
+    public function choice()
+    {
+      return $this->belongsTo('App\Choice');
+    }
 }

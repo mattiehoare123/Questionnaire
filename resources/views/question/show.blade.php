@@ -9,6 +9,8 @@
 
         {!! Form::open(array('action' => 'ResponseController@store', 'id' => 'submitQuestionnaire')) !!}
         @csrf
+        {!! Form::hidden('question_id', $question->id ) !!}
+
         <section>
 
           @if (isset($choice))     {{--Check that all the data is being passed over--}}
@@ -17,6 +19,7 @@
             @foreach ($choice as $choice)         {{--If the data is being passed over show all the questionnaire titles--}}
             <div class="wrapper-class">
               <!--This passes in the choice into the responses model-->
+              {!! Form::hidden('choice_id', $choice->id ) !!}
               {!! Form::radio('responses', $choice->choice) !!}{{$choice->choice}}
             </div>
               @endforeach
@@ -29,5 +32,6 @@
               {!! Form::submit('Submit', ['class' => 'button']) !!}
           </div>
         {!! Form::close() !!}
+        <a href="/dashboard" class="hollow button">Submit</a>
       </section>
     @endsection

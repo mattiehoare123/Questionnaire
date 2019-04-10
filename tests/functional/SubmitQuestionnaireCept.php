@@ -54,16 +54,17 @@ $I->see('Food Review');
 $I->click('Take');
 
 //Then
-$I->amOnPage('/questionnaire/show');
+$I->amOnPage('/questionnaire/1');
 //And
 $I->see('Food Review');
 $I->see('testquestion');
-$I->see('testchoice');
-$I->see('testchoice2');
-$I->see('testchoice3');
-
 //Then
-$I->submitForm('#submitQuestionnaire', [
-  'responses' => 'testchoice'
-]);
-$I->seeRecord('responses', ['responses' => 'testchoice']);
+$I->click('Answer');
+//And
+$I->seeCurrentUrlEquals('/question/111');
+$I->see('testchoice');
+//Then
+$I->selectOption('input[name=responses]', 'testchoice');
+//And
+$I->click('Submit');
+$I->seeCurrentUrlEquals('/dashboard');

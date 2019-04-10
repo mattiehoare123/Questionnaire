@@ -16,9 +16,9 @@ class CreateResponsesTable extends Migration
         Schema::create('responses', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('question_id')->unsigned()->default(0);
-            //$table->foreign('question_id')->references('id')->on('permissions')->onDelete('cascade');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
             $table->integer('choice_id')->unsigned()->default(0);
-            //$table->foreign('choice_id')->references('id')->on('choices')->onDelete('cascade');
+            $table->foreign('choice_id')->references('id')->on('choices')->onDelete('cascade');
             $table->string('responses');
             $table->timestamps();
         });

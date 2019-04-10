@@ -22,9 +22,11 @@ class QuestionController extends Controller
          $this->middleware('auth');
      }
 
-    public function index()
+    public function index($id)
     {
+      $question = Question::find($id);
 
+      return view('question.show')->with('question', $question);
     }
 
     /**

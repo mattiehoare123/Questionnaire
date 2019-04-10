@@ -26,7 +26,7 @@ class QuestionnaireController extends Controller
         $questionnaires = Questionnaires::where('id',$id)->first();
         //First returns an collection where get returns the element itself
         $question = Question::where('questionnaires_id',$id)->get();
-        $choice = Choice::where('question_id', $id)->get();
+
         return view('questionnaire.index')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice);
     }
     /**

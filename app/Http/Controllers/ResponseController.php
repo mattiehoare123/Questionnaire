@@ -20,7 +20,7 @@ class ResponseController extends Controller
      {
          $this->middleware('auth');
      }
-     
+
     public function index()
     {
         //
@@ -44,12 +44,12 @@ class ResponseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
         $input = $request->all();
 
-        Response::create($input);
+        $response = Response::create($input);
 
-        return redirect('admin/articles');
+        return redirect('/dashboard');
     }
 
     /**
@@ -60,12 +60,10 @@ class ResponseController extends Controller
      */
     public function show($id)
     {
-        //
-        $questionnaires = questionnaires::all();//Get all the questionnaires
-        $question = question::all();
-        $choice = choice::all();
-        $response = response::all();
-        return view('responses.show')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice)->with('response', $response);
+      $questionnaires = questionnaires::findOrFail($id);
+      $question = question::where('questionnaires_id', $id)->get();
+      //$choice = Choice::where('question_id',$id)->get();
+      return view('responses.show')->with('questionnaires', $questionnaires)->with('question', $question);
     }
 
     /**
