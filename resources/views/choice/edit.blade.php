@@ -10,10 +10,7 @@
     <!-- Laravel did not support PATCH when placed above so therefore used a method called form spoof which hids the method to spoof the HTTP which worked below-->
           @method('PATCH')
           @csrf
-          <div class="columns large-12">
-              {!! Form::label('choice', 'Choice:') !!}
-              {!! Form::text('choice', null) !!}
-          </div>
+          @include('partials/choiceform')
           <div class="columns large-12">
               {!! Form::submit('Update', ['class' => 'button']) !!}
           </div>

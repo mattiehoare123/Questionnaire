@@ -12,21 +12,7 @@
     <!-- Laravel did not support PATCH when placed above so therefore used a method called form spoof which hids the method to spoof the HTTP which worked below-->
             @method('PATCH')
             @csrf
-        <div class="row large-12 columns">
-            {!! Form::label('title', 'Title:') !!}
-            {!! Form::text('title', null) !!}
-        </div>
-
-        <div class="row large-12 columns">
-            {!! Form::label('description', 'Description:') !!}
-            {!! Form::text('description', null) !!}
-        </div>
-
-        <div class="row large-12 columns">
-            {!! Form::label('ethical', 'Ethical Statement:') !!}
-            {!! Form::text('ethical', null) !!}
-        </div>
-
+            @include('partials/questionnaireform')
         <div class="row large-4 columns">
             {!! Form::submit('Update', ['class' => 'button']) !!}
         </div>

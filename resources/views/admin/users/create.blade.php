@@ -14,18 +14,7 @@
 
     {!! Form::open(array('action' => 'UserController@store', 'id' => 'createUser')) !!}
     @csrf
-    <div class="columns large-12">
-            {!! Form::label('name', 'Name:') !!}
-            {!! Form::text('name', null) !!}
-        </div>
-        <div class="columns large-12">
-            {!! Form::label('email', 'Email:') !!}
-            {!! Form::text('email', null) !!}
-        </div>
-        <div class="columns large-12">
-            {!! Form::label('password', 'Password:') !!}
-            {!! Form::text('password', null) !!}
-        </div>
+    @include('partials/userform')
         <div class="columns large-12">
             {!! Form::submit('Submit', ['class' => 'button']) !!}
         </div>
