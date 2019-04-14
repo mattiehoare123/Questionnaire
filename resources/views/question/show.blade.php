@@ -7,9 +7,12 @@
 
         <h1>{{$question->question}}</h1>
 
+        {{$question->questionnaires->id}}
+
         {!! Form::open(array('action' => 'ResponseController@store', 'id' => 'submitQuestionnaire')) !!}
         @csrf
         {!! Form::hidden('question_id', $question->id ) !!}
+
 
         <section>
 
@@ -32,6 +35,5 @@
               {!! Form::submit('Submit', ['class' => 'button']) !!}
           </div>
         {!! Form::close() !!}
-        <a href="/dashboard" class="hollow button">Submit</a>
       </section>
     @endsection

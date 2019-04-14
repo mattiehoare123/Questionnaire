@@ -23,8 +23,9 @@ section {
 #title {
   float: right;
 }
-.error
-{
-  border: 2px solid red;
-  background-color: red;
+table td {
+  text-align: center;
+}
+td ul li {
+  list-style-type: none;
 }

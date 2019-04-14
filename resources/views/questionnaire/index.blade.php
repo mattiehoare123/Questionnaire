@@ -37,7 +37,7 @@
 
       @if (isset($question))     {{--Check that all the data is being passed over--}}
 
-      <table>
+      <table>  <!--Start of table-->
         <thead>
           <tr>
             <td>Question</td>
@@ -47,16 +47,19 @@
           </tr>
         </thead>
         <tbody>
-
-        @foreach ($question as $question)         {{--If the data is being passed over show all the questionnaire titles--}}
         <tr>
+        @foreach ($question as $question)         {{--If the data is being passed over show all the questionnaire titles--}}
             <td>{{$question->question}}</td>
             <!--When using $question->choice is returns an array colletion of the choices and if i used $question->choice->id
             it would say instance does not exist because the relationship was has many. So i used a foreach to loop through the choices
             to get a single choice and then i could access the id, question_id and choice-->
-            @foreach($question->choice as $choices)
-              <td>{{$choices->choice}}</td>
-              @endforeach
+            <td>
+              @foreach($question->choice as $choices)
+              <ul>
+                <li>{{$choices->choice}}</li>
+              </ul>
+                @endforeach
+            </td>
             <!--When using question/{{$question->id}}/edit it produced a url which was questionnaire/5/question/1/edit which is incorrect
             and it did not route to the edit page so within laravel it has a helper called url which generates the path given which got rid of
             the questionnaire/5 at the beginning of the url so therefore this now routes to the correct file-->
@@ -69,8 +72,8 @@
         </tr>
       @endforeach
       </tbody>
-    </table>
-    @else {{--If no data is being passed over or no questionnaires have been made this show--}}
+    </table>  <!--End of the table-->
+    @else  <!--If no data is being passed through or no questions have been created yet-->
     <p>You Have Not Created Any Questions Yet</p>
     @endif
   </section>

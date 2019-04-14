@@ -48,11 +48,11 @@ class ResponseController extends Controller
         $input = $request->all();
         //Store the $input data into the Respone table
         Response::create($input);
-        return redirect('/dashboard');
+        return redirect()->back();
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource.zz
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

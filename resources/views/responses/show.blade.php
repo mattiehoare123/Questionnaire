@@ -1,36 +1,35 @@
-@extends('layouts.master')
+@extends('layouts.master') <!--This calls the master template to display with this page-->
 
-@section('title', 'Dashboard')
+@section('title', 'Dashboard') <!--This declares the title of the webpage -->
 
-@section('content')
+@section('content') <!--This calls the yeild which is in the master template-->
 <section>
-  <h1>{{$questionnaires->title}}</h1>
+  <h1>{{$questionnaires->title}}</h1> <!--Get the questionnaire title-->
 
-      @if (isset($question))     {{--Check that all the data is being passed over--}}
+      @if (isset($question)) <!--Check that all the the data is being passed over-->
 
-      <table>
-        <thead>
-          <tr>
-            <td>Question</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            @foreach ($question as $question)         {{--If the data is being passed over show all the questionnaire titles--}}
-            <td>{{$question->question}}</td>
-            @foreach($question->response as $responses)
-            <td>
-            <ul>
-              <li>{{$responses->responses}}</li>
-            </ul>
-          </td>
-            @endforeach
-          </tr>
+<table>
+    <tr>
+      <th>Question</th>
+      <th>Response</th>
+    </tr>
+    <tr>
+      @foreach ($question as $question)   <!--Loop over the questions that are in the table-->
+      <td>
+        {{$question->question}}
+      </td>
+      <td>
+        @foreach($question->response as $responses) <!--Loop over the responses-->
+          <ul>
+            <li>{{$responses->responses}}</li> <!--Display the responses to the question-->
+          </ul>
           @endforeach
-        </tbody>
-      </table>
-      @else {{--If no data is being passed over or no questionnaires have been made this show--}}
-      <p>No Responses On This Question Yet</p>
-      @endif
-  </section>
-  @endsection
+      </td>
+    </tr>
+  @endforeach
+</table>
+@else <!--If there is no data being passed over or if no responses have been made yet-->
+<p>No Responses On This Question Yet</p>
+@endif
+</section>
+@endsection

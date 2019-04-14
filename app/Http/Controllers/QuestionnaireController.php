@@ -75,7 +75,7 @@ class QuestionnaireController extends Controller
         //Where the in Questionnaires table the id matches the $id get the first matcb
         $questionnaires = Questionnaires::where('id',$id)->first();
         //Where the in Question table the questionnaire_id matches the $id get all records so therefore ->get() is used instead of ->first()
-        $question = Question::where('questionna.ires_id',$id)->get();
+        $question = Question::where('questionnaires_id',$id)->get();
         //Return the show view and instead of ->with('questionnaires', $questionnaires) i have used ->withQuestionnaires('$questionnaires') which are the same
         return view('questionnaire.show')->withQuestionnaires($questionnaires)->with('question', $question);
       }
