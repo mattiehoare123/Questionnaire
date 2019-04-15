@@ -17,10 +17,22 @@
     <ul class="dropdown menu" data-dropdown-menu>
        <li>
          <!--Display the users name-->
-        <a href="#">Matthew Hoare</a>
+        <a href="#">{{Auth::user()->name}}</a>
         <ul class="menu vertical">
           <!--A dropdown menu which allow the user to logout-->
-          <li><a href="#">Logout</a></li>
+          <li>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
+          </li>
         </ul>
       </li>
     </ul>
