@@ -14,7 +14,7 @@
 
         @foreach ($question as $question)   <!--Loop through the questions-->
         {!! Form::hidden('question_id', $question->id ) !!} <!--Getting the question->id and storing it as hidden-->
-          <p>{{$question->question}}</p>  <!--Display the questions-->
+          <p>{{$i++}}. {{$question->question}}</p>  <!--Display the questions-->
 
           @foreach($question->choice as $choices) <!--Loop over the responses-->
               {!! Form::hidden('choice_id', $choices->id ) !!} <!--Getting the choice->id and storing it as hidden-->

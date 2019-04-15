@@ -10,11 +10,13 @@
 
 <table>
     <tr>
+      <th>Number</th>
       <th>Question</th><!--The table header for the question-->
       <th>Response</th><!--The table header for the response-->
     </tr>
     <tr>
-      @foreach ($question as $question)   <!--Loop through the questions array and show each question-->
+      @foreach ($question as $question)
+      <td>{{$number++}}</td>   <!--Loop through the questions array and show each question-->
       <td>
         {{$question->question}} <!--Display each question-->
       </td>

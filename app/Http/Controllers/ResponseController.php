@@ -63,7 +63,8 @@ class ResponseController extends Controller
       $questionnaires = questionnaires::findOrFail($id);
       //Retrieve the questions where the questionnaire_id in the question table matches the $id
       $question = question::where('questionnaires_id', $id)->get();
-      return view('responses.show')->with('questionnaires', $questionnaires)->with('question', $question);//If both variables find the correct data then load with the view
+      $number = 1;
+      return view('responses.show')->with('questionnaires', $questionnaires)->with('question', $question)->withnumber($number);//If both variables find the correct data then load with the view
     }
 
     /**

@@ -28,7 +28,8 @@ class QuestionnaireController extends Controller
         //->first() returns an collection where ->get() returns the element itself
         $question = Question::where('questionnaires_id',$id)->get();
         //Return the view with the two variables
-        return view('questionnaire.index')->with('questionnaires', $questionnaires)->with('question', $question);
+        $number = 1;
+        return view('questionnaire.index')->with('questionnaires', $questionnaires)->with('question', $question)->withnumber($number);
     }
     /**
      * Show the form for creating a new resource.
@@ -76,8 +77,9 @@ class QuestionnaireController extends Controller
         $questionnaires = Questionnaires::where('id',$id)->first();
         //Where the in Question table the questionnaire_id matches the $id get all records so therefore ->get() is used instead of ->first()
         $question = Question::where('questionnaires_id',$id)->get();
+        $i = 1;
         //Return the show view and instead of ->with('questionnaires', $questionnaires) i have used ->withQuestionnaires('$questionnaires') which are the same
-        return view('questionnaire.show')->withQuestionnaires($questionnaires)->with('question', $question);
+        return view('questionnaire.show')->withQuestionnaires($questionnaires)->with('question', $question)->withi($i);
       }
     /**
      * Show the form for editing the specified resource.
