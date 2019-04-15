@@ -10,8 +10,10 @@
     @csrf
     <!--Hidden question->id to store the question_id-->
     {!! Form::hidden('questionnaires_id', $questionnaires->id) !!}
-    @include('partials/questionform')<!--Include the question form-->
-    {!! Form::submit('Submit', ['class' => 'button']) !!}<!--Send the form the question store method-->
-    {!! Form::close() !!}
+    @include('partials/questionform') <!--Include the question form-->
+    <div class="columns small-8 large-6">
+      {!! Form::submit('Submit', ['class' => 'button']) !!}<!--Send the form the question store method-->
+      {!! Form::close() !!}
+  </div>
   </section>
 @endsection

@@ -11,6 +11,8 @@
           @method('PATCH')
           @csrf
           @include('partials/choiceform')<!--Include the choice form-->
-          {!! Form::submit('Update', ['class' => 'button']) !!}<!--Send to form to the update method when clicked upon-->
+          <div class="columns small-8 large-6">
+            {!! Form::submit('Update', ['class' => 'button']) !!}<!--Send to form to the update method when clicked upon-->
+          </div>
       {!! Form::close() !!}
 @endsection

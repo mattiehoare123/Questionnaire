@@ -18,7 +18,8 @@
 
           @foreach($question->choice as $choices) <!--Loop over the responses-->
               {!! Form::hidden('choice_id', $choices->id ) !!} <!--Getting the choice->id and storing it as hidden-->
-              {!! Form::radio('responses', $choices->choice) !!}{{$choices->choice}} <!--Display the choices with radio button next besides them for user to select-->
+              <!--Each choice was next to one another so therefore wrapped it in a p tag which puts each choice on a new line-->
+              <p>{!! Form::radio('responses', $choices->choice) !!}{{$choices->choice}}</p> <!--Display the choices with radio button next besides them for user to select-->
             @endforeach
 
             {!! Form::submit('Submit', ['class' => 'button']) !!} <!--Submit after answering each question-->

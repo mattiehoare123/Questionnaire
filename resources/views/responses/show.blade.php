@@ -8,7 +8,7 @@
 
       @if (isset($question)) <!--Check that all the the data is being passed over-->
 
-<table>
+<table id="responses">
     <tr>
       <th>Number</th>
       <th>Question</th><!--The table header for the question-->

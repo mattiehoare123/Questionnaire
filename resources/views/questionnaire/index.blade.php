@@ -31,20 +31,28 @@
     @endif
 
     <section>
-      <h1>Edit - {{$questionnaires->title}}</h1>
-      <a id="title" href="{{ url('questionnaire/'.$questionnaires->id.'/edit')}}" class="hollow button warning">Edit Title</a>
-      <a href="/question/{{$questionnaires->id}}/create" class="hollow button success">Create Quesion</a>
+      <div class="row">
+        <div class="columns small-6 large-8"><h1>Edit - {{$questionnaires->title}}</h1></div>
+        <div class="columns small-3 large-2"><a id="title" href="{{ url('questionnaire/'.$questionnaires->id.'/edit')}}" class="hollow button warning">Edit Title</a></div>
+        <div class="columns small-3 large-2"><a href="/question/{{$questionnaires->id}}/create" id="createQuestion" class="hollow button success">Create Quesion</a></div>
+      </div>
+      <div class="row">
+        <div class="columns small-12 large-12"><h1>{{$questionnaires->description}}</h1></div>
+        <div class="columns small-12 large-12"><h1>{{$questionnaires->ethical}}</h1></div>
+      </div>
 
       @if (isset($question))     {{--Check that all the data is being passed over--}}
-
+      <div class="row">
+        <div class="columns">
+          <div class="table-scroll">
       <table>  <!--Start of table-->
         <thead>
           <tr>
-            <td>Number</td>
-            <td>Question</td>
-            <td>Choices</td>
-            <td>Edit</td>
-            <td>Delete</td>
+            <th>Number</th>
+            <th>Question</th>
+            <th>Choices</th>
+            <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -65,10 +73,10 @@
             <!--When using question/{{$question->id}}/edit it produced a url which was questionnaire/5/question/1/edit which is incorrect
             and it did not route to the edit page so within laravel it has a helper called url which generates the path given which got rid of
             the questionnaire/5 at the beginning of the url so therefore this now routes to the correct file-->
-            <td><a href="{{ url('question/'.$question->id.'/edit')}}" class="hollow button warning">Edit</a></td>
+            <td><a href="{{ url('question/'.$question->id.'/edit')}}" class="clear button warning">Edit</a></td>
             <td>
               {!! Form::open(['method' => 'DELETE', 'route' => ['question.destroy', $question->id]]) !!}
-              {!! Form::submit('Delete', ['class' => 'hollow alert button']) !!}
+              {!! Form::submit('Delete', ['class' => 'clear alert button']) !!}
               {!! Form::close() !!}
           </td>
         </tr>
@@ -78,5 +86,9 @@
     @else  <!--If no data is being passed through or no questions have been created yet-->
     <p>You Have Not Created Any Questions Yet</p>
     @endif
+    </div>
+  </div>
+</div>
+
   </section>
 @endsection

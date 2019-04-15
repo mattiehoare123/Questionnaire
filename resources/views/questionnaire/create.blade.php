@@ -13,7 +13,9 @@
     to pass to the user id i have used Auth::user()->id which gets the current users id logged in and passes it to the controller store method then model--->
     {!! Form::hidden('user_id', Auth::user()->id ) !!}
     @include('partials/questionnaireform')<!--Include the questionnaire form-->
-    {!! Form::submit('Submit', ['class' => 'button']) !!}<!--Send the input to the controller when this button is clicked-->
-    {!! Form::close() !!}
+    <div class="columns small-8 large-6">
+      {!! Form::submit('Submit', ['class' => 'button']) !!}<!--Send the input to the controller when this button is clicked-->
+      {!! Form::close() !!}
+    </div>
   </section>
 @endsection
