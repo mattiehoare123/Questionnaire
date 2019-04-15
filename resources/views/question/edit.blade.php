@@ -1,15 +1,15 @@
-@extends('layouts.master')
+@extends('layouts.master')<!--Telling the view it's a child of the master layout by using extends-->
 
-@section('title', 'Edit Question')
+@section('title', 'Edit Question')<!--Linking the title to the title yeild in the master template linking it with the name and giving it a parameter -->
 
-@section('content')
+@section('content')<!--This calls the yeild and everything between the section will be inserted into the position of yeild-->
 
-    <h1>Edit Question - {{$question->question}}</h1>
+    <h1>Edit Question - {{$question->question}}</h1><!--Get the question title that is being edited-->
     @include ('errors/errorlist')
 
-    @if (session('Edit_Choice'))
+    @if (session('Edit_Choice'))<!--If the session has a message which has been passed with the view from the controller then display it-->
     <div class="callout success" data-closable>
-      {{session('Edit_Choice')}}
+      {{session('Edit_Choice')}}<!--Display the message-->
       <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
         <span aria-hidden="true">&times;</span>
       </button>
@@ -25,28 +25,27 @@
     </div>
     @endif
 
-    <!--Edit Form-->
+    <!--Find and load the question->id data into the form-->
     {!! Form::model($question, ['url' => 'question/'. $question->id]) !!}
     @csrf
     <!-- Laravel did not support PATCH when placed above so therefore used a method called form spoof which hides the method to spoof the HTTP which worked below-->
         @method('PATCH')
         @csrf
-        @include('partials/questionform')
-        <div class="columns large-12">
-            {!! Form::submit('Update', ['class' => 'button']) !!}
-        </div>
-      {!! Form::close() !!}
+        @include('partials/questionform')<!--Include the question form-->
+        {!! Form::submit('Update', ['class' => 'button']) !!}
 
+      {!! Form::close() !!}
+      <!--Create a choice by sending the user to the choice create view passing over the question->id-->
       <a href="{{ url('choice/'.$question->id.'/create')}}" class="hollow button success">Add Choice</a>
 
       <section>
 
-        @if (isset($choice))     {{--Check that all the data is being passed over--}}
+        @if (isset($choice))  <!--Check that all the data is being passed over-->
 
         <table>
           <thead>
             <tr>
-              <td>Choice</td>
+              <td>Choice</td> <!--Table headers-->
               <td>Edit</td>
               <td>Delete</td>
             </tr>
@@ -54,11 +53,13 @@
             <tbody>
             </tbody>
 
-            @foreach ($choice as $choice)         {{--If the data is being passed over show all the questionnaire titles--}}
+            @foreach ($choice as $choice)   <!--Loop through the choice array and show each choice that belongs to that question-->
             <tr>
-              <td>{{$choice->choice}}</td>
+              <td>{{$choice->choice}}</td> <!--Display the choice-->
+              <!--Edit a choice by sending the user to the choice edit view passing over the $id to find the choices data-->
               <td><a href="{{ url('choice/'.$choice->id.'/edit')}}" class="hollow button warning">Edit Choice</a></td>
               <td>
+                <!--Create a form to delete a choice-->
                 {!! Form::open(['method' => 'DELETE', 'route' => ['choice.destroy', $choice->id]]) !!}
                 {!! Form::submit('Delete', ['class' => 'hollow button alert']) !!}
                 {!! Form::close() !!}
@@ -67,8 +68,8 @@
           @endforeach
         </tbody>
       </table>
-      @else {{--If no data is being passed over or no questionnaires have been made this show--}}
-      <p>No choices yet</p>
+      @else <!--If no choices being passed over display this message-->
+      <p>No Choices Created Yet</p>
       @endif
     </section>
 

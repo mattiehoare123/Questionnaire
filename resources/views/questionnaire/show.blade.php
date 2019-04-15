@@ -1,30 +1,28 @@
-@extends('layouts.master')<!--This calls the master template to display with this page-->
+@extends('layouts.master')<!--Telling the view it's a child of the master layout by using extends-->
 
-@section('title', 'Take Questionnaire') <!--This declares the title of the webpage -->
-
-@section('content')<!--This calls the yeild which is in the master template-->
+@section('title', 'Take Questionnaire')<!--Linking the title to the title yeild in the master template linking it with the name and giving it a parameter -->
+@section('content')<!--This calls the yeild and everything between the section will be inserted into the position of yeild-->
   <section>
-    <h1>{{ $questionnaires->title }}</h1> <!--Get the questionnaire title-->
-    <p>{{ $questionnaires->description  }}</p> <!--Get the questionnaire description-->
-    <p>{{ $questionnaires->ethical }}</p> <!--Get the questionnaire ethical statement-->
-
+    <h1>{{ $questionnaires->title }}</h1> <!--Get the questionnaire title from the variable-->
+    <p>{{ $questionnaires->description  }}</p> <!--Get the questionnaire description from the varaible-->
+    <p>{{ $questionnaires->ethical }}</p> <!--Get the questionnaire ethical statement from the varaible-->
+    <!--Creates a form which will send to the Response store method-->
     {!! Form::open(array('action' => 'ResponseController@store', 'id' => 'submitQuestionnaire')) !!}
     @csrf
 
       @if (isset($question))   <!--Check the data is being passed over-->
 
         @foreach ($question as $question)   <!--Loop through the questions-->
-        {!! Form::hidden('question_id', $question->id ) !!}
+        {!! Form::hidden('question_id', $question->id ) !!} <!--Getting the question->id and storing it as hidden-->
           <p>{{$question->question}}</p>  <!--Display the questions-->
 
           @foreach($question->choice as $choices) <!--Loop over the responses-->
-              {!! Form::hidden('choice_id', $choices->id ) !!}
-              {!! Form::radio('responses', $choices->choice) !!}{{$choices->choice}}
-            @endforeach <!--Take them to question show view too answer a single question-->
+              {!! Form::hidden('choice_id', $choices->id ) !!} <!--Getting the choice->id and storing it as hidden-->
+              {!! Form::radio('responses', $choices->choice) !!}{{$choices->choice}} <!--Display the choices with radio button next besides them for user to select-->
+            @endforeach
 
-          <div class="row large-4 columns">
-              {!! Form::submit('Submit', ['class' => 'button']) !!}
-          </div>
+            {!! Form::submit('Submit', ['class' => 'button']) !!} <!--Submit after answering each question-->
+
         @endforeach
         {!! Form::close() !!}
         @else  <!--If there is no data being passed over or no questions have been created yet-->

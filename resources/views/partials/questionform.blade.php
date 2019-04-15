@@ -1,6 +1,6 @@
 <div class="columns large-12">
-    {!! Form::label('question', 'Question:') !!}
-    {!! Form::text('question', null) !!}
+    {!! Form::label('question', 'Question:') !!}<!--Label for the question field input-->
+    {!! Form::text('question', null) !!}<!--Form input for the question field-->
 </div>
 <div class="columns large-12">
     {!! Form::label('required', 'Required:') !!}

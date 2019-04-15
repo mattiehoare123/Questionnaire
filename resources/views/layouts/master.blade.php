@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+    <!--Character encoding capable of encoding all characters on the web-->
     <meta charset="utf-8">
     <title>@yield('title')</title>
+    <!--Allows it to be viewed on a mobile device-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Included CSS Files, use foundation.css if you do not want minified code -->
+    <!-- Included CSS Files in the public folder that contain all the css code-->
     <link rel="stylesheet" href="/css/foundation.css"/>
     <link rel="stylesheet" href="/css/foundation.css">
     <link rel="stylesheet" href="/css/app.css">
   </head>
   <body>
-
+    <!--Defining a container and row which is used in the Foundation layout-->
     <div class="container">
       <header class="row fullWidth">
-        @include('includes.header')
+        @include('includes.header')<!--Inclue the nav bar-->
       </header>
 
       <section class="row fullWidth">
-        @yield('content')
+        @yield('content')<!--Defining a section within the layout-->
       </section>
 
       <footer>
-        @include('includes.footer')
+        @include('includes.footer')<!--Include the footer-->
     </div>
 
 

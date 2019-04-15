@@ -1,11 +1,12 @@
-@extends('layouts.master')
+@extends('layouts.master')<!--Telling the view it's a child of the master layout by using extends-->
 
-@section('title', 'Create Choice')
+@section('title', 'Create Choice')<!--Linking the title to the title yeild in the master template linking it with the name and giving it a parameter -->
 
-@section('content')
+@section('content')<!--This calls the yeild and everything between the section will be inserted into the position of yeild-->
   <div class="columns large-12">
     <h1>Add Choices</h1>
-    @include ('errors/errorlist')
+    @include ('errors/errorlist')<!--Include the error code if any occur-->
+    <!--Create a form which will send to the choice store method-->
     {!! Form::open(array('action' => 'ChoiceController@store', 'id' => 'createChoice')) !!}
     @csrf
     {!! Form::hidden('question_id', $question->id) !!}
@@ -17,6 +18,7 @@
         {!! Form::submit('Add Another', ['class' => 'hollow button success']) !!}
     </div>
     {!! Form::close() !!}
+    <!--After the user added all choices take them back to the question edit form-->
     <a href="{{ url('questionnaire/'.$question->questionnaires_id.'/index')}}" class="hollow button">Complete</a>
   </div>
 @endsection

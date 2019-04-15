@@ -1,8 +1,8 @@
-@extends('layouts.master') <!--This calls the master template to display with this page-->
+@extends('layouts.master') <!--Telling the view it's a child of the master layout by using extends-->
 
-@section('title', 'Dashboard') <!--This declares the title of the webpage -->
+@section('title', 'Dashboard') <!--Linking the title to the title yeild in the master template linking it with the name and giving it a parameter -->
 
-@section('content') <!--This calls the yeild which is in the master template-->
+@section('content') <!--This calls the yeild and everything between the section will be inserted into the position of yeild-->
 <section>
   <h1>{{$questionnaires->title}}</h1> <!--Get the questionnaire title-->
 
@@ -10,13 +10,13 @@
 
 <table>
     <tr>
-      <th>Question</th>
-      <th>Response</th>
+      <th>Question</th><!--The table header for the question-->
+      <th>Response</th><!--The table header for the response-->
     </tr>
     <tr>
-      @foreach ($question as $question)   <!--Loop over the questions that are in the table-->
+      @foreach ($question as $question)   <!--Loop through the questions array and show each question-->
       <td>
-        {{$question->question}}
+        {{$question->question}} <!--Display each question-->
       </td>
       <td>
         @foreach($question->response as $responses) <!--Loop over the responses-->
