@@ -18,7 +18,7 @@
         @include('includes.header')<!--Inclue the nav bar-->
       </header>
 
-      <section class="row fullWidth">
+      <section class="row fullWidth" id="main">
         @yield('content')<!--Defining a section within the layout-->
       </section>
 

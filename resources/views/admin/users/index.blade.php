@@ -4,8 +4,10 @@
 
 @section('content')<!--This calls the yeild and everything between the section will be inserted into the position of yeild-->
 <section>
-    <h1>Users</h1>
-    <a href="users/create" class="hollow button button success">Add User</a><!--Take the user to the user create view when clicked upin-->
+  <div class="row">
+    <div class="columns small-8 large-8"> <h1>Users</h1></div>
+    <div class="columns small-4 large-2"><a href="users/create" class="hollow button button success">Add User</a></div><!--Take the user to the user create view when clicked upon-->
+  </div>
 
     @if (session('added'))<!--If the session has a message which has been passed with the view then display it-->
     <div class="callout success" data-closable>
@@ -35,7 +37,9 @@
     @endif
 
       @if (isset($user))   <!--Check that all the data is being passed over-->
-
+      <div class="row">
+        <div class="columns">
+          <div class="table-scroll">
       <table>
         <thead>
           <tr>
@@ -68,6 +72,9 @@
             @endforeach
           </tbody>
         </table>
+      </div>
+    </div>
+  </div>
         @else <!--If no users are being passed through then display this message-->
         <p>No Users Yet</p>
         @endif

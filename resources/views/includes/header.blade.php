@@ -17,7 +17,7 @@
     <ul class="dropdown menu" data-dropdown-menu>
        <li>
          <!--Display the users name-->
-        <a href="#">{{Auth::user()->name}}</a>
+        <a>{{Auth::user()->name}}</a>
         <ul class="menu vertical">
           <!--A dropdown menu which allow the user to logout-->
           <li>

@@ -12,7 +12,7 @@
     {!! Form::hidden('questionnaires_id', $questionnaires->id) !!}
     @include('partials/questionform') <!--Include the question form-->
     <div class="columns small-8 large-6">
-      {!! Form::submit('Submit', ['class' => 'button']) !!}<!--Send the form the question store method-->
+      {!! Form::submit('Submit', ['class' => 'button']) !!}<!--Send the input to the controller when this button is clicked-->
       {!! Form::close() !!}
   </div>
   </section>

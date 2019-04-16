@@ -9,6 +9,8 @@
     {!! Form::open(array('action' => 'UserController@store', 'id' => 'createUser')) !!}
     @csrf
     @include('partials/userform')<!--Include the user form-->
-    {!! Form::submit('Submit', ['class' => 'button']) !!}<!--Send the input to the controller store method when submitted-->
-    {!! Form::close() !!}
+    <div class="columns small-8 large-6">
+      {!! Form::submit('Submit', ['class' => 'button']) !!}<!--Send the input to the controller store method when submitted-->
+      {!! Form::close() !!}
+    </div>
 @endsection

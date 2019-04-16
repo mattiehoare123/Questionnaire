@@ -32,13 +32,13 @@
         @method('PATCH')
         @csrf
         @include('partials/questionform')<!--Include the question form-->
-        <div class="columns small-6 large-6">
+        <div class="columns small-6 large-12">
           {!! Form::submit('Update', ['class' => 'button']) !!}
         </div>
 
       {!! Form::close() !!}
       <!--Create a choice by sending the user to the choice create view passing over the question->id-->
-      <div class="columns small-6 large-6 text-right">
+      <div class="columns small-6 large-12">
         <a href="{{ url('choice/'.$question->id.'/create')}}" class="hollow button success">Add Choice</a>
       </div>
 

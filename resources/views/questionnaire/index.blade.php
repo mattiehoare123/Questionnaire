@@ -32,9 +32,9 @@
 
     <section>
       <div class="row">
-        <div class="columns small-6 large-8"><h1>Edit - {{$questionnaires->title}}</h1></div>
-        <div class="columns small-3 large-2"><a id="title" href="{{ url('questionnaire/'.$questionnaires->id.'/edit')}}" class="hollow button warning">Edit Title</a></div>
-        <div class="columns small-3 large-2"><a href="/question/{{$questionnaires->id}}/create" id="createQuestion" class="hollow button success">Create Quesion</a></div>
+        <div class="columns small-6 large-6"><h1>Edit - {{$questionnaires->title}}</h1></div>
+        <div class="columns small-3 large-4"><a id="title" href="{{ url('questionnaire/'.$questionnaires->id.'/edit')}}" class="hollow button warning">Edit Title</a></div>
+        <div class="columns small-3 large-2"><a href="/question/{{$questionnaires->id}}/create" id="createQuestionButton" class="hollow button success">Create Quesion</a></div>
       </div>
       <div class="row">
         <div class="columns small-12 large-12"><h1>{{$questionnaires->description}}</h1></div>

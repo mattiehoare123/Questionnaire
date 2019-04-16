@@ -1,8 +1,19 @@
-footer {
-  height: 100px;
-  color: black;
-  width: 100%;
+/***Global Tags***/
+html {
+  position: relative;
+  min-height: 100%;
 }
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 100px;
+}
+h1 {
+  padding-left: 10px;
+}
+table td ul li {
+  list-style-type: none;
+}
+/***Master Template***/
 /*Rows where not 100% full width of the page so created a class that will make them 100% width"*/
 .fullWidth {
    width: 100%;
@@ -12,6 +23,10 @@ footer {
 }
 section {
   padding: 10px;
+}
+/***Nav Bar***/
+.title-bar {
+  background-color: #2c838c;
 }
 .top-bar, .top-bar ul {
   background-color: #2c838c;
@@ -23,7 +38,20 @@ section {
   font-size: 20px;
   color: white;
 }
-/* On screens that are 600px or less, set the background color to olive */
+/***Footer***/
+footer {
+  background-color: #f4f4f4;
+  color: black;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 100px;
+}
+.email:first-child{
+  padding-top: 20px;
+}
+/* On screens that are 600px or less,*/
 @media screen and (max-width: 600px) {
 footer {
   text-align: center;
@@ -34,26 +62,7 @@ footer {
     text-align: right;
   }
 }
-/*Footer*/
-footer {
-  background-color: #f4f4f4;
-  color: black;
-  bottom: 0;
-}
-.email:first-child{
-  padding-top: 20px;
-}
-#title {
-  margin-top: 10px;
-  float: left;
-}
-#responses  td {
-  text-align: center;
-}
-table td ul li {
-  list-style-type: none;
-}
-/*Dashboard*/
+/***Dashboard Index***/
 #dashboard tbody td:first-child {
   font-size: 19px;
 }
@@ -64,12 +73,18 @@ table td ul li {
 .clear {
   font-size: 18px;
 }
-#createQuestion {
+/***Questionnaire Index***/
+#title {
+  margin-top: 10px;
+  float: left;
+}
+#createQuestionButton {
   float: right;
 }
-#createQuestion, #title {
+#createQuestionButton, #title {
   margin-top: 10px;
 }
-h1 {
-  padding-left: 10px;
+/***Responses Show***/
+#responses  td {
+  text-align: center;
 }

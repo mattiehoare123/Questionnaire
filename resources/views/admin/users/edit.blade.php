@@ -11,6 +11,8 @@
     @method('PATCH')
     @csrf
     @include('partials/userform')<!--Include the user form-->
-    {!! Form::submit('Update', ['class' => 'button']) !!}<!--Send the form to the update method when clicked upon-->
-    {!! Form::close() !!}
+    <div class="columns small-8 large-6">
+      {!! Form::submit('Update', ['class' => 'button']) !!}<!--Send the form to the update method when clicked upon-->
+      {!! Form::close() !!}
+    </div>
 @endsection
