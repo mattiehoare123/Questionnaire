@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
 use App\Questionnaires;
 use App\Question;
 use App\Choice;
@@ -89,11 +90,18 @@ class QuestionnaireController extends Controller
      */
     public function edit($id)
     {
+
         /**
         *Runs the find or fail and if the $id is correct it will open with the edit view
         *passing along the $id variale with the compact function
         */
         $questionnaires = questionnaires::findOrFail($id);
+
+        if(Auth::id() !== $questionnaires->user_id)
+        {
+          return back();
+        }
+
         //Compact creates an array containing vairables and there values
         return view('questionnaire.edit', compact('questionnaires'));
     }

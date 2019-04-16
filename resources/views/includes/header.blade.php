@@ -9,15 +9,23 @@
     <!--When collapsed these two sections will become a dropdown menu-->
     <ul class="dropdown menu" data-dropdown-menu>
       <li class="menu-text">Quick Question</li><!--Name of the application-->
+      @if (Gate::allows('see_all_users'))
+        <li><a href="admin/users">Users</a></li>
+      @else
       <li><a href="{{ url('dashboard')}}">My Questionnaires</a></li><!--Go back to dashboard view-->
     </ul>
+    @endif
   </div>
   <!--Right side of the menu-->
   <div class="top-bar-right">
     <ul class="dropdown menu" data-dropdown-menu>
        <li>
          <!--Display the users name-->
-        <a>{{Auth::user()->name}}</a>
+         @if (Gate::allows('see_all_users'))
+          <p>Admin</p>
+        @else
+          <a>{{Auth::user()->name}}</a>
+        @endif
         <ul class="menu vertical">
           <!--A dropdown menu which allow the user to logout-->
           <li>

@@ -23,7 +23,7 @@ class UserController extends Controller
 
     public function index()
     {
-        //
+        
         //if (Gate::allows('see_all_users')){
 
             $user = User::all();

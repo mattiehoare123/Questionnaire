@@ -6,6 +6,7 @@
     <h1>{{ $questionnaires->title }}</h1> <!--Get the questionnaire title from the variable-->
     <p>{{ $questionnaires->description  }}</p> <!--Get the questionnaire description from the varaible-->
     <p>{{ $questionnaires->ethical }}</p> <!--Get the questionnaire ethical statement from the varaible-->
+    @include ('errors/errorlist')<!--Include the error code if any errors occur-->
     <!--Creates a form which will send to the Response store method-->
     {!! Form::open(array('action' => 'ResponseController@store', 'id' => 'submitQuestionnaire')) !!}
     @csrf
@@ -13,9 +14,14 @@
       @if (isset($question))   <!--Check the data is being passed over-->
 
         @foreach ($question as $question)   <!--Loop through the questions-->
-        {!! Form::hidden('question_id', $question->id ) !!} <!--Getting the question->id and storing it as hidden-->
-          <p>{{$i++}}. {{$question->question}}</p>  <!--Display the questions-->
 
+        {!! Form::hidden('question_id', $question->id ) !!} <!--Getting the question->id and storing it as hidden-->
+        <!--If the question is required place a red star indicating that if it is-->
+        @if($question->required == 1)
+            <p>{{$i++}}. {{$question->question}} <span style="color: red;">*</span> </p>  <!--Display the questions-->
+          @else
+            <p>{{$i++}}. {{$question->question}}</p>  <!--Display the questions-->
+          @endif
           @foreach($question->choice as $choices) <!--Loop over the responses-->
               {!! Form::hidden('choice_id', $choices->id ) !!} <!--Getting the choice->id and storing it as hidden-->
               <!--Each choice was next to one another so therefore wrapped it in a p tag which puts each choice on a new line-->
@@ -26,6 +32,7 @@
 
         @endforeach
         {!! Form::close() !!}
+
         @else  <!--If there is no data being passed over or no questions have been created yet-->
           <p>No Questions Created Yet</p>
         @endif

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Questionnaires;
 use App\Question;
-use App\Choice;
 use App\Response;
 
 class ResponseController extends Controller

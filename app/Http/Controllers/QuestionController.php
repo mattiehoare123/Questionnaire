@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Questionnaires;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\Questionnaires;
 use App\Question;
 use App\Choice;
 
@@ -94,7 +94,15 @@ class QuestionController extends Controller
        * the choices where the question_id in the table matches the $id passed
        */
         $question = question::findOrFail($id);
+        //Get the record in questionnaires where the user_id matches the current id logged in
+        $questionnaires = Questionnaires::where('user_id', Auth::id())->first();
         $choice = Choice::where('question_id',$id)->get();
+        /*If the questionnaires_id in the question is not equal to the questionnaires id return back to the page,
+        this is so other users cannot edit other users records only the user that belongs to the record can edit it themselves*/
+        if($question->questionnaires_id !== $questionnaires->id)
+        {
+          return back();
+        }
 
         return view('question.edit', compact('question'))->with('choice', $choice);
     }

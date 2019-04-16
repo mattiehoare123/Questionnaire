@@ -9,7 +9,7 @@
     <ul class="dropdown menu" data-dropdown-menu>
       <li class="menu-text">Quick Question</li>
       <!--Take the admin to page that displays all the users-->
-      <li><a href="#0">Users</a></li>
+      <li><a href="admin/users">Users</a></li>
     </ul>
   </div>
   <div class="top-bar-right">
