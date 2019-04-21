@@ -4,7 +4,7 @@
 
 @section('content')<!--This calls the yeild and everything between the section will be inserted into the position of yeild-->
 
-    <h1>Edit Question - {{$question->question}}</h1><!--Get the question title that is being edited-->
+    <h1 class="heading">Edit Question - {{$question->question}}</h1><!--Get the question title that is being edited-->
     @include ('errors/errorlist')
 
     @if (session('Edit_Choice'))<!--If the session has a message which has been passed with the view from the controller then display it-->

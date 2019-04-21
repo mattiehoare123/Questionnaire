@@ -7,9 +7,6 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 100px;
 }
-h1 {
-  padding-left: 10px;
-}
 table td ul li {
   list-style-type: none;
 }
@@ -23,6 +20,9 @@ table td ul li {
 }
 section {
   padding: 10px;
+}
+.heading {
+  padding-left: 10px;
 }
 /***Nav Bar***/
 .title-bar {
@@ -38,6 +38,9 @@ section {
   font-size: 20px;
   color: white;
 }
+.dropdown, .menu a:hover {
+  color: #2ba6cb;
+}
 /***Footer***/
 footer {
   background-color: #f4f4f4;
@@ -46,7 +49,16 @@ footer {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 100px;
+  height: 80px;
+}
+footer a {
+color: black;
+}
+footer a:hover {
+  color: #2c838c;
+}
+#complete {
+  float: right
 }
 .email:first-child{
   padding-top: 20px;
@@ -55,8 +67,11 @@ footer {
 @media screen and (max-width: 600px) {
 footer {
   text-align: center;
+  height: 100px;
 }
+
 }
+/* On screens that are 600px or more*/
 @media screen and (min-width: 600px) {
 .email {
     text-align: right;

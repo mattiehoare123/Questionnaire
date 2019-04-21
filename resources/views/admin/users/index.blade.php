@@ -61,11 +61,11 @@
                 @endforeach
               </td>
               <!--Take the user to the edit view passing over the $id to get the users data-->
-              <td><a href="users/{{$user->id}}/edit" class="hollow button warning">Edit</a></td>
+              <td><a href="users/{{$user->id}}/edit" class="clear button warning">Edit</a></td>
               <td>
                 <!--Created a form and set the method to delete and then take it to the destory method in the user controller passing it the user->id-->
                 {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id]]) !!}
-                {!! Form::submit('Delete', ['class' => 'hollow alert button']) !!}
+                {!! Form::submit('Delete', ['class' => 'clear alert button']) !!}
                 {!! Form::close() !!}
               </td>
             </tr>

@@ -22,7 +22,7 @@
        <li>
          <!--Display the users name-->
          @if (Gate::allows('see_all_users'))
-          <p>Admin</p>
+          <a>Admin</a>
         @else
           <a>{{Auth::user()->name}}</a>
         @endif

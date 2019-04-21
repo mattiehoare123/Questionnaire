@@ -4,7 +4,7 @@
 
 @section('content')<!--This calls the yeild and everything between the section will be inserted into the position of yeild-->
   <section>
-    <h1>Edit Title - {{$questionnaires->title}}</h1> <!--Display the questionnaire title that is being edited-->
+    <h1 class="heading">Edit Title - {{$questionnaires->title}}</h1> <!--Display the questionnaire title that is being edited-->
     @include ('errors/errorlist')<!--Include the error code if any occur-->
     <!--Form model binding is done by changing Form::open to the tag Form::model then adding the questionnaire object,
         an id is passed into the model by $id in the edit method in the controller and then record is loaded into

@@ -4,7 +4,8 @@
 
 @section('content')<!--This calls the yeild and everything between the section will be inserted into the position of yeild-->
     <section>
-    <h1>New Questionnaire</h1>
+    <!--Because the form has a padding on it the header is not inline so therefore added padding to tackle this problem-->
+    <h1 class="heading">New Questionnaire</h1>
     @include ('errors/errorlist')<!--Include the error code if any occur-->
     <!--Creates a form which will send to the Questionnaire store method-->
     {!! Form::open(array('action' => 'QuestionnaireController@store', 'id' => 'createTitle')) !!}

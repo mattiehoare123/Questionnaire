@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')<!--Linking the title to the title yeild in the master template linking it with the name and giving it a parameter -->
 
 @section('content')<!--This calls the yeild and everything between the section will be inserted into the position of yeild-->
-    <h1>Edit User - {{$user->name}}</h1><!--Display the user name that is being edited-->
+    <h1 class="heading">Edit User - {{$user->name}}</h1><!--Display the user name that is being edited-->
 
     @include ('errors/errorlist')<!--Include the error code if any occur-->
     <!--Find and load the user->id data into the form-->
