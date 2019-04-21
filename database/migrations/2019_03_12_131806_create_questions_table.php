@@ -19,7 +19,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('questionnaires_id')->unsigned();
             $table->foreign('questionnaires_id')->references('id')->on('questionnaires')->onDelete('cascade');
             $table->longText('question');
-            $table->boolean('required')->default(false);
+            $table->boolean('required');
             $table->timestamps();
         });
     }

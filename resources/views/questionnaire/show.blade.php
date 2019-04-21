@@ -2,10 +2,17 @@
 
 @section('title', 'Take Questionnaire')<!--Linking the title to the title yeild in the master template linking it with the name and giving it a parameter -->
 @section('content')<!--This calls the yeild and everything between the section will be inserted into the position of yeild-->
-  <section>
+  <section style="overflow-x:hidden">
     <h1>{{ $questionnaires->title }}</h1> <!--Get the questionnaire title from the variable-->
     <p>{{ $questionnaires->description  }}</p> <!--Get the questionnaire description from the varaible-->
+    <h3>Ethical Statement</h3>
     <p>{{ $questionnaires->ethical }}</p> <!--Get the questionnaire ethical statement from the varaible-->
+    <a href="#down"><button class="button success">Agree</button></a>
+    <a href="{{ url('/dashboard')}}"><button class="button alert">Disagree</button></a>
+  </section>
+  
+  <section id="down">
+    <p style="color: red">*Required</p>
     @include ('errors/errorlist')<!--Include the error code if any errors occur-->
     <!--Creates a form which will send to the Response store method-->
     {!! Form::open(array('action' => 'ResponseController@store', 'id' => 'submitQuestionnaire')) !!}
@@ -32,6 +39,8 @@
 
         @endforeach
         {!! Form::close() !!}
+
+        <a href="{{ url('/dashboard')}}" class="hollow button success">Finish</a>
 
         @else  <!--If there is no data being passed over or no questions have been created yet-->
           <p>No Questions Created Yet</p>

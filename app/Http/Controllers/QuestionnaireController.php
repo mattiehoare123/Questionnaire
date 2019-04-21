@@ -28,8 +28,13 @@ class QuestionnaireController extends Controller
         $questionnaires = questionnaires::findOrFail($id);
         //->first() returns an collection where ->get() returns the element itself
         $question = Question::where('questionnaires_id',$id)->get();
-        //Return the view with the two variables
+        //Return the view with the variable 1 which is for the question number
         $number = 1;
+        //If the id of the user does not equal the user_id in the questionnaire then do not allow access for the user to edit
+        if(Auth::id() !== $questionnaires->user_id)
+        {
+          return back();
+        }
         return view('questionnaire.index')->with('questionnaires', $questionnaires)->with('question', $question)->withnumber($number);
     }
     /**
@@ -54,6 +59,7 @@ class QuestionnaireController extends Controller
       $this->validate($request, [
         //This states that the title is required and it must be a minumum of 3 characters long
         'title' => 'required|min:3',
+        'description' => 'max:150'
       ]);
       //Get all fields from the form and put it into the $input variale using the $POST request
       $input = $request->all();
@@ -96,7 +102,7 @@ class QuestionnaireController extends Controller
         *passing along the $id variale with the compact function
         */
         $questionnaires = questionnaires::findOrFail($id);
-
+        //If the id of the user does not equal the user_id in the questionnaire then do not allow access for the user to edit
         if(Auth::id() !== $questionnaires->user_id)
         {
           return back();

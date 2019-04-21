@@ -19,7 +19,7 @@ class CreateQuestionnairesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('title');
             $table->string('description')->nullable();
-            $table->string('ethical')->nullable();
+            $table->longText('ethical')->nullable();
             $table->timestamps();
         });
     }

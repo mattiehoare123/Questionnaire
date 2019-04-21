@@ -37,8 +37,8 @@
         <div class="columns small-3 large-2"><a href="/question/{{$questionnaires->id}}/create" id="createQuestionButton" class="hollow button success">Create Quesion</a></div>
       </div>
       <div class="row">
-        <div class="columns small-12 large-12"><h1>{{$questionnaires->description}}</h1></div>
-        <div class="columns small-12 large-12"><h1>{{$questionnaires->ethical}}</h1></div>
+        <div class="columns small-12 large-12"><p>{{$questionnaires->description}}</p></div>
+        <div class="columns small-12 large-12"><p>{{$questionnaires->ethical}}</p></div>
       </div>
 
       @if (isset($question))     {{--Check that all the data is being passed over--}}
