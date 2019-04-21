@@ -15,6 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+     //$fillable is an arry that will contain the fields below that i want to set as mass-assignable
     protected $fillable = [
         'name', 'email', 'password',
     ];

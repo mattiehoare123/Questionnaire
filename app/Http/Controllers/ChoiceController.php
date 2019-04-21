@@ -88,7 +88,7 @@ class ChoiceController extends Controller
         //Get the record in the question table where the questionnaire_id matches the id above
         $question = Question::where('questionnaires_id', $questionnaires->id)->first();
         //If the choice question_id does not match the question->id then return back to the page where it was requested
-        if($choice->question_id !== $question->id)
+        if($choice->question_id == $question->id)
         {
           return back();
         }
