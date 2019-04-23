@@ -6,7 +6,7 @@
 <section>
   <div class="row">
     <div class="columns small-8 large-8"> <h1>Users</h1></div>
-    <div class="columns small-4 large-2"><a href="users/create" class="hollow button button success">Add User</a></div><!--Take the user to the user create view when clicked upon-->
+    <div class="columns small-4 large-2"><a id="addUser" href="users/create" class="hollow button button success">Add User</a></div><!--Take the user to the user create view when clicked upon-->
   </div>
 
     @if (session('added'))<!--If the session has a message which has been passed with the view then display it-->
@@ -37,9 +37,9 @@
     @endif
 
       @if (isset($user))   <!--Check that all the data is being passed over-->
-      <div class="row">
-        <div class="columns">
-          <div class="table-scroll">
+<div class="row">
+  <div class="columns">
+    <div class="table-scroll"><!--Make the table scrollabe on mobile devices-->
       <table>
         <thead>
           <tr>
@@ -57,7 +57,9 @@
               <td>{{$user->email}}</td><!--Display the user email-->
               <td>
                 @foreach($user->roles as $role)<!--Loop through the data from by the many to many relation-->
+                <ul>
                     <li>{{ $role->label }}</li><!--Display the user role-->
+                  </ul>
                 @endforeach
               </td>
               <!--Take the user to the edit view passing over the $id to get the users data-->

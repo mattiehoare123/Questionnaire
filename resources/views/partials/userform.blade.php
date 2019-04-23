@@ -10,12 +10,3 @@
       {!! Form::label('password', 'Password:') !!}<!--Label for the password field input-->
       {!! Form::text('password', null) !!}<!--Form input for the password field-->
     </div>
-  <div class="columns small-12 large-12">
-      {!! Form::label('roles', 'Roles:') !!}
-      <!--Loop through the roles and display all the roles made-->
-      @foreach($roles as $role)
-        {{ Form::label($role->name) }}
-        <!--Checkbox to select what role the user has-->
-        {{ Form::checkbox('role[]', $role->id, $user->roles->contains($role->id), ['id' => $role->id]) }}
-      @endforeach
-  </div>

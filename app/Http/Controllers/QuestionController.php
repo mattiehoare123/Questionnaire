@@ -95,15 +95,17 @@ class QuestionController extends Controller
        */
         $question = question::findOrFail($id);
         //Get the record in questionnaires where the user_id matches the current id logged in
-        $questionnaires = Questionnaires::where('user_id', Auth::id())->first();
         $choice = Choice::where('question_id',$id)->get();
-        /*If the questionnaires_id in the question is not equal to the questionnaires id return back to the page,
-        this is so other users cannot edit other users records only the user that belongs to the record can edit it themselves*/
+
+        /*I tried to make only the user can edit their questionnaire but because i was using ->first this only got
+        *the first questionnaire id record of the user so did not work as ->get() is not suitable in this case. How it worked was iff the questionnaires_id in the question is
+        *not equal to the questionnaires id return back to the page,
+        *$questionnaires = Questionnaires::where('user_id', Auth::id())->first();
         if($question->questionnaires_id !== $questionnaires->id)
         {
           return back();
         }
-
+        */
         return view('question.edit', compact('question'))->with('choice', $choice);
     }
 

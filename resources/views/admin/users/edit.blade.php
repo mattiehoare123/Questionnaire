@@ -11,6 +11,17 @@
     @method('PATCH')
     @csrf
     @include('partials/userform')<!--Include the user form-->
+    <div class="columns small-12 large-12">
+        {!! Form::label('roles', 'Roles:') !!}
+        <!--Loop through the roles and display all the roles made-->
+        @foreach($roles as $role)
+          <p>
+          {{ Form::label($role->name) }}
+          <!--Checkbox to select what role the user has-->
+          {{ Form::checkbox('role[]', $role->id, $user->roles->contains($role->id), ['id' => $role->id]) }}
+        </p>
+        @endforeach
+    </div>
     <div class="columns small-8 large-6">
       {!! Form::submit('Update', ['class' => 'button']) !!}<!--Send the form to the update method when clicked upon-->
       {!! Form::close() !!}

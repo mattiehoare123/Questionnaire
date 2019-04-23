@@ -41,6 +41,9 @@ section {
 .dropdown, .menu a:hover {
   color: #2ba6cb;
 }
+.test {
+  color: red;
+}
 /***Footer***/
 footer {
   background-color: #f4f4f4;
@@ -81,7 +84,7 @@ footer {
 #dashboard tbody td:first-child {
   font-size: 19px;
 }
-#create {
+#create, #addUser {
   margin-top: 10px;
   float: right;
 }

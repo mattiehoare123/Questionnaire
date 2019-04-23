@@ -22,9 +22,9 @@
     <!--To create a new questionnaire take the user to the create questionnaire view not id need passing as there are none required in the form-->
 
       @if (isset($questionnaires))  <!--Check tha data is being passed over-->
-      <div class="row">
-        <div class="columns">
-          <div class="table-scroll">
+<div class="row">
+  <div class="columns">
+    <div class="table-scroll"><!--Make the table scrollabe on mobile devices-->
       <table id="dashboard">
         <thead>
           <tr>

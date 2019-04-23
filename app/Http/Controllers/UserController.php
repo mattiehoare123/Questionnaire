@@ -23,15 +23,16 @@ class UserController extends Controller
 
     public function index()
     {
-        
-        //if (Gate::allows('see_all_users')){
-
-            $user = User::all();
-
-            return view('admin/users/index', ['user' => $user]);
-        }
-        //return view('/dashboard');
-
+      if (Gate::allows('see_all_users')) {
+        $user = User::all();
+        return view('admin.users.index')->with('user', $user);
+      }
+      /**
+       * When using return view(/dashboard) it returned the view with no variables so therefore the view was not displaying correctly
+       *so therefore i have redireted to the dashboard index method which passes through the variables
+       */
+      return redirect()->action('DashboardController@index');
+}
 
     /**
      * Show the form for creating a new resource.
@@ -42,8 +43,12 @@ class UserController extends Controller
     {
         //Show the create form with roles variable so the admin can provide user with a role
         $roles = Role::all();
-        return view('admin/users/create')->with('roles', $roles);;
+
+        //If user does not exist return to list of users
+
+        return view('admin/users/create')->with('roles', $roles);
     }
+
 
     /**
      * Store a newly created resource in storage.

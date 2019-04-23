@@ -10,7 +10,7 @@
     <ul class="dropdown menu" data-dropdown-menu>
       <li class="menu-text">Quick Question</li><!--Name of the application-->
       @if (Gate::allows('see_all_users'))
-        <li><a href="admin/users">Users</a></li>
+        <li><a href="{{ url('admin/users')}}">Users</a></li>
       @else
       <li><a href="{{ url('dashboard')}}">My Questionnaires</a></li><!--Go back to dashboard view-->
     </ul>
