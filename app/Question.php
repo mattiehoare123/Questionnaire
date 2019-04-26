@@ -23,7 +23,7 @@ class Question extends Model
     {
       return $this->hasMany('App\Choice');
     }
-    //A question has many responses 
+    //A question has many responses
     public function response()
     {
       return $this->hasMany('App\Response');

@@ -15,7 +15,7 @@ class CreateResponsesTable extends Migration
     {
         Schema::create('responses', function (Blueprint $table) {
             $table->increments('id');//Incremeents meaing each id will go up by 1
-            $table->integer('question_id')->unsigned()->default(0); //Refering to the question_id in the question table
+            $table->integer('question_id')->unsigned(); //Refering to the question_id in the question table
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade'); //This points out where the id above is being accessed from
             $table->integer('choice_id')->unsigned()->default(0); //Refering to the choice_id in the choice table
             $table->foreign('choice_id')->references('id')->on('choices')->onDelete('cascade'); //This points out where the id above is being accessed from

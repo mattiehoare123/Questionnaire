@@ -71,13 +71,12 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-      $questionnaires = Questionnaires::where('id', $id);
-      //Get the question data that matches the $id to display the title
-      $question = Question::findorFail($id);
-      //Gets all the choices that have the question_id same the $id passed for the user to answer
+      $question = Question::find($id);
       $choice = Choice::where('question_id',$id)->get();
+      $number = 1;
+
       //Return the view with the question title and choices
-      return view('question.show')->with('questionnaires', $questionnaires)->with('question', $question)->with('choice', $choice);
+      return view('question.show')->with('question', $question)->with('choice', $choice)->withnumber($number);
 
     }
 
