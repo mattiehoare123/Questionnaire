@@ -145,7 +145,7 @@ class QuestionnaireController extends Controller
         //Delete this questionnaire from the table
         $questionnaires->delete();
         //Return back to the page where the action was executed with this message
-        return redirect()->back()->with('Questionnaire_Delete', 'Questionnaire Deleted');;;
+        return redirect()->back()->with('Questionnaire_Delete', 'Questionnaire Deleted');
 
     }
 }

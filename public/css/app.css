@@ -19,10 +19,10 @@ table td ul li {
    max-width: initial;
 }
 section {
-  padding: 10px;
+  padding: 10px 20px;
 }
 .heading {
-  padding-left: 10px;
+  padding-left: 15px;
 }
 /***Nav Bar***/
 .title-bar {
@@ -41,9 +41,6 @@ section {
 .dropdown, .menu a:hover {
   color: #2ba6cb;
 }
-.test {
-  color: red;
-}
 /***Footer***/
 footer {
   background-color: #f4f4f4;
@@ -60,8 +57,9 @@ color: black;
 footer a:hover {
   color: #2c838c;
 }
-#complete {
-  float: right
+footer p {
+  margin: 0;
+  padding: 0;
 }
 .email:first-child{
   padding-top: 20px;
@@ -81,7 +79,7 @@ footer {
   }
 }
 /***Dashboard Index***/
-#dashboard tbody td:first-child {
+#questionnaire_title {
   font-size: 19px;
 }
 #create, #addUser {
@@ -103,7 +101,16 @@ footer {
 #createQuestionButton, #title {
   margin-top: 10px;
 }
+/***Create Choice***/
+#choiceInfo {
+  padding-left: 15px;
+  margin-top: -10px;
+}
 /***Responses Show***/
-#responses  td {
+#responses td {
   text-align: center;
+}
+/***Submit Buttons***/
+.floatButton {
+  float: right;
 }

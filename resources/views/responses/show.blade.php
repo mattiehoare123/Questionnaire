@@ -3,7 +3,6 @@
 @section('title', 'Dashboard') <!--Linking the title to the title yeild in the master template linking it with the name and giving it a parameter -->
 
 @section('content') <!--This calls the yeild and everything between the section will be inserted into the position of yeild-->
-<section>
   <h1>{{$questionnaires->title}}</h1> <!--Get the questionnaire title-->
 
       @if (isset($question)) <!--Check that all the the data is being passed over-->
@@ -33,5 +32,4 @@
 @else <!--If there is no data being passed over or if no responses have been made yet-->
 <p>No Responses On This Question Yet</p>
 @endif
-</section>
 @endsection

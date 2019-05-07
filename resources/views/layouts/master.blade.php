@@ -13,7 +13,7 @@
   </head>
   <body>
     <!--Defining a container and row which is used in the Foundation layout-->
-    <div class="container">
+    <main class="container">
       <header class="row fullWidth">
         @include('includes.header')<!--Inclue the nav bar-->
       </header>
@@ -24,7 +24,7 @@
 
       <footer>
         @include('includes.footer')<!--Include the footer-->
-    </div>
+    </main>
 
 
     <!-- Latest version of jQuery -->

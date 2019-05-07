@@ -46,8 +46,9 @@ class ResponseController extends Controller
         //Get all the input from the view and eqaul it to $input
         $input = $request->all();
         //Store the $input data into the Respone table
-        Response::create($input);
-        return redirect()->back();
+        $response = Response::create($input);
+        //Notify the respodent that their choice has been submitted and remind them what they just choose
+        return redirect()->back()->with('Question_Answered', 'You Choose "' . $response->responses . '"');
     }
 
     /**
